@@ -10,28 +10,16 @@ jobs:
   emoji:
     runs-on: ubuntu-latest
     steps:
-      - name: React to new issues/PRs 😎
+      - name: React to new issues
+        if: github.event_name == 'issues'
         uses: actions/github-script@v7
         with:
           script: |
-            const reaction = context.eventName === 'issues' ? '🎉' : '🚀';
-            github.rest.reactions.createForReaction(context.repo.owner, context.repo.repo, context.payload[context.eventName].id, reaction);
+            github.rest.reactions.createForReaction(context.repo.owner, context.repo.repo, context.payload.issue.id, '🎉');
       
-      - name: Add fun labels
+      - name: React to new PRs
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
-            const labels = ['welcome', 'ready-for-review'];
-            const number = context.eventName === 'issues' ? context.payload.issue.number : context.payload.pull_request.number;
-            for (const label of labels) {
-              try {
-                github.rest.issues.addLabels({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: number,
-                  labels: [label]
-                });
-              } catch (e) {
-                // Label might already exist, that's ok
-              }
-            }
+            github.rest.reactions.createForReaction(context.repo.owner, context.repo.repo, context.payload.pull_request.id, '🚀');
