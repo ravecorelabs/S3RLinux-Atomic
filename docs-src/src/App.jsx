@@ -486,7 +486,7 @@ function StatusWidget() {
         flexWrap: 'wrap'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
         <img 
           src="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg" 
           alt="Build Status"
@@ -497,6 +497,13 @@ function StatusWidget() {
           alt="ArtifactHub"
           style={{ height: 20 }}
         />
+        <a href="https://stats.uptimerobot.com/wYoVLjGhlA" target="_blank">
+          <img 
+            src="https://img.shields.io/uptimerobot/status/795507046.svg" 
+            alt="Uptime"
+            style={{ height: 20 }}
+          />
+        </a>
       </div>
       <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>
         Container image built successfully. ISO builds available from Actions.
