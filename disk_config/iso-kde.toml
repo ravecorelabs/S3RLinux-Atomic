@@ -19,3 +19,6 @@ enable = [
 disable = [
   "org.fedoraproject.Anaconda.Modules.Subscription",
 ]
+
+[customizations.storage]
+root filesystem = { type = "xfs" }
