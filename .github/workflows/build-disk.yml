@@ -64,9 +64,8 @@ jobs:
         if: inputs.platform == 'arm64'
         run: |
           set -x
-          sudo apt update -y
-          sudo apt install -y \
-            podman
+          apt-get update -y
+          apt-get install -y podman
 
       - name: Maximize build space
         if: inputs.platform != 'arm64'
@@ -110,6 +109,6 @@ jobs:
           RCLONE_CONFIG_S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
           SOURCE_DIR: ${{ steps.build.outputs.output-directory }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y rclone
+          apt-get update
+          apt-get install -y rclone
           rclone copy $SOURCE_DIR S3:${{ secrets.S3_BUCKET_NAME }}
