@@ -1,8 +1,4 @@
-# ArtifactHub package configuration
-# Add this to your ArtifactHub repo settings:
-# OCI URL: oci://ghcr.io/moonlightos-meow/s3rlinux-atomic
-
-repositoryID: ""  # Fill in after adding package on artifacthub.io
+repositoryID: "259a4515-42ed-4f24-a1c5-c927fefba868"
 owners:
   - name: S3RLinux
     email: ash8820@proton.me
