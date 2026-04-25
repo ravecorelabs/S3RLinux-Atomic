@@ -310,14 +310,20 @@ function App() {
 
       {/* Get Started */}
       <Section id="get-started" title="🚀 Get S3RLinux" gray>
-        <p style={{ color: colors.textMuted, marginBottom: '2rem', textAlign: 'center' }}>
-          Select your hardware configuration.
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', maxWidth: 900, margin: '0 auto' }}>
-          <DownloadCard title="Intel / AMD" desc="For integrated graphics or modern AMD GPUs" recommended />
-          <DownloadCard title="Nvidia" desc="For RTX/GTX series graphics cards" />
+        <div style={{ 
+          maxWidth: 800, 
+          margin: '0 auto 2rem', 
+          padding: '2rem', 
+          background: 'rgba(255, 0, 128, 0.15)', 
+          border: `3px solid ${colors.pink}`,
+          borderRadius: 12,
+          textAlign: 'center'
+        }}>
+          <h3 style={{ color: colors.pink, marginBottom: '1rem', fontSize: '1.8rem' }}>⛔ DO NOT DOWNLOAD YET</h3>
+          <p style={{ color: colors.text, fontSize: '1.2rem' }}>
+            <strong>WE HAVEN'T TESTED IT.</strong> Wait for now. We'll tell you when it's safe.
+          </p>
         </div>
-        <CodeSection />
       </Section>
 
       {/* Music */}
