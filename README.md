@@ -9,6 +9,14 @@
 
 ---
 
+## ⚠️ DISCLAIMER
+
+**THIS IS UNTESTED SOFTWARE.** We built this in one session while sleep-deprived and listening to S3RL. It might not work. It might explode your cat. You're on your own.
+
+* lol no tech support included *
+
+---
+
 ## ⚠️ ATOMIC? REALLY?
 
 Yep. We got tired of maintaining our own archiso and decided to just use Universal Blue's template. Less work = more time listening to S3RL. 

@@ -256,6 +256,26 @@ function App() {
         </motion.div>
       </motion.section>
 
+      {/* Disclaimer Banner */}
+      <Section id="disclaimer" title="">
+        <div style={{ 
+          maxWidth: 800, 
+          margin: '0 auto', 
+          padding: '1.5rem', 
+          background: 'rgba(255, 0, 128, 0.1)', 
+          border: `2px solid ${colors.pink}`,
+          borderRadius: 12,
+          textAlign: 'center'
+        }}>
+          <h3 style={{ color: colors.pink, marginBottom: '0.5rem', fontSize: '1.3rem' }}>⚠️ DISCLAIMER</h3>
+          <p style={{ color: colors.text, marginBottom: '0.5rem' }}>
+            <strong>THIS IS UNTESTED SOFTWARE.</strong> We built this in one session while sleep-deprived and listening to S3RL. 
+            It might not work. It might explode your cat. You're on your own.
+          </p>
+          <p style={{ color: colors.pink, fontStyle: 'italic' }}>* lol no tech support included *</p>
+        </div>
+      </Section>
+
       {/* Workflows Section */}
       <Section id="workflows" title="🔄 Latest Builds">
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
