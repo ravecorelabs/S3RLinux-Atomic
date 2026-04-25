@@ -259,6 +259,9 @@ function App() {
       {/* Workflows Section */}
       <Section id="workflows" title="🔄 Latest Builds">
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <StatusWidget />
+        </div>
+      </Section>
           {loadingRuns ? (
             <p style={{ textAlign: 'center', color: colors.textMuted }}>Loading builds...</p>
           ) : workflowRuns.length === 0 ? (
@@ -462,6 +465,42 @@ function Card({ icon, title, desc }) {
       <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 4 }} style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{icon}</motion.div>
       <h3 style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>{title}</h3>
       <p style={{ color: colors.textMuted, lineHeight: 1.6 }}>{desc}</p>
+    </motion.div>
+  )
+}
+
+function StatusWidget() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      style={{
+        background: colors.darker,
+        border: `1px solid ${colors.border}`,
+        borderRadius: 12,
+        padding: '1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        flexWrap: 'wrap'
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <img 
+          src="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg" 
+          alt="Build Status"
+          style={{ height: 20 }}
+        />
+        <img 
+          src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic" 
+          alt="ArtifactHub"
+          style={{ height: 20 }}
+        />
+      </div>
+      <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>
+        Container image built successfully. ISO builds available from Actions.
+      </p>
     </motion.div>
   )
 }
