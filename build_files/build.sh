@@ -17,7 +17,7 @@ BUG_REPORT_URL="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues"
 LOGO="s3rlinux-a-logo"
 EOF
 
-cp /usr/lib/os-release /etc/os-release
+### Branding files
 cp /ctx/s3rlinux-a-logo.png /usr/share/pixmaps/
 cp /ctx/S3RL-Atomic.colors /usr/share/color-schemes/
 cp -r /ctx/sddm /usr/share/sddm/themes/

@@ -1,8 +1,8 @@
-# This file is completely optional, but if you want to index your image on https://artifacthub.io/ you can 
-# Sign up and add the Repository ID to the right field. Owners fields are optional.
-# Examples: https://artifacthub.io/packages/search?ts_query_web=ublue&sort=relevance&page=1 
+# ArtifactHub package configuration
+# Add this to your ArtifactHub repo settings:
+# OCI URL: oci://ghcr.io/moonlightos-meow/s3rlinux-atomic
 
-repositoryID: my-custom-id-here # Fill in with your own credentials 
-owners: # (optional, used to claim repository ownership)
-  - name: My Name
-    email: my_email@email.com
+repositoryID: ""  # Fill in after adding package on artifacthub.io
+owners:
+  - name: S3RLinux
+    email: ash8820@proton.me
