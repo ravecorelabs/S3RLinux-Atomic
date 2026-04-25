@@ -4,14 +4,17 @@
 
 > "RAVE ALL NIGHT 💀"
 
-[![Build](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
-[![Stars](https://img.shields.io/github/stars/moonlightOS-Meow/S3RLinux-Atomic?style=flat)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/stargazers)
-[![Forks](https://img.shields.io/github/forks/moonlightOS-Meow/S3RLinux-Atomic?style=flat)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/fork)
-[![License](https://img.shields.io/badge/license-SAL-purple)](LICENSE)
-[![Contributors](https://img.shields.io/github/all-contributors/moonlightOS-Meow/S3RLinux-Atomic)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic#contributors)
+---
+
+## 📋 Quick Links
+
+| 🌐 Website | ⭐ Stars | 💬 Discussion | 🐛 Issues |
+|:---:|:---:|:---:|:---:|
+| [Live Site](https://moonlightOS-Meow.github.io/S3RLinux-Atomic) | [Stargazers](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/stargazers) | [Chat](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/discussions) | [Report Bugs](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues) |
 
 ---
+
+## ⚡ Quick Install
 
 ## 📊 Popularity
 
