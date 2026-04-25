@@ -21,9 +21,9 @@
 
 ---
 
-## 💬 Join Us
+## 💬 Discussion
 
-[Join our Discord](https://discord.gg/s3rlinux) | [Discussions](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/discussions)
+[Discussions](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/discussions)
 
 ---
 
