@@ -1,417 +1,428 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const colors = {
   cyan: '#00bcd4',
-  cyanGlow: 'rgba(0, 188, 212, 0.5)',
-  dark: '#1a1a1a',
-  darker: '#0a0a0a',
-  gray: '#2d2d30',
-  text: '#d2d2d2',
-  pink: '#ff0080',
-  purple: '#8000ff'
+  cyanLight: '#26c6da',
+  cyanDark: '#0097a7',
+  purple: '#9c27b0',
+  dark: '#0d1117',
+  darker: '#010409',
+  gray: '#161b22',
+  text: '#c9d1d9',
+  textMuted: '#8b949e',
+  border: '#30363d'
 }
 
 function App() {
-  const [particles, setParticles] = useState([])
-  const [beat, setBeat] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setParticles(p => [...p.slice(-30), {
-        id: Date.now() + Math.random(),
-        x: Math.random() * window.innerWidth,
-        y: -20,
-        vx: (Math.random() - 0.5) * 3,
-        vy: Math.random() * 4 + 2,
-        size: Math.random() * 8 + 4,
-        color: Math.random() > 0.5 ? colors.cyan : colors.pink
-      }])
-    }, 80)
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setParticles(p => p.map(pt => ({
-        ...pt,
-        x: pt.x + pt.vx,
-        y: pt.y + pt.vy
-      })).filter(pt => pt.y < window.innerHeight + 50))
-    }, 16)
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const interval = setInterval(() => setBeat(b => !b), 500)
-    return () => clearInterval(interval)
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
     <div style={{
       minHeight: '100vh',
-      background: `radial-gradient(ellipse at center, ${colors.dark} 0%, ${colors.darker} 50%, #050505 100%)`,
+      background: colors.darker,
       color: colors.text,
-      fontFamily: "'Segoe UI', 'Noto Sans', system-ui, sans-serif",
+      fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       position: 'relative',
-      overflow: 'hidden'
+      overflowX: 'hidden'
     }}>
-      {/* Animated background grid */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: `
-          linear-gradient(${colors.cyanGlow} 1px, transparent 1px),
-          linear-gradient(90deg, ${colors.cyanGlow} 1px, transparent 1px)
-        `,
-        backgroundSize: '50px 50px',
-        opacity: 0.1,
-        animation: 'gridMove 20s linear infinite'
-      }} />
+      {/* Navigation */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          background: scrolled ? `rgba(1,4,9,0.9)` : 'transparent',
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          borderBottom: scrolled ? `1px solid ${colors.border}` : 'none',
+          transition: 'all 0.3s'
+        }}
+      >
+        <div style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          padding: '1rem 2rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem', color: colors.cyan }}>
+            🌈 S3RLINUX
+          </div>
+          <div style={{ display: 'flex', gap: '2rem' }}>
+            {['Features', 'Get Started', 'Community'].map(link => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase().replace(' ', '-')}`}
+                style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s' }}
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+        </div>
+      </motion.nav>
 
-      <style>{`
-        @keyframes gridMove {
-          from { transform: translateY(0); }
-          to { transform: translateY(50px); }
-        }
-      `}</style>
+      {/* Hero Section */}
+      <section style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '2rem',
+        position: 'relative'
+      }}>
+        {/* Background glow */}
+        <div style={{
+          position: 'absolute',
+          top: '20%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 800,
+          height: 800,
+          background: `radial-gradient(circle, ${colors.cyan}15 0%, transparent 70%)`,
+          pointerEvents: 'none'
+        }} />
 
-      {particles.map(p => (
-        <motion.div
-          key={p.id}
-          initial={{ x: p.x, y: p.y, scale: 0 }}
-          animate={{ x: p.x, y: p.y, scale: 1 }}
-          exit={{ scale: 0 }}
-          style={{
-            position: 'absolute',
-            width: p.size,
-            height: p.size,
-            borderRadius: '50%',
-            background: p.color,
-            boxShadow: `0 0 20px ${p.color}`,
-            pointerEvents: 'none'
-          }}
-        />
-      ))}
-
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem', position: 'relative', zIndex: 1 }}>
-        {/* Hero Section */}
-        <motion.div
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-          style={{ textAlign: 'center', padding: '3rem 0' }}
-        >
+        <div style={{ maxWidth: 800, position: 'relative', zIndex: 1 }}>
           <motion.div
-            animate={{ scale: beat ? 1.05 : 1 }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 200 }}
             style={{
-              display: 'inline-block',
-              fontSize: '6rem',
-              filter: 'drop-shadow(0 0 30px rgba(0, 188, 212, 0.8))'
+              fontSize: 'clamp(4rem, 12vw, 8rem)',
+              marginBottom: '1rem'
             }}
           >
             🌈
           </motion.div>
 
           <motion.h1
-            initial={{ scale: 0, rotate: -10 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 150, delay: 0.2 }}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
             style={{
-              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-              background: `linear-gradient(135deg, #fff 0%, ${colors.cyan} 50%, ${colors.pink} 100%)`,
+              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              fontWeight: 800,
+              background: `linear-gradient(135deg, ${colors.text} 0%, ${colors.cyan} 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              margin: '1rem 0',
-              textShadow: 'none'
+              marginBottom: '1.5rem',
+              letterSpacing: '-0.02em'
             }}
           >
             S3RLINUX ATOMIC
           </motion.h1>
 
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            style={{
-              width: 200,
-              height: 4,
-              background: `linear-gradient(90deg, transparent, ${colors.cyan}, ${colors.pink}, transparent)`,
-              margin: '1rem auto',
-              borderRadius: 2
-            }}
-          />
-
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            style={{ fontSize: '1.4rem', color: '#999', maxWidth: 600, margin: '0 auto', lineHeight: 1.8 }}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            style={{
+              fontSize: '1.25rem',
+              color: colors.textMuted,
+              maxWidth: 600,
+              margin: '0 auto 2rem',
+              lineHeight: 1.7
+            }}
           >
-            The distro that exists because why not. Based on Aurora (KDE).
+            The Linux-based ultimate workstation.
             <br />
-            Immutable OSTree. The S3RL spirit lives on.
+            Built on Aurora. Powered by S3RL. RAVE ALL NIGHT.
           </motion.p>
 
           <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            <Button primary>
+              🚀 Get S3RLinux
+            </Button>
+            <Button>
+              📖 Documentation
+            </Button>
+          </motion.div>
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            style={{ marginTop: '1.5rem', fontSize: '2rem', fontWeight: 'bold', color: colors.cyan }}
+            transition={{ repeat: Infinity, duration: 2, delay: 1 }}
+            style={{
+              marginTop: '3rem',
+              color: colors.cyan,
+              fontWeight: 'bold',
+              fontSize: '1.5rem'
+            }}
           >
             RAVE ALL NIGHT 💀
-          </motion.div>
-
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', margin: '2.5rem 0' }}>
-            {['🎵 S3RL Themed', '💻 KDE Plasma', '⚡ Immutable OSTree', '🔒 bootc', '🎨 Custom Branding'].map((badge, i) => (
-              <motion.span
-                key={badge}
-                initial={{ scale: 0, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                transition={{ delay: 0.7 + i * 0.1, type: 'spring' }}
-                whileHover={{ scale: 1.1, background: colors.cyan, color: colors.darker, boxShadow: `0 0 30px ${colors.cyan}` }}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  padding: '0.8rem 1.5rem',
-                  borderRadius: 50,
-                  border: `1px solid ${colors.cyanGlow}`,
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s'
-                }}
-              >
-                {badge}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* License Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          style={{
-            background: `linear-gradient(135deg, rgba(0,188,212,0.15) 0%, rgba(255,0,128,0.1) 100%)`,
-            border: `2px solid transparent`,
-            borderImage: `linear-gradient(135deg, ${colors.cyan}, ${colors.pink}) 1`,
-            borderRadius: 24,
-            padding: '3rem',
-            margin: '3rem 0',
-            textAlign: 'center',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          <motion.div
-            style={{
-              position: 'absolute',
-              top: -50,
-              left: -50,
-              width: 100,
-              height: 100,
-              background: colors.cyan,
-              filter: 'blur(50px)',
-              opacity: 0.3
-            }}
-          />
-          <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: colors.cyan }}>
-            🎵 THE S3RL LICENSE (S3RLL)
-          </h2>
-          
-          <motion.div
-            animate={{ 
-              textShadow: [
-                `0 0 20px ${colors.cyan}`, 
-                `0 0 40px ${colors.cyan}, 0 0 60px ${colors.pink}`,
-                `0 0 20px ${colors.cyan}`
-              ]
-            }}
-            transition={{ repeat: Infinity, duration: 0.8 }}
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 'bold', letterSpacing: '0.1em' }}
-          >
-            RAVE ALL NIGHT
-          </motion.div>
-          
-          <p style={{ marginTop: '1.5rem', fontSize: '1.1rem' }}>
-            Per the license: you MUST listen to S3RL while using this OS.
-          </p>
-          <motion.p
-            style={{ marginTop: '0.5rem', fontStyle: 'italic', opacity: 0.6, fontSize: '0.9rem' }}
-          >
-            "lol no tech support included"
           </motion.p>
-        </motion.div>
-
-        {/* Features Grid */}
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', textAlign: 'center' }}>
-          ✨ Features
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', margin: '2rem 0' }}>
-          {[
-            { icon: '💻', title: 'KDE Plasma', desc: 'Because GNOME is fine but KDE hits different. Ricing paradise.' },
-            { icon: '⚡', title: 'Immutable OSTree', desc: 'Atomic updates. Rollback when things break. The future.' },
-            { icon: '🎨', title: 'Custom Branding', desc: 'S3RL-themed OS colors, SDDM login, Plymouth splash, KDE theme.' },
-            { icon: '🔄', title: 'Based on Aurora', desc: 'Built on Universal Blue\'s Aurora. Fedora foundation with KDE.' },
-            { icon: '📦', title: 'Customizable', desc: 'Just edit the Containerfile and build.sh. Add your own packages.' },
-            { icon: '🌐', title: 'GitHub CI/CD', desc: 'Automatic builds on push. GitHub Actions powered.' }
-          ].map((feature, i) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30, rotateY: -15 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -10, boxShadow: `0 20px 40px ${colors.cyanGlow}` }}
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                borderRadius: 20,
-                padding: '2rem',
-                border: '1px solid rgba(255,255,255,0.08)',
-                transition: 'all 0.4s',
-                perspective: 1000
-              }}
-            >
-              <motion.div
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 3, delay: i * 0.5 }}
-                style={{ fontSize: '2.5rem', marginBottom: '1rem' }}
-              >
-                {feature.icon}
-              </motion.div>
-              <h3 style={{ fontSize: '1.4rem', marginBottom: '0.8rem', color: colors.cyan }}>{feature.title}</h3>
-              <p style={{ opacity: 0.75, lineHeight: 1.6 }}>{feature.desc}</p>
-            </motion.div>
-          ))}
         </div>
+      </section>
 
-        {/* Code Sections */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          style={{ marginTop: '3rem' }}
-        >
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', textAlign: 'center' }}>🚀 Quick Start</h2>
-          <motion.div
-            initial={{ x: -20, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <CodeBlock code={`# Switch to our image
+      {/* About Section */}
+      <section id="features" style={{ padding: '6rem 2rem', background: colors.gray }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <SectionTitle>What is S3RLinux?</SectionTitle>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
+            <FeatureCard
+              icon="💻"
+              title="KDE Plasma"
+              desc="Built around the customizable and adaptable KDE Plasma Desktop Environment, carefully customized for the best experience out of the box."
+            />
+            <FeatureCard
+              icon="⚡"
+              title="Immutable OSTree"
+              desc="Image-based updates that get applied in the background. Rollback to a known-good state if anything breaks."
+            />
+            <FeatureCard
+              icon="🎵"
+              title="S3RL Themed"
+              desc="Because why not. Custom branding, SDDM theme, Plymouth splash, and the S3RL spirit built in."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section style={{ padding: '6rem 2rem' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <SectionTitle>Built different.</SectionTitle>
+          
+          <div style={{ display: 'grid', gap: '3rem', marginTop: '3rem' }}>
+            <FeatureRow
+              icon="🔒"
+              title="Rock-solid security"
+              desc="Updates are built and tested before they reach you. Everything configured, nothing to worry about."
+            />
+            <FeatureRow
+              icon="🎮"
+              title="Gaming ready"
+              desc="Support for all graphics cards including Nvidia. Game on, no problem."
+            />
+            <FeatureRow
+              icon="📦"
+              title="Customizable"
+              desc="Built from bash scripts and Containerfiles. Easy to audit, contribute, and extend."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Get Started */}
+      <section id="get-started" style={{ padding: '6rem 2rem', background: colors.gray }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
+          <SectionTitle>Get S3RLinux</SectionTitle>
+          
+          <p style={{ color: colors.textMuted, marginBottom: '2rem', fontSize: '1.1rem' }}>
+            Select your hardware configuration to continue.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+            <DownloadCard
+              title="Intel / AMD"
+              desc="For integrated graphics or modern AMD GPUs"
+              badge="Recommended"
+            />
+            <DownloadCard
+              title="Nvidia"
+              desc="For RTX/GTX series graphics cards"
+            />
+          </div>
+
+          <CodeBlock>{`# Switch to our image
 sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
 
 # Reboot
-sudo reboot`} />
-          </motion.div>
-        </motion.div>
+sudo reboot`}</CodeBlock>
+        </div>
+      </section>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          style={{ marginTop: '3rem' }}
-        >
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', textAlign: 'center' }}>🔨 Building Locally</h2>
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <CodeBlock code={`# Install just first
-just build`} />
-          </motion.div>
-          <p style={{ marginTop: '1rem', textAlign: 'center', opacity: 0.6 }}>
-            Or trigger a build from GitHub Actions.
+      {/* Community */}
+      <section id="community" style={{ padding: '6rem 2rem' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
+          <SectionTitle>For the community, by the community.</SectionTitle>
+          
+          <p style={{ color: colors.textMuted, marginBottom: '2rem', maxWidth: 600, margin: '1rem auto' }}>
+            S3RLinux is built and maintained by the community. We are passionate in what we do.
           </p>
-        </motion.div>
 
-        {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          style={{
-            textAlign: 'center',
-            padding: '3rem 0',
-            marginTop: '5rem',
-            borderTop: '1px solid rgba(255,255,255,0.1)'
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', margin: '1.5rem 0' }}>
-            {[
-              ['GitHub', 'https://github.com/moonlightOS-Meow/S3RLinux-Atomic'],
-              ['Releases', 'https://github.com/moonlightOS-Meow/S3RLinux-Atomic/releases'],
-              ['Issues', 'https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues']
-            ].map(([name, url], i) => (
-              <motion.a
-                key={name}
-                href={url}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ color: colors.cyan, scale: 1.1 }}
-                style={{ color: colors.text, textDecoration: 'none', transition: 'all 0.3s' }}
-              >
-                {name}
-              </motion.a>
-            ))}
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+            <Button>GitHub</Button>
+            <Button>Discord</Button>
+            <Button>Forums</Button>
           </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Built with 💜 and UNTZ UNTZ
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            style={{ marginTop: '0.5rem' }}
-          >
-            © 2026 S3RLinux • RAVE ALL NIGHT 💀
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            style={{ marginTop: '1.5rem', fontStyle: 'italic', opacity: 0.5 }}
-          >
-            OOH-OOH OOH-OOH
-          </motion.p>
-        </motion.footer>
-      </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{
+        padding: '3rem 2rem',
+        borderTop: `1px solid ${colors.border}`,
+        textAlign: 'center'
+      }}>
+        <p style={{ color: colors.textMuted, fontSize: '0.9rem' }}>
+          Proudly built with 💜 by the S3RLinux team.
+        </p>
+        <p style={{ color: colors.textMuted, fontSize: '0.8rem', marginTop: '0.5rem' }}>
+          Based on Aurora. Not affiliated with Fedora, KDE, or Red Hat.
+        </p>
+        <p style={{ color: colors.cyan, marginTop: '1rem', fontStyle: 'italic' }}>
+          RAVE ALL NIGHT 💀 OOH-OOH
+        </p>
+      </footer>
     </div>
   )
 }
 
-function CodeBlock({ code }) {
+function SectionTitle({ children }) {
   return (
-    <motion.pre
-      whileHover={{ scale: 1.01 }}
+    <motion.h2
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
       style={{
-        background: 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.9) 100%)',
-        padding: '1.5rem 2rem',
-        borderRadius: 16,
-        overflowX: 'auto',
-        border: `1px solid ${colors.cyanGlow}`,
-        boxShadow: `0 0 30px rgba(0,188,212,0.2), inset 0 0 30px rgba(0,188,212,0.05)`
+        fontSize: 'clamp(2rem, 4vw, 3rem)',
+        fontWeight: 700,
+        textAlign: 'center'
       }}
     >
-      <code style={{ 
-        color: colors.cyan, 
-        fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+      {children}
+    </motion.h2>
+  )
+}
+
+function Button({ children, primary }) {
+  return (
+    <motion.a
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        padding: '0.8rem 1.5rem',
+        borderRadius: 8,
+        fontWeight: 600,
         fontSize: '1rem',
-        lineHeight: 1.8
-      }}>
-        {code}
+        textDecoration: 'none',
+        background: primary ? colors.cyan : 'transparent',
+        color: primary ? colors.darker : colors.text,
+        border: primary ? 'none' : `1px solid ${colors.border}`,
+        transition: 'all 0.2s'
+      }}
+    >
+      {children}
+    </motion.a>
+  )
+}
+
+function FeatureCard({ icon, title, desc }) {
+  return (
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      style={{
+        background: colors.darker,
+        border: `1px solid ${colors.border}`,
+        borderRadius: 12,
+        padding: '2rem',
+        transition: 'all 0.3s'
+      }}
+    >
+      <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{icon}</div>
+      <h3 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', color: colors.text }}>{title}</h3>
+      <p style={{ color: colors.textMuted, lineHeight: 1.6 }}>{desc}</p>
+    </motion.div>
+  )
+}
+
+function FeatureRow({ icon, title, desc }) {
+  return (
+    <motion.div
+      initial={{ x: -20, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      style={{
+        display: 'flex',
+        gap: '2rem',
+        alignItems: 'flex-start'
+      }}
+    >
+      <div style={{ fontSize: '2.5rem', flexShrink: 0 }}>{icon}</div>
+      <div>
+        <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{title}</h3>
+        <p style={{ color: colors.textMuted, lineHeight: 1.7 }}>{desc}</p>
+      </div>
+    </motion.div>
+  )
+}
+
+function DownloadCard({ title, desc, badge }) {
+  return (
+    <motion.div
+      whileHover={{ borderColor: colors.cyan }}
+      style={{
+        background: colors.darker,
+        border: `1px solid ${colors.border}`,
+        borderRadius: 12,
+        padding: '2rem',
+        textAlign: 'left',
+        transition: 'all 0.3s',
+        cursor: 'pointer'
+      }}
+    >
+      {badge && (
+        <span style={{
+          background: colors.cyan,
+          color: colors.darker,
+          padding: '0.25rem 0.75rem',
+          borderRadius: 4,
+          fontSize: '0.75rem',
+          fontWeight: 600
+        }}>
+          {badge}
+        </span>
+      )}
+      <h3 style={{ fontSize: '1.3rem', marginTop: badge ? '1rem' : 0, marginBottom: '0.5rem' }}>{title}</h3>
+      <p style={{ color: colors.textMuted, fontSize: '0.9rem' }}>{desc}</p>
+    </motion.div>
+  )
+}
+
+function CodeBlock({ children }) {
+  return (
+    <motion.pre
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      style={{
+        background: colors.darker,
+        border: `1px solid ${colors.border}`,
+        borderRadius: 12,
+        padding: '1.5rem',
+        marginTop: '2rem',
+        overflowX: 'auto',
+        textAlign: 'left'
+      }}
+    >
+      <code style={{ color: colors.cyan, fontFamily: 'monospace', fontSize: '0.95rem' }}>
+        {children}
       </code>
     </motion.pre>
   )
