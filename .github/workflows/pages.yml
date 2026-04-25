@@ -28,7 +28,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'docs-src'
       
       - name: Install dependencies
         run: cd docs-src && npm ci
