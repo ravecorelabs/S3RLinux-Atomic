@@ -4,6 +4,7 @@
 
 > "RAVE ALL NIGHT 💀"
 
+[![Build](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
 
 ---
@@ -37,8 +38,9 @@ S3RLinux Atomic is a **bootc** image themed around **S3RL** — the legendary Ha
 - [x] OS branding changed (done, barely)
 - [x] Custom license added (done, it's funny go read it)
 - [x] Custom logo added (done)
-- [ ] First build coming soon™
-- [ ] ISO/image builds in progress
+- [x] First build DONE 🎉
+- [ ] ISO builds in progress (run from Actions!)
+- [x] ArtifactHub listed (done)
 
 ---
 
