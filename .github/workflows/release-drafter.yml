@@ -12,7 +12,5 @@ jobs:
       contents: write
     steps:
       - uses: release-drafter/release-drafter@v6
-        with:
-          config-name: release-drafter
         env:
           GITHUB_TOKEN: ${{ github.token }}
