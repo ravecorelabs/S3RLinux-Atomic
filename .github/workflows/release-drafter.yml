@@ -1,0 +1,32 @@
+name: 'Release Drafter'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  draft_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          template: |
+            ## 💀 What's Changed
+            
+            ## 📦 New Features
+            $CHANGES
+            
+            ## 🔧 Fixes
+            $FIXES
+            
+            ## ❤️ Contributors
+            Thanks to our contributors: $CONTRIBUTORS
+            
+            ---
+            *RAVE ALL NIGHT 💀*
+        config: release-drafter-config.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

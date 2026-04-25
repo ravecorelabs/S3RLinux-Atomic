@@ -1,0 +1,28 @@
+name: 'Close stale issues'
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 60
+          days-before-close: 7
+          stale-issue-message: |
+            😴 This issue has been open for 60 days - is it still needed?
+            If no activity, we'll close it soon! RAVE ALL NIGHT 💀
+          close-issue-message: |
+            🔒 Closing this issue due to inactivity.
+            But you can always reopen if you need! 💜
+          stale-pr-message: |
+            😴 This PR has been waiting for 60 days...
+            Please review or we'll have to close it!
+          close-pr-message: |
+            🔒 Closing this PR due to inactivity.
+            Thanks for the contribution! 💜
+          anyOfLabels: '["wontfix", "wont fix", "duplicate", "duplicate of"]'
+          removeStaleWhenUpdated: true

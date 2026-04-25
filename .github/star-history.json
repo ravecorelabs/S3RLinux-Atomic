@@ -1,0 +1,7 @@
+enabled: true
+removeStates: CHANGES_REQUESTED
+
+# Star history settings
+specs:
+  - repository: moonlightOS-Meow/S3RLinux-Atomic
+    branch: main

@@ -1,0 +1,19 @@
+categories:
+  - title: '🎉 New Features'
+    label: 'enhancement'
+  - title: '🐛 Bug Fixes'
+    label: 'bug'
+  - title: '📚 Documentation'
+    label: 'documentation'
+  - title: '🔧 Maintenance'
+    label: 'chore'
+  - title: '❤️ Contributors'
+    label: 'contributors'
+
+template: |
+  ## 💀 S3RLinux Update
+  
+  $CHANGES
+  
+  ---
+  *Built with 💜 and OOH-OOH*
