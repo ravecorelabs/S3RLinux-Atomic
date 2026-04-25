@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=S3RL Atomic
+Description=S3RL themed boot splash
+ModuleName=script
+
+[script]
+image_root=@PLYMOUTH_DATA_DIR@/S3RL-Atomic
+file=script.script

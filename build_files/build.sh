@@ -2,6 +2,37 @@
 
 set -ouex pipefail
 
+### OS Branding
+cat > /usr/lib/os-release << 'EOF'
+NAME="S3RLinux Atomic"
+PRETTY_NAME="S3RLinux Atomic"
+ID="s3rlinux-atomic"
+ID_LIKE="fedora"
+BUILD_ID=latest
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://s3rlinux.github.io"
+DOCUMENTATION_URL="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
+SUPPORT_URL="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues"
+BUG_REPORT_URL="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues"
+LOGO="s3rlinux-a-logo"
+EOF
+
+cp /usr/lib/os-release /etc/os-release
+cp /ctx/s3rlinux-a-logo.png /usr/share/pixmaps/
+cp /ctx/S3RL-Atomic.colors /usr/share/color-schemes/
+cp -r /ctx/sddm /usr/share/sddm/themes/
+mkdir -p /etc/sddm.conf.d
+cat > /etc/sddm.conf.d/s3rl-theme.conf << 'EOF'
+[Theme]
+Current=S3RL-Atomic
+EOF
+
+cp /ctx/plymouth/s3rl-atomic.plymouth /usr/share/plymouth/themes/
+cp /ctx/plymouth/script.script /usr/share/plymouth/themes/S3RL-Atomic/
+cp /ctx/s3rlinux-logo-are-you-fucking-blind.png /usr/share/plymouth/themes/S3RL-Atomic/s3rlinux-logo.png
+plymouth-set-default S3RL-Atomic
+ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/alternatives/plymouth-theme
+
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.

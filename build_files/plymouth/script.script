@@ -1,0 +1,107 @@
+# S3RL Atomic Plymouth Theme
+# "RAVE ALL NIGHT 💀"
+
+# Set colors
+bg_color = (0.102, 0.102, 0.102, 1);  /* #1a1a1a - dark background */
+fg_color = (0.0, 0.737, 0.831, 1);   /* #00bcd4 - cyan accent */
+text_color = (0.824, 0.824, 0.824, 1); /* #d2d2d2 - light gray */
+
+# Logo position - centered
+logo_image = Image("s3rlinux-logo.png");
+logo_width = logo_image.GetWidth();
+logo_height = logo_image.GetHeight();
+
+# Scale logo to reasonable size if too big
+if (logo_width > 400) {
+    scale = 400.0 / logo_width;
+    logo_width = 400;
+    logo_height = logo_height * scale;
+}
+
+Window.SetBackgroundRGB(bg_color);
+
+# Draw function
+fun draw() {
+    # Center the logo
+    logo_x = (Window.GetWidth() - logo_width) / 2;
+    logo_y = Window.GetHeight() * 0.35;
+    
+    logo_image = Image("s3rlinux-logo.png");
+    logo_image = logo_image.Scale(logo_width, logo_height);
+    logo_image.SetPosition(logo_x, logo_y, -1);
+    logo_image.Draw();
+    
+    # Draw "S3RLINUX ATOMIC" text below logo
+    text = "S3RLINUX ATOMIC";
+    font = Font("Noto Sans Bold");
+    text_width = font.GetTextWidth(text);
+    text_x = (Window.GetWidth() - text_width) / 2;
+    text_y = logo_y + logo_height + 30;
+    font.SetColor(text_color);
+    font.SetSize(24);
+    text_image = Image.Text(text, font, text_x, text_y);
+    text_image.Draw();
+    
+    # Draw three loading dots
+    dot_y = Window.GetHeight() * 0.7;
+    dot_spacing = 40;
+    dot_radius = 8;
+    dot_color = Color(fg_color);
+    
+    # Dot 1
+    dot1_x = Window.GetWidth() / 2 - dot_spacing;
+    Circle(dot_radius).SetColor(dot_color);
+    Circle(dot_radius).SetPosition(dot1_x, dot_y);
+    Circle(dot_radius).Draw();
+    
+    # Dot 2 (center)
+    dot2_x = Window.GetWidth() / 2;
+    Circle(dot_radius).SetColor(dot_color);
+    Circle(dot_radius).SetPosition(dot2_x, dot_y);
+    Circle(dot_radius).Draw();
+    
+    # Dot 3
+    dot3_x = Window.GetWidth() / 2 + dot_spacing;
+    Circle(dot_radius).SetColor(dot_color);
+    Circle(dot_radius).SetPosition(dot3_x, dot_y);
+    Circle(dot_radius).Draw();
+    
+    # Animated pulse effect on dots based on progress
+    progress = Progress.GetNumber();
+    
+    if (progress > 0.0) {
+        anim_dot = (progress * 3) % 3;
+        
+        # Animate first dot
+        if (anim_dot < 1.0) {
+            Circle(dot_radius).SetPosition(dot1_x, dot_y);
+            Circle(dot_radius).Draw();
+        }
+        
+        # Animate second dot  
+        if (anim_dot < 2.0) {
+            Circle(dot_radius).SetPosition(dot2_x, dot_y);
+            Circle(dot_radius).Draw();
+        }
+        
+        # Animate third dot
+        if (anim_dot < 3.0) {
+            Circle(dot_radius).SetPosition(dot3_x, dot_y);
+            Circle(dot_radius).Draw();
+        }
+    }
+    
+    # Draw "RAVE ALL NIGHT" at bottom
+    rave_text = "RAVE ALL NIGHT";
+    font_small = Font("Noto Sans");
+    rave_width = font_small.GetTextWidth(rave_text);
+    rave_x = (Window.GetWidth() - rave_width) / 2;
+    rave_y = Window.GetHeight() - 50;
+    font_small.SetColor(fg_color);
+    font_small.SetSize(14);
+    rave_image = Image.Text(rave_text, font_small, rave_x, rave_y);
+    rave_image.Draw();
+}
+
+# Entry point
+Plymouth.SetRefreshFunction(draw);
