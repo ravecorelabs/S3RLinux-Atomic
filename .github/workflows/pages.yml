@@ -30,7 +30,7 @@ jobs:
           node-version: 20
       
       - name: Install dependencies
-        run: cd docs-src && npm ci
+        run: cd docs-src && npm install
       
       - name: Build website
         run: cd docs-src && npm run build
