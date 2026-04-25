@@ -20,5 +20,6 @@ disable = [
   "org.fedoraproject.Anaconda.Modules.Subscription",
 ]
 
-[customizations.storage]
-root filesystem = { type = "xfs" }
+[[customizations.filesystem]]
+mountpoint = "/"
+type = "xfs"
