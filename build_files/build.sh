@@ -32,6 +32,23 @@ mkdir -p /usr/share/plymouth/themes/S3RL-Atomic/
 cp /ctx/plymouth/script.script /usr/share/plymouth/themes/S3RL-Atomic/
 cp /ctx/s3rlinux-logo-are-you-fucking-blind.png /usr/share/plymouth/themes/S3RL-Atomic/s3rlinux-logo.png
 # plymouth-set-default is not available in container build - handled at runtime
+# Create a systemd service to set plymouth theme on boot
+mkdir -p /etc/systemd/system
+cat > /etc/systemd/system/s3rl-plymouth.service << 'EOF'
+[Unit]
+Description=S3RLinux Plymouth Theme
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/plymouth-set-default S3RL-Atomic
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable s3rl-plymouth.service
 ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/alternatives/plymouth-theme
 
 ### Install packages
