@@ -31,7 +31,7 @@ cp /ctx/plymouth/s3rl-atomic.plymouth /usr/share/plymouth/themes/
 mkdir -p /usr/share/plymouth/themes/S3RL-Atomic/
 cp /ctx/plymouth/script.script /usr/share/plymouth/themes/S3RL-Atomic/
 cp /ctx/s3rlinux-logo-are-you-fucking-blind.png /usr/share/plymouth/themes/S3RL-Atomic/s3rlinux-logo.png
-plymouth-set-default S3RL-Atomic
+# plymouth-set-default is not available in container build - handled at runtime
 ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/alternatives/plymouth-theme
 
 ### Install packages
