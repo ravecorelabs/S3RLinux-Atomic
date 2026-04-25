@@ -1,0 +1,14 @@
+# CODEOWNERS
+
+# Default owner
+* @moonlightOS-Meow
+
+# Container stuff
+Containerfile @moonlightOS-Meow
+.github/workflows/ @moonlightOS-Meow
+
+# Build files
+build_files/ @moonlightOS-Meow
+
+# Website
+docs-src/ @moonlightOS-Meow
