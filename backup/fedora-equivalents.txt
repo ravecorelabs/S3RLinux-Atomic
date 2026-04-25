@@ -1,0 +1,59 @@
+# Fedora equivalents for Arch packages
+# After installing Aurora, run:
+# sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Then install these:
+# sudo dnf install firefox steam lutris wine discord spotifycode
+
+# ========================
+# Gaming
+# ========================
+steam -> steam (RPMFusion)
+lutris -> lutris
+wine -> wine
+gamemode -> gamemode
+mangohud -> mangohud
+gamescope -> gamescope
+proton-ge -> proton-ge (AUR or manually)
+
+# ========================
+# Communication
+# ========================
+discord -> discord
+spotify -> spotify (Flatpak) or spotify (RPMFusion)
+
+# ========================
+# Development
+# ========================
+visual-studio-code-bin -> code
+github-cli -> gh
+python -> python
+git -> git
+
+# ========================
+# Media
+# ========================
+vlc -> vlc
+mpv -> mpv
+ffmpeg -> ffmpeg
+
+# ========================
+# Already in Aurora/KDE
+# ========================
+breeze-icons (KDE) - included
+firefox - included
+bluez (bluetooth) - included
+NetworkManager - included
+KDE apps - most included
+
+# ========================
+# Install via RPMFusion
+# ========================
+# Run after install:
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Gaming packages:
+sudo dnf install steam lutris wine wine-mono discord
+
+# Optional:
+sudo dnf install vlc mpv ffmpeg
