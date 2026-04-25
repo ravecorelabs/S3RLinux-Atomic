@@ -2,14 +2,8 @@ name: 'Welcome first-time contributors'
 
 on:
   pull_request:
-    paths-ignore:
-      - '**.md'
-      - '**.txt'
-      - '**.yml'
-      - '**.yaml'
+    types: [opened]
   issues:
-  types: [opened]
-  pull_request_target:
     types: [opened]
 
 jobs:
@@ -23,11 +17,7 @@ jobs:
         uses: actions-cool/maintainer-validate@v1
         with:
           GITHUB_TOKEN: ${{ github.token }}
-          # Welcome message
           welcome-message: "🎉 Welcome to S3RLinux! Thanks for the PR! RAVE ALL NIGHT 💀"
-          # Labels for issues
           issue-labels: "welcome"
-          # Labels for PRs
           pr-labels: "ready-for-review"
-          # Comment on closed PRs (helpful for first-time contributors)
           closed-pr-message: "Thanks for contributing to S3RLinux! 💜"
