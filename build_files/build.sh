@@ -8,6 +8,7 @@ NAME="S3RLinux Atomic"
 PRETTY_NAME="S3RLinux Atomic"
 ID="s3rlinux-atomic"
 ID_LIKE="fedora"
+VERSION_ID="42"
 BUILD_ID=latest
 ANSI_COLOR="38;2;23;147;209"
 HOME_URL="https://s3rlinux.github.io"
