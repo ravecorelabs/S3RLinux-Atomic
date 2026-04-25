@@ -194,6 +194,51 @@ Credits contributors in README.
 
 ---
 
+## 📜 Session History (For Future Reference)
+
+### What We Built (2026-04-25 Session)
+
+This project was created during a long session where we built S3RLinux Atomic from scratch. Key decisions:
+
+1. **Base Image**: Chose Aurora (KDE) instead of Bazzite because user wanted KDE, and Aurora IS KDE now
+2. **Bootc**: Using bootc/OSTree system (not Arch!) - immutable Fedora-based
+3. **Branding**: Created full custom theming (KDE colors, SDDM login, Plymouth splash)
+4. **Website**: Built React+Vite site with Framer Motion animations, Aurora-styled
+5. **Bots**: Added all the fun GitHub bots (welcome, stale, emoji, release drafter, etc.)
+6. **Container Build**: Had multiple failures due to:
+   - Missing logo in build_files
+   - plymouth directory not created before copying files
+   - plymouth-set-default not available in container (used systemd service instead)
+   - bootc container lint causing cancels (disabled)
+   - Syntax error in website code
+   - Various network timeouts
+
+### Known Issues
+- Container image has ~195 vulnerabilities from base Aurora (can't fix - comes with base)
+- ISO build failed initially - needed xfs filesystem type added to disk configs
+- Need to enable RPMFusion on installed systems for gaming packages
+
+### User Requirements
+- User was on Arch/EndeavourOS, wanted to switch to bootc-based distro
+- Audio: S3RL playlist on Spotify: https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2
+- Email: ash8820@proton.me
+- GitHub: moonlightOS-Meow
+
+### Backups Created
+- `backup/packages-arch.txt` - 1125 Arch packages list
+- `backup/fedora-equivalents.txt` - Fedora package equivalents guide
+
+### Quick Install After Switch to Aurora
+```bash
+# Enable RPMFusion
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Gaming
+sudo dnf install steam lutris wine discord
+```
+
+---
+
 ## 📞 Getting Help
 
 - GitHub Issues: https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues
