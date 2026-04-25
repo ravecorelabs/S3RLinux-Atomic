@@ -260,14 +260,12 @@ function App() {
       <Section id="workflows" title="🔄 Latest Builds">
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           <StatusWidget />
-        </div>
-      </Section>
           {loadingRuns ? (
-            <p style={{ textAlign: 'center', color: colors.textMuted }}>Loading builds...</p>
+            <p style={{ textAlign: 'center', color: colors.textMuted, marginTop: '1rem' }}>Loading builds...</p>
           ) : workflowRuns.length === 0 ? (
-            <p style={{ textAlign: 'center', color: colors.textMuted }}>No builds yet. Trigger one from GitHub Actions!</p>
+            <p style={{ textAlign: 'center', color: colors.textMuted, marginTop: '1rem' }}>No builds yet. Trigger one from GitHub Actions!</p>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
               {workflowRuns.map(run => (
                 <WorkflowCard key={run.id} run={run} />
               ))}
