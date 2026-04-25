@@ -4,6 +4,8 @@
 
 > "RAVE ALL NIGHT 💀"
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
+
 ---
 
 ## ⚠️ ATOMIC? REALLY?
