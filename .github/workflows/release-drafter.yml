@@ -13,20 +13,6 @@ jobs:
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
-          template: |
-            ## 💀 What's Changed
-            
-            ## 📦 New Features
-            $CHANGES
-            
-            ## 🔧 Fixes
-            $FIXES
-            
-            ## ❤️ Contributors
-            Thanks to our contributors: $CONTRIBUTORS
-            
-            ---
-            *RAVE ALL NIGHT 💀*
-        config: release-drafter-config.yml
+          config: release-drafter-config.yml
         env:
           GITHUB_TOKEN: ${{ github.token }}
