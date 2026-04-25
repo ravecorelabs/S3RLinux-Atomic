@@ -11,9 +11,11 @@
 
 ## ⚠️ DISCLAIMER
 
-**THIS IS UNTESTED SOFTWARE.** We built this in one session while sleep-deprived and listening to S3RL. It might not work. It might explode your cat. You're on your own.
-
-* lol no tech support included *
+> ### ⚠️ WAIT - WE HAVEN'T TESTED IT YET !!!
+> 
+> **DO NOT INSTALL THIS YET.** We literally just built it. It might not boot. It might brick everything. Wait until someone (probably us, later, when we're less lazy) confirms it actually works.
+> 
+> We warned you. lol no tech support included
 
 ---
 

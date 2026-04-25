@@ -262,17 +262,19 @@ function App() {
           maxWidth: 800, 
           margin: '0 auto', 
           padding: '1.5rem', 
-          background: 'rgba(255, 0, 128, 0.1)', 
-          border: `2px solid ${colors.pink}`,
+          background: 'rgba(255, 0, 128, 0.15)', 
+          border: `3px solid ${colors.pink}`,
           borderRadius: 12,
           textAlign: 'center'
         }}>
-          <h3 style={{ color: colors.pink, marginBottom: '0.5rem', fontSize: '1.3rem' }}>⚠️ DISCLAIMER</h3>
-          <p style={{ color: colors.text, marginBottom: '0.5rem' }}>
-            <strong>THIS IS UNTESTED SOFTWARE.</strong> We built this in one session while sleep-deprived and listening to S3RL. 
-            It might not work. It might explode your cat. You're on your own.
+          <h3 style={{ color: colors.pink, marginBottom: '1rem', fontSize: '1.5rem' }}>⚠️ WAIT - WE HAVEN'T TESTED IT YET !!!</h3>
+          <p style={{ color: colors.text, marginBottom: '0.5rem', fontSize: '1.1rem' }}>
+            <strong>DO NOT INSTALL THIS YET.</strong> We literally just built it. It might not boot. It might brick everything.
           </p>
-          <p style={{ color: colors.pink, fontStyle: 'italic' }}>* lol no tech support included *</p>
+          <p style={{ color: colors.text, marginBottom: '0.5rem' }}>
+            Wait until someone (probably us, later, when we're less lazy) confirms it actually works.
+          </p>
+          <p style={{ color: colors.pink, fontStyle: 'italic', fontSize: '1rem' }}>We warned you. lol no tech support included</p>
         </div>
       </Section>
 
