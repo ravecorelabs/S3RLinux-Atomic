@@ -6,6 +6,24 @@
 
 [![Build](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
+[![Stars](https://img.shields.io/github/stars/moonlightOS-Meow/S3RLinux-Atomic?style=flat)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/stargazers)
+[![Forks](https://img.shields.io/github/forks/moonlightOS-Meow/S3RLinux-Atomic?style=flat)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/fork)
+[![License](https://img.shields.io/badge/license-SAL-purple)](LICENSE)
+[![Contributors](https://img.shields.io/github/all-contributors/moonlightOS-Meow/S3RLinux-Atomic)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic#contributors)
+
+---
+
+## 📊 Popularity
+
+<div align="center">
+
+[![Star History](https://api.star-history.com/svg?repos=moonlightOS-Meow/S3RLinux-Atomic&type=Date)](https://star-history.com/#moonlightOS-Meow/S3RLinux-Atomic)
+
+---
+
+## 💬 Join Us
+
+[Join our Discord](https://discord.gg/s3rlinux) | [Discussions](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/discussions)
 
 ---
 

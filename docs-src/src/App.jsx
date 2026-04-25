@@ -278,6 +278,18 @@ function App() {
         </div>
       </Section>
 
+      {/* GitHub Stats */}
+      <Section id="stats" title="⭐ Stars">
+        <div style={{ textAlign: 'center' }}>
+          <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/stargazers">
+            <img alt="GitHub stars" src="https://img.shields.io/github/stars/moonlightOS-Meow/S3RLinux-Atomic?style=flat&labelColor=0d1117&color=00bcd4" />
+          </a>
+          <p style={{ color: colors.textMuted, marginTop: '1rem' }}>
+            Help us grow! Star us on GitHub →
+          </p>
+        </div>
+      </Section>
+
       {/* Workflows Section */}
       <Section id="workflows" title="🔄 Latest Builds">
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
