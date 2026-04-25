@@ -282,7 +282,7 @@ function App() {
           </motion.div>
           
           <a 
-            href="https://open.spotify.com/artist/2aqPPJ14ZTofWGC9CmJ0MR1"
+href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -465,7 +465,7 @@ function Button({ children }) {
 function SpotifyButton() {
   return (
     <motion.a
-      href="https://open.spotify.com/artist/2aqPPJ14ZTofWGC9CmJ0MR1"
+      href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
       target="_blank"
       whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.98 }}
