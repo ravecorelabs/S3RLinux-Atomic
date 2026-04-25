@@ -23,3 +23,4 @@ disable = [
 [[customizations.filesystem]]
 mountpoint = "/"
 type = "xfs"
+minsize = "20 GiB"
