@@ -18,6 +18,8 @@ const colors = {
 
 function App() {
   const [scrolled, setScrolled] = useState(false)
+  const [workflowRuns, setWorkflowRuns] = useState([])
+  const [loadingRuns, setLoadingRuns] = useState(true)
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.8])
@@ -26,6 +28,20 @@ function App() {
     const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/moonlightOS-Meow/S3RLinux-Atomic/actions/runs?per_page=5', {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setWorkflowRuns(data.workflow_runs || [])
+      setLoadingRuns(false)
+    })
+    .catch(() => setLoadingRuns(false))
   }, [])
 
   return (
@@ -37,6 +53,32 @@ function App() {
       position: 'relative',
       overflowX: 'hidden'
     }}>
+      {/* Confetti button */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+        onClick={() => confetti()}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        style={{
+          position: 'fixed',
+          bottom: '2rem',
+          right: '2rem',
+          zIndex: 100,
+          background: `linear-gradient(135deg, ${colors.cyan}, ${colors.pink})`,
+          border: 'none',
+          borderRadius: '50%',
+          width: 60,
+          height: 60,
+          fontSize: '1.5rem',
+          cursor: 'pointer',
+          boxShadow: `0 0 20px ${colors.cyanGlow}`
+        }}
+      >
+        🎉
+      </motion.button>
+
       {/* Animated background */}
       <Background />
 
@@ -71,10 +113,10 @@ function App() {
             🌈 S3RLINUX
           </motion.div>
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            {['Features', 'Get Started', 'Music'].map(link => (
+            {['Features', 'Builds', 'Get Started', 'Music'].map(link => (
               <motion.a
                 key={link}
-                href={`#${link.toLowerCase().replace(' ', '-')}`}
+                href={link === 'Builds' ? '#workflows' : `#${link.toLowerCase().replace(' ', '-')}`}
                 whileHover={{ color: colors.cyan }}
                 style={{ 
                   color: scrolled ? colors.text : colors.textMuted, 
@@ -100,7 +142,7 @@ function App() {
                 textDecoration: 'none'
               }}
             >
-              ⭐ Star on GitHub
+              ⭐ Star
             </motion.a>
           </div>
         </div>
@@ -118,10 +160,7 @@ function App() {
           position: 'relative'
         }}
       >
-        <motion.div
-          style={{ opacity: heroOpacity, scale: heroScale }}
-        >
-          {/* Glow behind text */}
+        <motion.div style={{ opacity: heroOpacity, scale: heroScale }}>
           <div style={{
             position: 'absolute',
             top: '30%',
@@ -184,12 +223,8 @@ function App() {
               transition={{ delay: 0.6 }}
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}
             >
-              <GradientButton>
-                🚀 Get S3RLinux
-              </GradientButton>
-              <Button>
-                📖 Documentation
-              </Button>
+              <GradientButton>🚀 Get S3RLinux</GradientButton>
+              <Button>📖 Docs</Button>
               <SpotifyButton />
             </motion.div>
 
@@ -213,12 +248,7 @@ function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ repeat: Infinity, duration: 3 }}
-              style={{ 
-                marginTop: '1rem',
-                fontStyle: 'italic', 
-                color: colors.pink,
-                fontSize: '0.9rem' 
-              }}
+              style={{ marginTop: '1rem', fontStyle: 'italic', color: colors.pink, fontSize: '0.9rem' }}
             >
               OOH-OOH OOH-OOH
             </motion.p>
@@ -226,33 +256,48 @@ function App() {
         </motion.div>
       </motion.section>
 
-      {/* About Section */}
+      {/* Workflows Section */}
+      <Section id="workflows" title="🔄 Latest Builds">
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          {loadingRuns ? (
+            <p style={{ textAlign: 'center', color: colors.textMuted }}>Loading builds...</p>
+          ) : workflowRuns.length === 0 ? (
+            <p style={{ textAlign: 'center', color: colors.textMuted }}>No builds yet. Trigger one from GitHub Actions!</p>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {workflowRuns.map(run => (
+                <WorkflowCard key={run.id} run={run} />
+              ))}
+            </div>
+          )}
+        </div>
+      </Section>
+
+      {/* Features */}
       <Section id="features" title="✨ What is S3RLinux?">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-          <Card icon="💻" title="KDE Plasma" desc="Built around KDE Plasma Desktop, carefully customized for the best experience out of the box. Feel right at home." />
-          <Card icon="⚡" title="Immutable OSTree" desc="Image-based updates applied in background. Atomic rollbacks to known-good state if anything breaks." />
-          <Card icon="🎵" title="S3RL Themed" desc="Custom branding, SDDM theme, Plymouth splash, and the S3RL spirit built in. Because why not." />
-          <Card icon="🔒" title="Rock-solid" desc="Updates tested before they reach you. Everything configured, nothing to worry about." />
-          <Card icon="🎮" title="Gaming Ready" desc="Support for all graphics cards including Nvidia. Game on, no problem." />
-          <Card icon="📦" title="Customizable" desc="Built from bash scripts and Containerfiles. Easy to audit, contribute, and extend." />
+          <Card icon="💻" title="KDE Plasma" desc="Built around KDE Plasma Desktop, carefully customized for the best experience." />
+          <Card icon="⚡" title="Immutable OSTree" desc="Image-based updates in background. Atomic rollbacks if anything breaks." />
+          <Card icon="🎵" title="S3RL Themed" desc="Custom branding, SDDM, Plymouth splash. Because why not." />
+          <Card icon="🔒" title="Rock-solid" desc="Updates tested before reaching you. Everything configured." />
+          <Card icon="🎮" title="Gaming Ready" desc="Support for all graphics cards including Nvidia." />
+          <Card icon="📦" title="Customizable" desc="Built from bash scripts and Containerfiles. Easy to extend." />
         </div>
       </Section>
 
       {/* Get Started */}
       <Section id="get-started" title="🚀 Get S3RLinux" gray>
         <p style={{ color: colors.textMuted, marginBottom: '2rem', textAlign: 'center' }}>
-          Select your hardware configuration to continue.
+          Select your hardware configuration.
         </p>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', maxWidth: 900, margin: '0 auto' }}>
           <DownloadCard title="Intel / AMD" desc="For integrated graphics or modern AMD GPUs" recommended />
           <DownloadCard title="Nvidia" desc="For RTX/GTX series graphics cards" />
         </div>
-
         <CodeSection />
       </Section>
 
-      {/* Music Section */}
+      {/* Music */}
       <Section id="music" title="🎵 The S3RL Playlist">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -270,19 +315,15 @@ function App() {
           <p style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: colors.textMuted }}>
             Per the S3RL License (S3RLL): you MUST listen to S3RL while using this OS.
           </p>
-          
           <motion.div
-            animate={{ 
-              textShadow: [`0 0 20px ${colors.cyan}`, `0 0 40px ${colors.cyan}, 0 0 60px ${colors.pink}`, `0 0 20px ${colors.cyan}`]
-            }}
+            animate={{ textShadow: [`0 0 20px ${colors.cyan}`, `0 0 40px ${colors.cyan}, 0 0 60px ${colors.pink}`, `0 0 20px ${colors.cyan}`] }}
             transition={{ repeat: Infinity, duration: 1 }}
             style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}
           >
             RAVE ALL NIGHT
           </motion.div>
-          
           <a 
-href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
+            href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -299,7 +340,6 @@ href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
           >
             🎧 Listen on Spotify
           </a>
-          
           <p style={{ marginTop: '1.5rem', fontStyle: 'italic', opacity: 0.5, fontSize: '0.85rem' }}>
             "lol no tech support included"
           </p>
@@ -307,78 +347,59 @@ href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
       </Section>
 
       {/* Footer */}
-      <footer style={{
-        padding: '4rem 2rem 2rem',
-        borderTop: `1px solid ${colors.border}`,
-        textAlign: 'center'
-      }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}
-        >
-          {['GitHub', 'Documentation', 'License'].map((link, i) => (
-            <motion.a
-              key={link}
-              href={i === 0 ? 'https://github.com/moonlightOS-Meow/S3RLinux-Atomic' : i === 1 ? '#' : '#'}
-              whileHover={{ color: colors.cyan }}
-              style={{ 
-                color: colors.textMuted, 
-                textDecoration: 'none',
-                transition: 'color 0.2s' 
-              }}
-            >
+      <footer style={{ padding: '4rem 2rem 2rem', borderTop: `1px solid ${colors.border}`, textAlign: 'center' }}>
+        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
+          {['GitHub', 'Documentation', 'License'].map(link => (
+            <a key={link} href="#" style={{ color: colors.textMuted, textDecoration: 'none' }}>
               {link}
-            </motion.a>
+            </a>
           ))}
-        </motion.div>
-        
-        <p style={{ color: colors.textMuted, fontSize: '0.9rem' }}>
-          Proudly built with 💜 by the S3RLinux team.
-        </p>
+        </div>
+        <p style={{ color: colors.textMuted }}>Proudly built with 💜 by the S3RLinux team.</p>
         <p style={{ color: colors.textMuted, fontSize: '0.8rem', marginTop: '0.5rem' }}>
           Based on Aurora. Not affiliated with Fedora, KDE, or Red Hat.
         </p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          style={{ 
-            marginTop: '1.5rem',
-            color: colors.cyan,
-            fontStyle: 'italic',
-            fontWeight: 600
-          }}
-        >
+        <p style={{ marginTop: '1.5rem', color: colors.cyan, fontStyle: 'italic', fontWeight: 600 }}>
           RAVE ALL NIGHT 💀 OOH-OOH
-        </motion.p>
+        </p>
       </footer>
     </div>
   )
 }
 
+function confetti() {
+  for (let i = 0; i < 100; i++) {
+    const confetti = document.createElement('div')
+    confetti.style.cssText = `
+      position: fixed;
+      left: ${Math.random() * 100}vw;
+      top: -20px;
+      width: 10px;
+      height: 10px;
+      background: hsl(${Math.random() * 360}, 100%, 50%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      animation: fall ${2 + Math.random() * 2}s linear forwards;
+    `
+    document.body.appendChild(confetti)
+    setTimeout(() => confetti.remove(), 4000)
+  }
+}
+
+const style = document.createElement('style')
+style.textContent = `
+  @keyframes fall {
+    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+`
+document.head.appendChild(style)
+
 function Background() {
   return (
     <>
-      <div style={{
-        position: 'fixed',
-        top: '10%',
-        left: '10%',
-        width: 500,
-        height: 500,
-        background: `radial-gradient(circle, ${colors.cyanGlow} 0%, transparent 70%)`,
-        filter: 'blur(80px)',
-        pointerEvents: 'none'
-      }} />
-      <div style={{
-        position: 'fixed',
-        bottom: '10%',
-        right: '10%',
-        width: 400,
-        height: 400,
-        background: `radial-gradient(circle, rgba(255,0,128,0.3) 0%, transparent 70%)`,
-        filter: 'blur(80px)',
-        pointerEvents: 'none'
-      }} />
+      <div style={{ position: 'fixed', top: '10%', left: '10%', width: 500, height: 500, background: `radial-gradient(circle, ${colors.cyanGlow} 0%, transparent 70%)`, filter: 'blur(80px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', bottom: '10%', right: '10%', width: 400, height: 400, background: `radial-gradient(circle, rgba(255,0,128,0.3) 0%, transparent 70%)`, filter: 'blur(80px)', pointerEvents: 'none' }} />
     </>
   )
 }
@@ -390,20 +411,10 @@ function Section({ children, id, title, gray }) {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
-      style={{
-        padding: '6rem 2rem',
-        background: gray ? colors.gray : colors.darker
-      }}
+      style={{ padding: '6rem 2rem', background: gray ? colors.gray : colors.darker }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <h2 style={{
-          fontSize: 'clamp(2rem, 4vw, 3rem)',
-          fontWeight: 700,
-          marginBottom: '2.5rem',
-          textAlign: 'center'
-        }}>
-          {title}
-        </h2>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, marginBottom: '2.5rem', textAlign: 'center' }}>{title}</h2>
         {children}
       </div>
     </motion.section>
@@ -427,8 +438,7 @@ function GradientButton({ children }) {
         textDecoration: 'none',
         background: `linear-gradient(135deg, ${colors.cyan}, ${colors.pink})`,
         color: '#fff',
-        boxShadow: `0 0 20px ${colors.cyanGlow}`,
-        transition: 'all 0.3s'
+        boxShadow: `0 0 20px ${colors.cyanGlow}`
       }}
     >
       {children}
@@ -437,79 +447,19 @@ function GradientButton({ children }) {
 }
 
 function Button({ children }) {
-  return (
-    <motion.a
-      href="#"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        padding: '0.8rem 1.5rem',
-        borderRadius: 8,
-        fontWeight: 600,
-        fontSize: '1rem',
-        textDecoration: 'none',
-        background: 'transparent',
-        color: colors.text,
-        border: `1px solid ${colors.border}`,
-        transition: 'all 0.2s'
-      }}
-    >
-      {children}
-    </motion.a>
-  )
+  return <motion.a href="#" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.8rem 1.5rem', borderRadius: 8, fontWeight: 600, fontSize: '1rem', textDecoration: 'none', background: 'transparent', color: colors.text, border: `1px solid ${colors.border}` }}>{children}</motion.a>
 }
 
 function SpotifyButton() {
   return (
-    <motion.a
-      href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2"
-      target="_blank"
-      whileHover={{ scale: 1.05, y: -2 }}
-      whileTap={{ scale: 0.98 }}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        padding: '0.8rem 1.5rem',
-        borderRadius: 8,
-        fontWeight: 600,
-        fontSize: '1rem',
-        textDecoration: 'none',
-        background: '#1DB954',
-        color: '#fff',
-        transition: 'all 0.2s'
-      }}
-    >
-      🎵 S3RL
-    </motion.a>
+    <motion.a href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2" target="_blank" whileHover={{ scale: 1.05 }} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.8rem 1.5rem', borderRadius: 8, fontWeight: 600, fontSize: '1rem', textDecoration: 'none', background: '#1DB954', color: '#fff' }}>🎵 S3RL</motion.a>
   )
 }
 
 function Card({ icon, title, desc }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -5, borderColor: colors.cyan }}
-      style={{
-        background: colors.darker,
-        border: `1px solid ${colors.border}`,
-        borderRadius: 12,
-        padding: '2rem',
-        transition: 'all 0.3s ease'
-      }}
-    >
-      <motion.div
-        animate={{ rotate: [0, 5, -5, 0] }}
-        transition={{ repeat: Infinity, duration: 4 }}
-        style={{ fontSize: '2.5rem', marginBottom: '1rem' }}
-      >
-        {icon}
-      </motion.div>
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ y: -5, borderColor: colors.cyan }} style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '2rem' }}>
+      <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 4 }} style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{icon}</motion.div>
       <h3 style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>{title}</h3>
       <p style={{ color: colors.textMuted, lineHeight: 1.6 }}>{desc}</p>
     </motion.div>
@@ -518,30 +468,8 @@ function Card({ icon, title, desc }) {
 
 function DownloadCard({ title, desc, recommended }) {
   return (
-    <motion.div
-      whileHover={{ borderColor: colors.cyan, scale: 1.02 }}
-      style={{
-        background: colors.darker,
-        border: `1px solid ${colors.border}`,
-        borderRadius: 12,
-        padding: '1.5rem',
-        cursor: 'pointer',
-        transition: 'all 0.3s',
-        textAlign: 'left'
-      }}
-    >
-      {recommended && (
-        <span style={{
-          background: colors.cyan,
-          color: colors.darker,
-          padding: '0.2rem 0.6rem',
-          borderRadius: 4,
-          fontSize: '0.7rem',
-          fontWeight: 700
-        }}>
-          RECOMMENDED
-        </span>
-      )}
+    <motion.div whileHover={{ borderColor: colors.cyan, scale: 1.02 }} style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '1.5rem', cursor: 'pointer', textAlign: 'left' }}>
+      {recommended && <span style={{ background: colors.cyan, color: colors.darker, padding: '0.2rem 0.6rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700 }}>RECOMMENDED</span>}
       <h3 style={{ fontSize: '1.2rem', marginTop: recommended ? '0.75rem' : 0 }}>{title}</h3>
       <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>{desc}</p>
     </motion.div>
@@ -550,29 +478,57 @@ function DownloadCard({ title, desc, recommended }) {
 
 function CodeSection() {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      style={{
-        maxWidth: 600,
-        margin: '2.5rem auto 0',
-        textAlign: 'center'
-      }}
-    >
+    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} style={{ maxWidth: 600, margin: '2.5rem auto 0', textAlign: 'center' }}>
       <p style={{ color: colors.textMuted, marginBottom: '1rem' }}>Or use bootc to switch:</p>
-      <pre style={{
+      <pre style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '1.5rem', textAlign: 'left', overflowX: 'auto' }}>
+        <code style={{ color: colors.cyan, fontFamily: 'monospace' }}>{`sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest\nsudo reboot`}</code>
+      </pre>
+    </motion.div>
+  )
+}
+
+function WorkflowCard({ run }) {
+  const statusColors = {
+    success: colors.green,
+    failure: '#f85149',
+    queued: colors.textMuted,
+    in_progress: colors.cyan
+  }
+  const statusEmoji = {
+    success: '✅',
+    failure: '❌',
+    queued: '⏳',
+    in_progress: '🔄'
+  }
+  const date = new Date(run.created_at).toLocaleDateString()
+  const time = new Date(run.created_at).toLocaleTimeString()
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      style={{
         background: colors.darker,
         border: `1px solid ${colors.border}`,
         borderRadius: 12,
-        padding: '1.5rem',
-        textAlign: 'left',
-        overflowX: 'auto'
-      }}>
-        <code style={{ color: colors.cyan, fontFamily: 'monospace' }}>
-{`sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
-sudo reboot`}
-        </code>
-      </pre>
+        padding: '1.25rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <span style={{ fontSize: '1.5rem' }}>{statusEmoji[run.status] || '❓'}</span>
+        <div>
+          <p style={{ fontWeight: 600 }}>{run.name}</p>
+          <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>{date} at {time}</p>
+        </div>
+      </div>
+      <a href={run.html_url} target="_blank" rel="noopener noreferrer" style={{ color: colors.cyan, textDecoration: 'none' }}>
+        View on GitHub →
+      </a>
     </motion.div>
   )
 }
