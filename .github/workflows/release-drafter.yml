@@ -29,4 +29,4 @@ jobs:
             *RAVE ALL NIGHT 💀*
         config: release-drafter-config.yml
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}

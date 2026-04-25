@@ -22,7 +22,7 @@ jobs:
       - name: Welcome new contributors
         uses: actions-cool/maintainer-validate@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           # Welcome message
           welcome-message: "🎉 Welcome to S3RLinux! Thanks for the PR! RAVE ALL NIGHT 💀"
           # Labels for issues
