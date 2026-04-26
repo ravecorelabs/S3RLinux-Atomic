@@ -48,6 +48,15 @@ cat > /etc/sddm.conf.d/s3rl-theme.conf << 'EOF'
 Current=S3RL-Atomic
 EOF
 
+# SDDM Auto Login (RAVE ALL NIGHT!)
+mkdir -p /etc/sddm.conf.d
+cat > /etc/sddm.conf.d/autologin.conf << 'EOF'
+[Autologin]
+User=s3rl
+Session=plasma.desktop
+Relogin=true
+EOF
+
 # Plymouth theme files (manual set via: plymouth-set-default S3RL-Atomic)
 cp /ctx/plymouth/s3rl-atomic.plymouth /usr/share/plymouth/themes/
 mkdir -p /usr/share/plymouth/themes/S3RL-Atomic/
