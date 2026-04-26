@@ -20,6 +20,13 @@ rm -rf /usr/share/backgrounds/*
 rm -rf /var/log/ublue*
 rm -f /etc/aurora*
 
+# REMOVE AURORA APPS (replace with S3RL equivalents)
+# Only remove cosmetic/unnecessary packages - keep bootc working!
+echo "Removing Aurora apps (heresy)..."
+# Remove Aurora-specific launchers/apps if any
+dnf5 remove -y ublue-os-autologin ublue-firstboot ublue-launcher 2>/dev/null || true
+dnf5 remove -y auroraos-* 2>/dev/null || true
+
 ### OS Branding
 cat > /usr/lib/os-release << 'EOF'
 NAME="S3RLinux Atomic"
