@@ -16,6 +16,36 @@
 
 ## ⚡ Quick Install
 
+```bash
+# Switch from existing Fedora/Bootc
+sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo reboot
+```
+
+---
+
+## 📝 Devlogs
+
+*Building an immutable distro from scratch, one bug at a time.*
+
+### 2026-04-25: First Working Build! 🎉
+- Fixed VERSION_ID missing (bootc-image-builder requirement)
+- Added --rootfs=xfs to fix disk builds
+- qcow2 and ISO both building!
+- **97 downloads** in first day!
+
+### 2026-04-25: Adding User + Debugging Plymouth
+- Created user `s3rl` for SDDM login
+- Plymouth theme included but may need runtime fix
+- Spicetify works on immutable! (user achievement unlocked 🔓)
+
+### Known Issues
+- Plymouth boot screen may not show (needs debugging)
+- SDDM needs user created in container (now fixed!)
+- bootc-image-builder has sudo/podman quirks (worked around)
+
+---
+
 ## 📊 Popularity
 
 <div align="center">
