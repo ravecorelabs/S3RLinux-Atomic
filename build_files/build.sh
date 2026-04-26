@@ -53,6 +53,31 @@ cp /ctx/plymouth/script.script /usr/share/plymouth/themes/S3RL-Atomic/
 cp /ctx/s3rlinux-logo-are-you-fucking-blind.png /usr/share/plymouth/themes/S3RL-Atomic/s3rlinux-logo.png
 ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/alternatives/plymouth-theme
 
+# Configure plymouth to use S3RL theme automatically (not need plymouth-set-default)
+mkdir -p /etc/plymouth/plymouthd.conf
+cat > /etc/plymouth/plymouthd.conf << 'EOF'
+[Daemon]
+Theme=S3RL-Atomic
+EOF
+
+# Also set via systemd service (for first boot - ignore chroot error)
+mkdir -p /etc/systemd/system
+cat > /etc/systemd/system/s3rl-plymouth.service << 'EOF'
+[Unit]
+Description=S3RLinux Plymouth Theme
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/plymouth-set-default S3RL-Atomic
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+(ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/Alternatives/plymouth-theme) 2>/dev/null || true
+
 ### Install packages
 
 # Update all packages to latest (security fixes)
