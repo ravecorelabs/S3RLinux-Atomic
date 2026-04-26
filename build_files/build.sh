@@ -75,3 +75,12 @@ dnf5 install -y tmux
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+### Create user (for login)
+# Replace 'username' with your desired username
+user_name="s3rl"
+user_password="s3rl"  # Change this!
+
+# Create user with password
+useradd -m -G wheel -s /bin/bash "$user_name"
+echo "$user_name:$user_password" | chpasswd
