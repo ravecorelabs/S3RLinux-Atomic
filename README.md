@@ -34,15 +34,14 @@ sudo reboot
 - qcow2 and ISO both building!
 - **97 downloads** in first day!
 
-### 2026-04-25: Adding User + Debugging Plymouth
-- Created user `s3rl` for SDDM login
-- Plymouth theme included but may need runtime fix
-- Spicetify works on immutable! (user achievement unlocked 🔓)
+### 2026-04-25: Spicetify on IMMUTABLE?! 🔓
+- **Spicetify works on bootc!** (the flex)
+- User figured out how to run it on immutable distro
+- This shouldn't be possible but it works!
 
 ### Known Issues
-- Plymouth boot screen may not show (needs debugging)
-- SDDM needs user created in container (now fixed!)
-- bootc-image-builder has sudo/podman quirks (worked around)
+- Plymouth boot screen may show black (needs debugging)
+- SDDM needs user (now fixed with `s3rl` user!)
 
 ---
 
