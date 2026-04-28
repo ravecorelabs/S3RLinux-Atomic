@@ -77,6 +77,7 @@ jobs:
         with:
           builder-image: ${{ env.BIB_IMAGE }}
           config-file: ${{ matrix.disk-type == 'anaconda-iso' && './disk_config/iso-kde.toml' || './disk_config/disk.toml' }}
+          output-directory: ./output-${{ matrix.disk-type }}
           image: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}
           additional-args: --rootfs=xfs
 
@@ -85,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.disk-type }}-image
-          path: ${{ steps.build.outputs.output-directory }}
+          path: ./output-${{ matrix.disk-type }}
           if-no-files-found: error
           retention-days: 90
           compression-level: 0
