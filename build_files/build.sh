@@ -70,7 +70,7 @@ cp /ctx/s3rlinux-logo-are-you-fucking-blind.png /usr/share/plymouth/themes/S3RL-
 ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/alternatives/plymouth-theme
 
 # Configure plymouth to use S3RL theme automatically (not need plymouth-set-default)
-mkdir -p /etc/plymouth/plymouthd.conf
+mkdir -p /etc/plymouth
 cat > /etc/plymouth/plymouthd.conf << 'EOF'
 [Daemon]
 Theme=S3RL-Atomic
