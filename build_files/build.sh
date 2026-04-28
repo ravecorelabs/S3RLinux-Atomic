@@ -4,28 +4,26 @@ set -ouex pipefail
 
 ### DELETE AURORA BRANDING
 echo "Removing Aurora heresy..."
-rm -f /usr/share/plymouth/themes/aurora/*
-rm -f /usr/share/plymouth/themes/breezy/*
-rm -f /usr/share/backgrounds/kde*/aurora*
-rm -f /usr/share/backgrounds/kde*/default/*
-rm -rf /usr/share/konforti*
-rm -f /usr/share/sddm/themes/aurora*
-rm -f /usr/share/sddm/themes/breezy*
-rm -f /usr/share/glib-schemas/10_ublue-*
-rm -f /usr/share/gnome-shell/theme/aurora*
-rm -rf /usr/share/icons/Flader_Stoy*
-# Remove Aurora wallpapers specifically
-rm -f /usr/share/backgrounds/kde*/aurora* /usr/share/backgrounds/kde*/default* /usr/share/backgrounds/*aurora* 2>/dev/null || true
-# Copy S3RL wallpapers from build area
+
+# Safely remove aurora dirs if they exist
+rm -rf /usr/share/plymouth/themes/aurora 2>/dev/null || true
+rm -rf /usr/share/plymouth/themes/breezy 2>/dev/null || true
+rm -rf /usr/share/konforti 2>/dev/null || true
+rm -rf /usr/share/sddm/themes/aurora 2>/dev/null || true
+rm -rf /usr/share/sddm/themes/breezy 2>/dev/null || true
+rm -rf /usr/share/gnome-shell/theme/aurora 2>/dev/null || true
+rm -rf /usr/share/icons/Flader_Stoy 2>/dev/null || true
+rm -rf /var/log/ublue 2>/dev/null || true  
+rm -f /etc/aurora* 2>/dev/null || true
+rm -f /usr/lib/glib-schemas/10_ublue-* 2>/dev/null || true
+
+# Copy any PNGs as wallpapers
 cp /*.png /usr/share/backgrounds/ 2>/dev/null || true
-# Remove Aurora logs
-rm -rf /var/log/ublue*
-rm -f /etc/aurora*
-# REMOVE AURORA FROM ABSOLUTELY EVERYTHING
-sed -i 's/Aurora/S3RLinux/g' /usr/lib/os-release 2>/dev/null || true
-sed -i 's/Aurora/S3RLinux/g' /etc/os-release 2>/dev/null || true
-# Force fresh hostname
-echo "s3rlinux" > /etc/hostname
+
+# Replace Aurora in os-release (this is the key branding fix!)
+sed -i 's/Aurora/S3RLinux/g; s/AURORA/S3RLINUX/g' /usr/lib/os-release 2>/dev/null || true
+
+# Hostname is set later in OS Branding section
 
 # Only remove Aurora cosmetic apps - keep useful ublue utilities!
 
