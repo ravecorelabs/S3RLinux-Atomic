@@ -14,8 +14,10 @@ rm -f /usr/share/sddm/themes/breezy*
 rm -f /usr/share/glib-schemas/10_ublue-*
 rm -f /usr/share/gnome-shell/theme/aurora*
 rm -rf /usr/share/icons/Flader_Stoy*
-# Remove ALL backgrounds (wallpapers)
-rm -rf /usr/share/backgrounds/*
+# Remove Aurora wallpapers specifically
+rm -f /usr/share/backgrounds/kde*/aurora* /usr/share/backgrounds/kde*/default* /usr/share/backgrounds/*aurora* 2>/dev/null || true
+# Copy S3RL wallpapers from build area
+cp /*.png /usr/share/backgrounds/ 2>/dev/null || true
 # Remove Aurora logs
 rm -rf /var/log/ublue*
 rm -f /etc/aurora*
