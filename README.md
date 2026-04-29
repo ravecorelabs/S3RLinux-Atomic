@@ -1,8 +1,12 @@
-# 🌈 S3RLINUX ATOMIC
+# 💀 S3RLINUX ATOMIC
 
-**S3RL-themed bootc Distribution**
+**S3RL-themed bootc Distribution** — The ultimate happy hardcore Linux experience!
 
 > "RAVE ALL NIGHT 💀"
+
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
+[![Container Image](https://img.shields.io/github/v/tag/moonlightOS-Meow/S3RLinux-Atomic?include_prereleases&label=Latest)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic)
+[![Disk Builds](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build-disk.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
 
 ---
 
@@ -17,7 +21,7 @@
 ## ⚡ Quick Install
 
 ```bash
-# Switch from existing Fedora/Bootc
+# Switch from existing Fedora/Bootc system
 sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
 sudo reboot
 ```
@@ -32,16 +36,15 @@ sudo reboot
 - Fixed VERSION_ID missing (bootc-image-builder requirement)
 - Added --rootfs=xfs to fix disk builds
 - qcow2 and ISO both building!
-- **97 downloads** in first day!
 
-### 2026-04-25: Spicetify on IMMUTABLE?! 🔓
-- **Spicetify works on bootc!** (the flex)
-- User figured out how to run it on immutable distro
-- This shouldn't be possible but it works!
+### 2026-04-25: The Great Branding Purge 🔥
+- Removed ALL Aurora "heresy"
+- Custom Plymouth theme with S3RL logo
+- SDDM auto-login as `s3rl` user
+- Hostname = s3rlinux
 
 ### Known Issues
-- Plymouth boot screen may show black (needs debugging)
-- SDDM needs user (now fixed with `s3rl` user!)
+- Container image has ~195 vulnerabilities from base Aurora (can't fix - comes with base)
 
 ---
 
@@ -61,21 +64,11 @@ sudo reboot
 
 ## ⚠️ DISCLAIMER
 
-> ### ⚠️ WAIT - WE HAVEN'T TESTED IT YET !!!
-> 
+> **⚠️ WAIT - WE HAVEN'T TESTED IT YET !!!**
+>
 > **DO NOT INSTALL THIS YET.** We literally just built it. It might not boot. It might brick everything. Wait until someone (probably us, later, when we're less lazy) confirms it actually works.
-> 
+>
 > We warned you. lol no tech support included
-
----
-
-## ⚠️ ATOMIC? REALLY?
-
-Yep. We got tired of maintaining our own archiso and decided to just use Universal Blue's template. Less work = more time listening to S3RL. 
-
-S3RLinux Atomic is a custom bootc image built on [Aurora](https://github.com/ublue-os/aurora). Same S3RL spirit. Way less crying over broken ISOs at 3am.
-
-*Sorry Arch... we still love you. But bootc is just easier. Maybe one day we'll return. 💔🥀*
 
 ---
 
@@ -83,12 +76,11 @@ S3RLinux Atomic is a custom bootc image built on [Aurora](https://github.com/ubl
 
 S3RLinux Atomic is a **bootc** image themed around **S3RL** — the legendary Happy Hardcore & Frenchcore DJ from Brisbane, Australia.
 
-- 🌈 Custom OS branding (we made our own, barely)
-- 🎵 Per the S3RL License (S3RLL): you MUST listen to S3RL while using this OS  
+- 💀 Custom OS branding (we made our own, barely)
+- 🎵 Per the S3RL License (SAL): you MUST listen to S3RL while using this OS
 - 💀 KDE Plasma desktop environment - because GNOME is fine but KDE hits different
 - ⚡ Immutable OSTree-based (don't @ us)
 - 🔧 Built on Fedora (the good stuff)
-- 📦 Uses homebrew for flatpak management
 
 ---
 
@@ -99,8 +91,9 @@ S3RLinux Atomic is a **bootc** image themed around **S3RL** — the legendary Ha
 - [x] Custom license added (done, it's funny go read it)
 - [x] Custom logo added (done)
 - [x] First build DONE 🎉
-- [ ] ISO builds in progress (run from Actions!)
+- [x] Disk images (qcow2 + ISO) in Actions!
 - [x] ArtifactHub listed (done)
+- [x] Aurora branding REMOVED 💀
 
 ---
 
@@ -128,7 +121,7 @@ just build
 ```bash
 just build-qcow2
 just build-iso
-just build-raw  
+just build-raw
 ```
 
 ---
@@ -162,5 +155,4 @@ We have one! Check `s3rlinux-a-logo.png`. It's... a logo.
 
 *Welcome to the future. The S3RL spirit flows through your OSTree. Your bootc commands are weapons.*
 
-*RAVE ALL NIGHT. 🌈💀*
-<!-- rebuild -->
+*RAVE ALL NIGHT. 💀🌈*

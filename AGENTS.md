@@ -212,11 +212,20 @@ This project was created during a long session where we built S3RLinux Atomic fr
    - bootc container lint causing cancels (disabled)
    - Syntax error in website code
    - Various network timeouts
+7. **Build Fixes** (2026-04-25 later):
+   - Fixed output directory collision - unique dirs per matrix (output-qcow2/, output-anaconda-iso/)
+   - Fixed Aurora branding removal - simpler rm commands with error handling
+   - Fixed plymouthd.conf - it's a FILE not directory
 
 ### Known Issues
 - Container image has ~195 vulnerabilities from base Aurora (can't fix - comes with base)
 - ISO build failed initially - needed xfs filesystem type added to disk configs
 - Need to enable RPMFusion on installed systems for gaming packages
+
+### Recent Fixes (2026-04-25)
+- build-disk.yml: Added `output-directory` param to ensure qcow2 and ISO have separate artifacts
+- build.sh: Simplified aurora removal to use specific dir paths (no globs that fail with set -e)
+- build.sh: Fixed plymouthd.conf mkdir - it's a file not dir
 
 ### User Requirements
 - User was on Arch/EndeavourOS, wanted to switch to bootc-based distro

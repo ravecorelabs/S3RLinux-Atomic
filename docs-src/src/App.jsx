@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
+// S3RL THEME - NEON PURPLE/PINK 💀
 const colors = {
-  cyan: '#00bcd4',
-  cyanLight: '#26c6da',
-  cyanGlow: 'rgba(0, 188, 212, 0.4)',
-  pink: '#ff0080',
   purple: '#9c27b0',
-  dark: '#0d1117',
-  darker: '#010409',
-  gray: '#161b22',
-  text: '#c9d1d9',
-  textMuted: '#8b949e',
-  border: '#30363d',
+  pink: '#ff0080',
+  purpleDark: '#7b1fa2',
+  pinkLight: '#ff3385',
+  cyanGlow: 'rgba(156, 39, 176, 0.4)',
+  pinkGlow: 'rgba(255, 0, 128, 0.4)',
+  dark: '#0d0a14',
+  darker: '#050308',
+  gray: '#1a1425',
+  text: '#e0d6e8',
+  textMuted: '#9e86a8',
+  border: '#2d2140',
   green: '#238636'
 }
 
@@ -32,15 +34,10 @@ function App() {
 
   useEffect(() => {
     fetch('https://api.github.com/repos/moonlightOS-Meow/S3RLinux-Atomic/actions/runs?per_page=5', {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json'
-      }
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
     })
     .then(res => res.json())
-    .then(data => {
-      setWorkflowRuns(data.workflow_runs || [])
-      setLoadingRuns(false)
-    })
+    .then(data => { setWorkflowRuns(data.workflow_runs || []); setLoadingRuns(false) })
     .catch(() => setLoadingRuns(false))
   }, [])
 
@@ -53,12 +50,12 @@ function App() {
       position: 'relative',
       overflowX: 'hidden'
     }}>
-      {/* Confetti button */}
+      {/* S3RL Button */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        onClick={() => confetti()}
+        onClick={() => s3rlRave()}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         style={{
@@ -66,17 +63,17 @@ function App() {
           bottom: '2rem',
           right: '2rem',
           zIndex: 100,
-          background: `linear-gradient(135deg, ${colors.cyan}, ${colors.pink})`,
+          background: `linear-gradient(135deg, ${colors.purple}, ${colors.pink})`,
           border: 'none',
           borderRadius: '50%',
           width: 60,
           height: 60,
           fontSize: '1.5rem',
           cursor: 'pointer',
-          boxShadow: `0 0 20px ${colors.cyanGlow}`
+          boxShadow: `0 0 20px ${colors.pinkGlow}`
         }}
       >
-        🎉
+        💀
       </motion.button>
 
       {/* Animated background */}
@@ -108,16 +105,16 @@ function App() {
         }}>
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            style={{ fontWeight: 800, fontSize: '1.4rem', color: colors.cyan, cursor: 'pointer' }}
+            style={{ fontWeight: 800, fontSize: '1.4rem', color: colors.pink, cursor: 'pointer' }}
           >
-            🌈 S3RLINUX
+            💀 S3RLINUX
           </motion.div>
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             {['Features', 'Builds', 'Get Started', 'Music'].map(link => (
               <motion.a
                 key={link}
                 href={link === 'Builds' ? '#workflows' : `#${link.toLowerCase().replace(' ', '-')}`}
-                whileHover={{ color: colors.cyan }}
+                whileHover={{ color: colors.purple }}
                 style={{ 
                   color: scrolled ? colors.text : colors.textMuted, 
                   textDecoration: 'none', 
@@ -168,7 +165,7 @@ function App() {
             transform: 'translateX(-50%)',
             width: 600,
             height: 600,
-            background: `radial-gradient(circle, ${colors.cyanGlow} 0%, transparent 70%)`,
+            background: `radial-gradient(circle, ${colors.purpleGlow} 0%, transparent 70%)`,
             pointerEvents: 'none',
             filter: 'blur(40px)'
           }} />
@@ -190,7 +187,7 @@ function App() {
               style={{
                 fontSize: 'clamp(2.5rem, 7vw, 5rem)',
                 fontWeight: 900,
-                background: `linear-gradient(135deg, ${colors.text} 0%, ${colors.cyan} 50%, ${colors.pink} 100%)`,
+                background: `linear-gradient(135deg, ${colors.text} 0%, ${colors.purple} 50%, ${colors.pink} 100%)`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 marginBottom: '1rem',
@@ -214,7 +211,7 @@ function App() {
             >
               The Linux-based ultimate workstation.
               <br />
-              <span style={{ color: colors.cyan }}>Built on Aurora.</span> Powered by S3RL. RAVE ALL NIGHT.
+              <span style={{ color: colors.purple }}>Built on bootc.</span> Powered by S3RL. RAVE ALL NIGHT.
             </motion.p>
 
             <motion.div
@@ -236,7 +233,7 @@ function App() {
                 marginTop: '2rem',
                 fontSize: '1.8rem',
                 fontWeight: 800,
-                background: `linear-gradient(90deg, ${colors.cyan}, ${colors.pink})`,
+                background: `linear-gradient(90deg, ${colors.purple}, ${colors.pink})`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
               }}
@@ -357,7 +354,7 @@ function App() {
             Per the S3RL License (S3RLL): you MUST listen to S3RL while using this OS.
           </p>
           <motion.div
-            animate={{ textShadow: [`0 0 20px ${colors.cyan}`, `0 0 40px ${colors.cyan}, 0 0 60px ${colors.pink}`, `0 0 20px ${colors.cyan}`] }}
+            animate={{ textShadow: [`0 0 20px ${colors.purple}`, `0 0 40px ${colors.purple}, 0 0 60px ${colors.pink}`, `0 0 20px ${colors.purple}`] }}
             transition={{ repeat: Infinity, duration: 1 }}
             style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}
           >
@@ -398,9 +395,9 @@ function App() {
         </div>
         <p style={{ color: colors.textMuted }}>Proudly built with 💜 by the S3RLinux team.</p>
         <p style={{ color: colors.textMuted, fontSize: '0.8rem', marginTop: '0.5rem' }}>
-          Based on Aurora. Not affiliated with Fedora, KDE, or Red Hat.
+          Based on S3RLinux Atomic. Not affiliated with Fedora, KDE, or Red Hat.
         </p>
-        <p style={{ marginTop: '1.5rem', color: colors.cyan, fontStyle: 'italic', fontWeight: 600 }}>
+        <p style={{ marginTop: '1.5rem', color: colors.purple, fontStyle: 'italic', fontWeight: 600 }}>
           RAVE ALL NIGHT 💀 OOH-OOH
         </p>
       </footer>
@@ -428,10 +425,37 @@ function confetti() {
   }
 }
 
+function s3rlRave() {
+  // S3RL MODE - NEON RAVE!
+  for (let i = 0; i < 50; i++) {
+    const rave = document.createElement('div')
+    const hue = Math.random() > 0.5 ? 300 : 280 // pink or purple
+    rave.style.cssText = `
+      position: fixed;
+      left: ${Math.random() * 100}vw;
+      top: -20px;
+      width: ${5 + Math.random() * 15}px;
+      height: ${5 + Math.random() * 15}px;
+      background: hsl(${hue}, 100%, 60%);
+      border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 10px hsl(${hue}, 100%, 50%);
+      animation: r3e ${1.5 + Math.random()}s ease-in forwards;
+    `
+    document.body.appendChild(rave)
+    setTimeout(() => rave.remove(), 2500)
+  }
+  confetti()
+}
+
 const style = document.createElement('style')
 style.textContent = `
   @keyframes fall {
     to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+  @keyframes r3e {
+    to { transform: translateY(100vh) rotate(360deg) scale(0); opacity: 0; }
   }
 `
 document.head.appendChild(style)
@@ -439,7 +463,7 @@ document.head.appendChild(style)
 function Background() {
   return (
     <>
-      <div style={{ position: 'fixed', top: '10%', left: '10%', width: 500, height: 500, background: `radial-gradient(circle, ${colors.cyanGlow} 0%, transparent 70%)`, filter: 'blur(80px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', top: '10%', left: '10%', width: 500, height: 500, background: `radial-gradient(circle, ${colors.purpleGlow} 0%, transparent 70%)`, filter: 'blur(80px)', pointerEvents: 'none' }} />
       <div style={{ position: 'fixed', bottom: '10%', right: '10%', width: 400, height: 400, background: `radial-gradient(circle, rgba(255,0,128,0.3) 0%, transparent 70%)`, filter: 'blur(80px)', pointerEvents: 'none' }} />
     </>
   )
@@ -466,7 +490,7 @@ function GradientButton({ children }) {
   return (
     <motion.a
       href="#get-started"
-      whileHover={{ scale: 1.05, boxShadow: `0 0 30px ${colors.cyan}` }}
+      whileHover={{ scale: 1.05, boxShadow: `0 0 30px ${colors.purple}` }}
       whileTap={{ scale: 0.98 }}
       style={{
         display: 'inline-flex',
@@ -477,9 +501,9 @@ function GradientButton({ children }) {
         fontWeight: 600,
         fontSize: '1rem',
         textDecoration: 'none',
-        background: `linear-gradient(135deg, ${colors.cyan}, ${colors.pink})`,
+        background: `linear-gradient(135deg, ${colors.purple}, ${colors.pink})`,
         color: '#fff',
-        boxShadow: `0 0 20px ${colors.cyanGlow}`
+        boxShadow: `0 0 20px ${colors.purpleGlow}`
       }}
     >
       {children}
@@ -499,7 +523,7 @@ function SpotifyButton() {
 
 function Card({ icon, title, desc }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ y: -5, borderColor: colors.cyan }} style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '2rem' }}>
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ y: -5, borderColor: colors.purple }} style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '2rem' }}>
       <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 4 }} style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{icon}</motion.div>
       <h3 style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>{title}</h3>
       <p style={{ color: colors.textMuted, lineHeight: 1.6 }}>{desc}</p>
@@ -552,8 +576,8 @@ function StatusWidget() {
 
 function DownloadCard({ title, desc, recommended }) {
   return (
-    <motion.div whileHover={{ borderColor: colors.cyan, scale: 1.02 }} style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '1.5rem', cursor: 'pointer', textAlign: 'left' }}>
-      {recommended && <span style={{ background: colors.cyan, color: colors.darker, padding: '0.2rem 0.6rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700 }}>RECOMMENDED</span>}
+    <motion.div whileHover={{ borderColor: colors.purple, scale: 1.02 }} style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '1.5rem', cursor: 'pointer', textAlign: 'left' }}>
+      {recommended && <span style={{ background: colors.purple, color: colors.darker, padding: '0.2rem 0.6rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700 }}>RECOMMENDED</span>}
       <h3 style={{ fontSize: '1.2rem', marginTop: recommended ? '0.75rem' : 0 }}>{title}</h3>
       <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>{desc}</p>
     </motion.div>
@@ -565,7 +589,7 @@ function CodeSection() {
     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} style={{ maxWidth: 600, margin: '2.5rem auto 0', textAlign: 'center' }}>
       <p style={{ color: colors.textMuted, marginBottom: '1rem' }}>Or use bootc to switch:</p>
       <pre style={{ background: colors.darker, border: `1px solid ${colors.border}`, borderRadius: 12, padding: '1.5rem', textAlign: 'left', overflowX: 'auto' }}>
-        <code style={{ color: colors.cyan, fontFamily: 'monospace' }}>{`sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest\nsudo reboot`}</code>
+        <code style={{ color: colors.purple, fontFamily: 'monospace' }}>{`sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest\nsudo reboot`}</code>
       </pre>
     </motion.div>
   )
@@ -576,7 +600,7 @@ function WorkflowCard({ run }) {
     success: colors.green,
     failure: '#f85149',
     queued: colors.textMuted,
-    in_progress: colors.cyan
+    in_progress: colors.purple
   }
   const statusEmoji = {
     success: '✅',
@@ -610,7 +634,7 @@ function WorkflowCard({ run }) {
           <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>{date} at {time}</p>
         </div>
       </div>
-      <a href={run.html_url} target="_blank" rel="noopener noreferrer" style={{ color: colors.cyan, textDecoration: 'none' }}>
+      <a href={run.html_url} target="_blank" rel="noopener noreferrer" style={{ color: colors.purple, textDecoration: 'none' }}>
         View on GitHub →
       </a>
     </motion.div>
