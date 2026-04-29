@@ -96,6 +96,10 @@ EOF
 
 ### Install packages
 
+# Security updates from broken bot
+dnf5 install -y dnf5-plugins 2>/dev/null || true
+dnf5 update --security -y 2>/dev/null || true
+
 # Update all packages to latest (security fixes)
 dnf5 update -y
 
