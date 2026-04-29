@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-// S3RL THEME - Inspired by Aurora but with purple/pink 💀
+// S3RL THEME - Aurora inspired but with purple/pink 💀
 const colors = {
   purple: '#9c27b0',
   pink: '#ff0080',
@@ -22,10 +22,8 @@ const colors = {
 
 function App() {
   const [scrolled, setScrolled] = useState(false)
-  const [selectedGpu, setSelectedGpu] = useState('amd')
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
-  const heroScale = useTransform(scrollY, [0, 500], [1, 0.9])
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -43,7 +41,7 @@ function App() {
       overflowX: 'hidden'
     }}>
       
-      {/* NAVIGATION - Aurora style */}
+      {/* NAVIGATION */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -68,10 +66,7 @@ function App() {
           alignItems: 'center'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <motion.span 
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              style={{ fontSize: '1.8rem' }}
-            >
+            <motion.span whileHover={{ scale: 1.1, rotate: 5 }} style={{ fontSize: '1.8rem' }}>
               🌈
             </motion.span>
             <span style={{ fontWeight: 700, fontSize: '1.25rem', color: colors.text }}>
@@ -112,13 +107,13 @@ function App() {
                 border: `1px solid ${colors.border}`
               }}
             >
-              ⭐ Star on GitHub
+              ⭐ Star
             </motion.a>
           </div>
         </div>
       </motion.nav>
 
-      {/* HERO SECTION - Aurora inspired */}
+      {/* HERO SECTION */}
       <motion.section
         style={{
           minHeight: '100vh',
@@ -131,7 +126,7 @@ function App() {
           position: 'relative'
         }}
       >
-        <motion.div style={{ opacity: heroOpacity, scale: heroScale }}>
+        <motion.div style={{ opacity: heroOpacity }}>
           {/* Glow */}
           <div style={{
             position: 'absolute',
@@ -201,7 +196,7 @@ function App() {
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <PrimaryButton>Get S3RLinux</PrimaryButton>
-              <SecondaryButton>Read Documentation</SecondaryButton>
+              <SecondaryButton>Documentation</SecondaryButton>
             </motion.div>
           </div>
         </motion.div>
@@ -222,7 +217,7 @@ function App() {
         </motion.div>
       </motion.section>
 
-      {/* FEATURES SECTION - Aurora style */}
+      {/* FEATURES SECTION */}
       <Section id="features" title="How does S3RLinux fit in for you?">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
           <FeatureCard 
@@ -258,7 +253,7 @@ function App() {
         </div>
       </Section>
 
-      {/* DOWNLOAD SECTION */}
+      {/* DOWNLOAD SECTION - Simple one button */}
       <Section id="download" title="Download S3RLinux">
         <div style={{ 
           background: colors.cardBg, 
@@ -266,60 +261,40 @@ function App() {
           borderRadius: 16, 
           padding: '2rem',
           maxWidth: 600,
-          margin: '0 auto'
+          margin: '0 auto',
+          textAlign: 'center'
         }}>
           <p style={{ color: colors.textMuted, marginBottom: '1.5rem', fontSize: '0.95rem' }}>
-            Select your primary GPU to get the edition with preinstalled drivers optimized for your hardware.
+            Get the latest S3RLinux Atomic image. Built on bootc with KDE Plasma.
           </p>
           
-          <div style={{ marginBottom: '1.5rem' }}>
-            <p style={{ fontSize: '0.85rem', color: colors.textMuted, marginBottom: '0.75rem' }}>PRIMARY GPU</p>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              {['amd', 'nvidia', 'intel'].map(gpu => (
-                <motion.button
-                  key={gpu}
-                  onClick={() => setSelectedGpu(gpu)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  style={{
-                    flex: 1,
-                    padding: '0.75rem 1rem',
-                    borderRadius: 8,
-                    fontWeight: 500,
-                    fontSize: '0.9rem',
-                    cursor: 'pointer',
-                    background: selectedGpu === gpu ? colors.purple : 'transparent',
-                    color: selectedGpu === gpu ? '#fff' : colors.text,
-                    border: `1px solid ${selectedGpu === gpu ? colors.purple : colors.border}`,
-                    textTransform: 'uppercase',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  {gpu}
-                </motion.button>
-              ))}
-            </div>
-          </div>
-
-          <motion.div
+          <motion.a
+            href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic"
+            target="_blank"
             whileHover={{ scale: 1.02 }}
             style={{
+              display: 'block',
               background: colors.purple,
               color: '#fff',
               padding: '1rem 2rem',
               borderRadius: 10,
               fontWeight: 600,
-              fontSize: '1rem',
+              fontSize: '1.1rem',
               cursor: 'pointer',
-              textAlign: 'center'
+              textDecoration: 'none',
+              marginBottom: '1.5rem'
             }}
           >
-            Download S3RLinux ({selectedGpu.toUpperCase()})
-          </motion.div>
+            Download Container Image
+          </motion.a>
           
-          <p style={{ color: colors.textMuted, fontSize: '0.8rem', marginTop: '1rem', textAlign: 'center' }}>
-            Or use bootc to switch: sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+          <p style={{ color: colors.textMuted, fontSize: '0.85rem', marginBottom: '1rem' }}>
+            Or use bootc to switch:
           </p>
+          <CodeBlock>
+            sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+            sudo reboot
+          </CodeBlock>
         </div>
       </Section>
 
@@ -328,16 +303,9 @@ function App() {
         <CompareTable />
       </Section>
 
-      {/* COMMUNITY SECTION - Aurora style */}
+      {/* COMMUNITY SECTION - No Discord */}
       <Section id="community" title="Join the conversation">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', maxWidth: 900, margin: '0 auto' }}>
-          <CommunityCard 
-            icon="💬"
-            title="Discord"
-            description="Join our Discord server to hang out and chat with fellow S3RLinux users and developers."
-            buttonText="Join Discord"
-            buttonColor="#5865F2"
-          />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', maxWidth: 700, margin: '0 auto' }}>
           <CommunityCard 
             icon="🐛"
             title="GitHub"
@@ -348,7 +316,7 @@ function App() {
         </div>
       </Section>
 
-      {/* FOOTER - Aurora style */}
+      {/* FOOTER */}
       <footer style={{ 
         padding: '4rem 2rem 2rem', 
         borderTop: `1px solid ${colors.border}`,
@@ -368,18 +336,17 @@ function App() {
           <div>
             <h4 style={{ fontWeight: 600, marginBottom: '1rem' }}>Resources</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {['Documentation', 'Download', 'GitHub', 'Discord'].map(link => (
-                <a key={link} href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>{link}</a>
-              ))}
+              <a href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Documentation</a>
+              <a href="#download" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Download</a>
+              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>GitHub</a>
             </div>
           </div>
           
           <div>
             <h4 style={{ fontWeight: 600, marginBottom: '1rem' }}>Project</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {['Contribute', 'License', 'Blog', 'Art'].map(link => (
-                <a key={link} href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>{link}</a>
-              ))}
+              <a href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>License</a>
+              <a href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Blog</a>
             </div>
           </div>
         </div>
@@ -471,7 +438,7 @@ function SecondaryButton({ children }) {
   )
 }
 
-// FEATURE CARDS - Aurora style
+// FEATURE CARDS
 function FeatureCard({ icon, title, description }) {
   return (
     <motion.div
@@ -493,7 +460,24 @@ function FeatureCard({ icon, title, description }) {
   )
 }
 
-// COMPARE TABLE - Aurora style
+// CODE BLOCK
+function CodeBlock({ children }) {
+  return (
+    <pre style={{ 
+      background: colors.darker, 
+      border: `1px solid ${colors.border}`, 
+      borderRadius: 10, 
+      padding: '1rem 1.25rem', 
+      textAlign: 'left', 
+      overflowX: 'auto',
+      fontSize: '0.9rem'
+    }}>
+      <code style={{ color: colors.pink, fontFamily: "'Fira Code', monospace" }}>{children}</code>
+    </pre>
+  )
+}
+
+// COMPARE TABLE
 function CompareTable() {
   const features = [
     { name: 'Automatic Updates', s3rl: true, fedora: false, arch: false, ubuntu: 'some' },
@@ -527,7 +511,7 @@ function CompareTable() {
               <td style={{ padding: '1rem', textAlign: 'center' }}>{f.s3rl ? <Check /> : <Cross />}</td>
               <td style={{ padding: '1rem', textAlign: 'center' }}>{f.fedora === true ? <Check /> : f.fedora === 'opt' ? <Some /> : <Cross />}</td>
               <td style={{ padding: '1rem', textAlign: 'center' }}>{f.arch === true ? <Check /> : f.arch === 'opt' ? <Some /> : <Cross />}</td>
-              <td style={{ padding: '1rem', textAlign: 'center' }}>{f.ubuntu === true ? <Check /> : f.ubuntu === 'opt' ? <Some /> : f.ubuntu === 'some' ? <Some /> : <Cross />}</td>
+              <td style={{ padding: '1rem', textAlign: 'center' }}>{f.ubuntu === true ? <Check /> : f.ubuntu === 'opt' ? <Some /> : <Cross />}</td>
             </tr>
           ))}
         </tbody>
@@ -536,7 +520,7 @@ function CompareTable() {
   )
 }
 
-// COMMUNITY CARDS
+// COMMUNITY CARD
 function CommunityCard({ icon, title, description, buttonText, buttonColor }) {
   return (
     <motion.div
@@ -554,7 +538,8 @@ function CommunityCard({ icon, title, description, buttonText, buttonColor }) {
       <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.75rem' }}>{title}</h3>
       <p style={{ color: colors.textMuted, lineHeight: 1.6, marginBottom: '1.5rem', fontSize: '0.95rem' }}>{description}</p>
       <motion.a
-        href="#"
+        href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues"
+        target="_blank"
         whileHover={{ scale: 1.05 }}
         style={{
           display: 'inline-block',
