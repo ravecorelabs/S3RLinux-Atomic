@@ -6,6 +6,18 @@
 
 ## 💀💀💀 WE ARE ON ARTIFACTHUB NOW! YAAAAAY 💀💀💀
 
+## 📥 Downloads
+
+**Latest builds from GitHub Actions:**
+
+| Type | Link | Size |
+|:---|:---|:---|
+| 🖥️ VM Image (qcow2) | [Actions Run](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/runs/25122556798) | ~4GB |
+| 💿 Live ISO | [Actions Run](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/runs/25122556798) | ~4GB |
+| 🐳 Container | [GH Packages](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic) | ~2GB |
+
+> **Note:** Download artifacts from the Actions run above. Click the run → find your artifact → download!
+
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
 [![Container Image](https://img.shields.io/github/v/tag/moonlightOS-Meow/S3RLinux-Atomic?include_prereleases&label=Latest)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic)
 [![Disk Builds](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build-disk.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
