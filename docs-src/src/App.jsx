@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Wiki from './Wiki.jsx'
 
 // S3RL THEME - Aurora inspired but with purple/pink 💀
 const colors = {
@@ -543,6 +544,9 @@ nmcli device wifi connect MYNETWORK password MYPASSWORD
           />
         </div>
       </Section>
+
+      {/* WIKI SECTION - Full knowledge base like Arch Wiki */}
+      <Wiki />
 
       {/* FOOTER */}
       <footer style={{ 
