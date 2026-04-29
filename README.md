@@ -4,6 +4,8 @@
 
 > "RAVE ALL NIGHT 💀"
 
+## 💀💀💀 WE ARE ON ARTIFACTHUB NOW! YAAAAAY 💀💀💀
+
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
 [![Container Image](https://img.shields.io/github/v/tag/moonlightOS-Meow/S3RLinux-Atomic?include_prereleases&label=Latest)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic)
 [![Disk Builds](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build-disk.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
