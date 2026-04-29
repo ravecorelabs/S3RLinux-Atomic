@@ -41,6 +41,9 @@ function App() {
       overflowX: 'hidden'
     }}>
       
+      {/* DECORATIVE CORNERS - No more white lines */}
+      <CornerDecorations />
+
       {/* NAVIGATION */}
       <motion.nav
         initial={{ y: -100 }}
@@ -75,7 +78,7 @@ function App() {
           </div>
           
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            {['Features', 'Download', 'Install', 'Compare', 'Blog'].map(link => (
+            {['Features', 'Download', 'Install', 'Compare', 'Blog', 'FAQ'].map(link => (
               <motion.a
                 key={link}
                 href={`#${link.toLowerCase()}`}
@@ -199,10 +202,24 @@ function App() {
               <SecondaryButton>Documentation</SecondaryButton>
               <SpotifyButton />
             </motion.div>
+            
+            {/* FUN TAGLINE */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              style={{
+                marginTop: '2rem',
+                color: colors.textMuted,
+                fontSize: '0.95rem'
+              }}
+            >
+              💀 "lol no tech support included" 💀
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* BADGES */}
+        {/* BADGES - Fixed */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -217,7 +234,7 @@ function App() {
         >
           <img src="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg" alt="Build" style={{ height: 24 }} />
           <img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic" alt="ArtifactHub" style={{ height: 24 }} />
-          <img src="https://img.shields.io/docker/vsize/ghcr.io/moonlightos-meow/s3rlinux-atomic/latest?label=size" alt="Size" style={{ height: 24 }} />
+          <img src="https://img.shields.io/docker/pull/ghcr.io/moonlightos-meow/s3rlinux-atomic?label=pulls" alt="Pulls" style={{ height: 24 }} />
         </motion.div>
 
         {/* Scroll indicator */}
@@ -381,32 +398,56 @@ sudo reboot
         <BlogSection />
       </Section>
 
-      {/* FAQ SECTION */}
-      <Section id="faq" title="Frequently Asked Questions">
+      {/* FAQ SECTION - MORE FUNNY */}
+      <Section id="faq" title="Frequently Asked Questions (FAQ)">
         <div style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <FAQCard 
             question="Is S3RLinux based on Fedora?"
-            answer="Yes! S3RLinux Atomic is built on top of Aurora, which is a KDE Plasma flavor of Fedora. It uses bootc/OSTree for immutable atomic updates."
+            answer="Yes! S3RLinux Atomic is built on top of Aurora, which is a KDE Plasma flavor of Fedora. It uses bootc/OSTree for immutable atomic updates. Not Arch. Never Arch. We made a promise. We kept the promise."
           />
           <FAQCard 
             question="Can I use S3RLinux as my daily driver?"
-            answer="Absolutely. It includes all the essentials - web browser, code editor, terminal, media players, and gaming support. Perfect for daily use."
+            answer="Absolutely. It includes all the essentials - web browser, code editor, terminal, media players, and gaming support. Perfect for daily use. Your waifu will be jealous."
           />
           <FAQCard 
             question="How do I update S3RLinux?"
-            answer="Updates happen automatically in the background! You can also run: sudo bootc upgrade. Reboot to apply."
+            answer="Updates happen automatically in the background! Just use your computer and let it do its thing. You can also run: sudo bootc upgrade. Reboot to apply. Easy peasy lemon squeezy."
           />
           <FAQCard 
             question="Can I roll back if something breaks?"
-            answer="Yes! bootc maintains previous versions. Boot into the previous deployment from the boot menu to roll back."
+            answer="Yes! bootc maintains previous versions. Boot into the previous deployment from the boot menu to roll back. Like hitting Ctrl+Z but for your entire OS. We've all been there."
           />
           <FAQCard 
             question="Does it include RPMFusion?"
-            answer="RPMFusion is not pre-installed (to keep base clean), but you can easily enable it with: sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
+            answer="RPMFusion is not pre-installed (to keep base clean), but you can easily enable it with: sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm. Gaming awaits. Your FPS will thank you."
           />
           <FAQCard 
             question="Is this free?"
-            answer="Yes! S3RLinux is free and open source under the SAL license. However, per the license, you MUST listen to S3RL while using it. This is not optional."
+            answer="Yes! S3RLinux is free and open source under the SAL license. However, per the license, you MUST listen to S3RL while using it. This is not optional. We will find out. We always find out. 👀"
+          />
+          <FAQCard 
+            question="Why is it purple and pink?"
+            answer="Because S3RL. That's it. That's the entire reason. Purple represents the darkness of the club at 3AM. Pink represents the UV lights. Together they create perfect Happy Hardcore energy. Science."
+          />
+          <FAQCard 
+            question="What if my GPU isn't supported?"
+            answer="Honestly? Try AMD. Seriously, just use AMD. NVIDIA users will have a fun time with drivers. But hey, at least the boot splash looks cool while you're troubleshooting. We've heard the stories. We believe you."
+          />
+          <FAQCard 
+            question="Can I contribute?"
+            answer="Yes! Pull requests welcome. Just don't remove the S3RL references. We will find you. Also, maybe read the AGENTS.md first. Or don't. Live dangerously. We don't care anymore. Just don't break it. Actually, break it. That's how we learn."
+          />
+          <FAQCard 
+            question="What does 'Atomic' mean?"
+            answer="It means the OS is immutable - you can't mess it up (easily). Updates are applied atomically, like quantum entanglement but for packages. If something breaks, roll back. Simple. Clean. No garbage everywhere. Your /home is sacred. / is disposable. The future is here."
+          />
+          <FAQCard 
+            question="Why no tech support?"
+            answer="Because lol. We're just some random person who likes Happy Hardcore and making OSes. If you need help, maybe try the issue tracker? Or a fortune teller? Or maybe just... read the error message? revolutionary concept we know"
+          />
+          <FAQCard 
+            question="What's the deal with this license?"
+            answer="The SAL (S3RLinux Atomic License) is a joke license that says you must listen to S3RL while using this OS. We can't actually enforce it. But seriously, you should listen to S3RL. Your ears will thank you. Your soul will ascend. OOH-OOH OOH-OOH"
           />
         </div>
       </Section>
@@ -425,7 +466,7 @@ sudo reboot
             </div>
             <p style={{ color: colors.textMuted, fontSize: '0.9rem', lineHeight: 1.6 }}>
               The ultimate Happy Hardcore Linux experience. Built on bootc. Powered by S3RL. <br/><br/>
-              🔊 <a href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2" target="_blank" style={{ color: colors.pink }}>Listen to S3RL</a> while using this OS - per license requirements.
+              🔊 <a href="https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2" target="_blank" style={{ color: colors.pink }}>Listen to S3RL</a> while using this OS - per license requirements. We mean it.
             </p>
           </div>
           
@@ -454,10 +495,18 @@ sudo reboot
             © 2026 S3RLinux. Built with 💜 by moonlightOS-Meow. 
             <span style={{ marginLeft: '1rem' }}>RAVE ALL NIGHT 💀</span>
           </p>
+          <p style={{ color: colors.textMuted, fontSize: '0.75rem', marginTop: '0.5rem', opacity: 0.7 }}>
+            lol no tech support included. You're on your own. Good luck. 🍀
+          </p>
         </div>
       </footer>
     </div>
   )
+}
+
+// CORNER DECORATIONS - Gone! No more white lines
+function CornerDecorations() {
+  return null
 }
 
 // SECTIONS
@@ -708,7 +757,7 @@ function BlogSection() {
   )
 }
 
-// FAQ CARD
+// FAQ CARD - EVEN MORE FUNNY
 function FAQCard({ question, answer }) {
   const [open, setOpen] = useState(false)
   
