@@ -78,7 +78,7 @@ function App() {
           </div>
           
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            {['Features', 'Download', 'Install', 'Compare', 'Blog', 'FAQ'].map(link => (
+            {['Features', 'Download', 'Install', 'Compare', 'Docs', 'Blog', 'FAQ'].map(link => (
               <motion.a
                 key={link}
                 href={`#${link.toLowerCase()}`}
@@ -199,7 +199,7 @@ function App() {
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <PrimaryButton>Get S3RLinux</PrimaryButton>
-              <SecondaryButton>Documentation</SecondaryButton>
+              <SecondaryButton href="#docs">Documentation</SecondaryButton>
               <SpotifyButton />
             </motion.div>
             
@@ -393,6 +393,44 @@ sudo reboot
         <CompareTable />
       </Section>
 
+      {/* DOCS SECTION */}
+      <Section id="docs" title="Documentation">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
+          <DocCard 
+            icon="⚡"
+            title="Quick Start"
+            description="Get up and running in 5 minutes. From zero to RAVE in no time."
+            link="#install"
+          />
+          <DocCard 
+            icon="🔄"
+            title="Updating S3RLinux"
+            description="How automatic updates work and how to manually trigger them."
+          />
+          <DocCard 
+            icon="↩️"
+            title="Rollback Guide"
+            description="Something broke? Here's how to roll back to a working state."
+          />
+          <DocCard 
+            icon="🎮"
+            title="Gaming Setup"
+            description="Enable RPMFusion, install Steam, Lutris, and get your game on."
+          />
+          <DocCard 
+            icon="🖥️"
+            title="Dual Boot"
+            description="Set up S3RLinux alongside Windows or other distros."
+          />
+          <DocCard 
+            icon="🐳"
+            title="容器指南"
+            description="在 Docker 或 Podman 中运行 S3RLinux。容器内的 Linux!"
+            link="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
+          />
+        </div>
+      </Section>
+
       {/* BLOG SECTION */}
       <Section id="blog" title="Latest from the Blog">
         <BlogSection />
@@ -561,10 +599,10 @@ function PrimaryButton({ children }) {
   )
 }
 
-function SecondaryButton({ children }) {
+function SecondaryButton({ children, href = "#" }) {
   return (
     <motion.a
-      href="#"
+      href={href}
       whileHover={{ scale: 1.05, borderColor: colors.pink }}
       whileTap={{ scale: 0.98 }}
       style={{
@@ -718,17 +756,17 @@ function BlogSection() {
   const posts = [
     { 
       title: "S3RLinux Atomic - First Release", 
-      date: "2026-04-25",
+      date: "2026-04-29",
       excerpt: "Introducing S3RLinux Atomic - the ultimate Happy Hardcore Linux experience. Built on bootc with KDE Plasma and fully themed with S3RL purple/pink magic."
     },
     { 
       title: "Why bootc?", 
-      date: "2026-04-25",
+      date: "2026-04-29",
       excerpt: "bootc provides atomic updates, easy rollbacks, and unified container/host management. Learn why we chose bootc for S3RLinux."
     },
     { 
       title: "The S3RL Theme", 
-      date: "2026-04-25",
+      date: "2026-04-29",
       excerpt: "Custom SDDM login, Plymouth boot splash, KDE color scheme - everything themed around S3RL."
     },
   ]
@@ -754,6 +792,31 @@ function BlogSection() {
         </motion.div>
       ))}
     </div>
+  )
+}
+
+// DOC CARD
+function DocCard({ icon, title, description, link = "#" }) {
+  return (
+    <motion.a
+      href={link}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4, borderColor: colors.purple }}
+      style={{
+        display: 'block',
+        background: colors.cardBg,
+        border: `1px solid ${colors.border}`,
+        borderRadius: 14,
+        padding: '1.75rem',
+        textDecoration: 'none',
+        transition: 'border-color 0.2s'
+      }}
+    >
+      <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>{icon}</div>
+      <h3 style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.75rem', color: colors.text }}>{title}</h3>
+      <p style={{ color: colors.textMuted, lineHeight: 1.65, fontSize: '0.95rem' }}>{description}</p>
+    </motion.a>
   )
 }
 
