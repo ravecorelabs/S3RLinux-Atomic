@@ -424,8 +424,8 @@ sudo reboot
           />
           <DocCard 
             icon="🐳"
-            title="容器指南"
-            description="在 Docker 或 Podman 中运行 S3RLinux。容器内的 Linux!"
+            title="Run in Container"
+            description="Run S3RLinux in Docker or Podman. Linux inside your Linux!"
             link="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
           />
         </div>
