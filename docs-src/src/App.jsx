@@ -394,40 +394,94 @@ sudo reboot
       </Section>
 
       {/* DOCS SECTION */}
-      <Section id="docs" title="Documentation">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
-          <DocCard 
-            icon="⚡"
-            title="Quick Start"
-            description="Get up and running in 5 minutes. From zero to RAVE in no time."
-            link="#install"
-          />
-          <DocCard 
-            icon="🔄"
-            title="Updating S3RLinux"
-            description="How automatic updates work and how to manually trigger them."
-          />
-          <DocCard 
-            icon="↩️"
-            title="Rollback Guide"
-            description="Something broke? Here's how to roll back to a working state."
-          />
-          <DocCard 
-            icon="🎮"
-            title="Gaming Setup"
-            description="Enable RPMFusion, install Steam, Lutris, and get your game on."
-          />
-          <DocCard 
-            icon="🖥️"
-            title="Dual Boot"
-            description="Set up S3RLinux alongside Windows or other distros."
-          />
-          <DocCard 
-            icon="🐳"
-            title="Run in Container"
-            description="Run S3RLinux in Docker or Podman. Linux inside your Linux!"
-            link="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
-          />
+      <Section id="docs" title="📖 Documentation">
+        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <p style={{ color: colors.textMuted, textAlign: 'center', marginBottom: '2rem', fontSize: '1.1rem' }}>
+            Click any card to reveal the commands! No hidden menus. Just click. 📚
+          </p>
+          
+          {/* DOCS GRID */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+            <DocCard 
+              icon="⚡"
+              title="⚡ Quick Start"
+              description="Get up and running in 5 minutes. From zero to RAVE in no time."
+              content={`# Install S3RLinux via bootc:
+sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo reboot`}
+            />
+            <DocCard 
+              icon="🔄"
+              title="🔄 Updating S3RLinux"
+              description="How automatic updates work and how to manually trigger them."
+              content={`# Updates happen automatically!
+# Force manual update:
+sudo bootc upgrade
+
+# Reboot to apply:
+sudo reboot`}
+            />
+            <DocCard 
+              icon="↩️"
+              title="↩️ Rollback Guide"
+              description="Something broke? Roll back to a working state."
+              content={`# Check previous deployments:
+sudo bootc status
+
+# Rollback:
+sudo bootc rollback
+sudo reboot`}
+            />
+            <DocCard 
+              icon="🎮"
+              title="🎮 Gaming Setup"
+              description="Enable RPMFusion, install Steam, Lutris, and get your game on."
+              content={`# Enable RPMFusion:
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+
+# Install gaming stuff:
+sudo dnf install steam lutris wine`}
+            />
+            <DocCard 
+              icon="🖥️"
+              title="🖥️ Dual Boot"
+              description="Set up S3RLinux alongside Windows or other distros."
+              content={`# Just install to a different partition!
+# Use custom partitioning during install
+# Or shrink Windows partition first:
+# In Windows: diskpart -> shrink desired=50000`}
+            />
+            <DocCard 
+              icon="🐳"
+              title="🐳 Run in Container"
+              description="Run S3RLinux in Docker or Podman. Linux inside your Linux!"
+              content={`# With Docker:
+docker run -it --rm ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+
+# With Podman:
+podman run -it ghcr.io/moonlightos-meow/s3rlinux-atomic:latest`}
+            />
+            <DocCard 
+              icon="🎵"
+              title="🎵 Audio Setup"
+              description="Low latency audio for music production. Pluge in and RAVE."
+              content={`# Install audio stuff:
+sudo dnf install jack2 Ardour audacity
+
+# For USB audio interface:
+# Just plug it in. Should work.™`}
+            />
+            <DocCard 
+              icon="🌐"
+              title="🌐 WiFi & Networking"
+              description="Get connected. Because internet exists."
+              content={`# WiFi:
+nmcli device wifi connect MYNETWORK password MYPASSWORD
+
+# Or just use the GUI:
+# Click the network icon in system tray`}
+            />
+          </div>
         </div>
       </Section>
 
@@ -795,28 +849,58 @@ function BlogSection() {
   )
 }
 
-// DOC CARD
-function DocCard({ icon, title, description, link = "#" }) {
+// DOC CARD - Clickable with content
+function DocCard({ icon, title, description, content, href = "#" }) {
+  const [open, setOpen] = useState(false)
+  
   return (
-    <motion.a
-      href={link}
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      onClick={() => setOpen(!open)}
       whileHover={{ y: -4, borderColor: colors.purple }}
       style={{
-        display: 'block',
         background: colors.cardBg,
         border: `1px solid ${colors.border}`,
         borderRadius: 14,
         padding: '1.75rem',
-        textDecoration: 'none',
+        cursor: 'pointer',
         transition: 'border-color 0.2s'
       }}
     >
       <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>{icon}</div>
-      <h3 style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.75rem', color: colors.text }}>{title}</h3>
-      <p style={{ color: colors.textMuted, lineHeight: 1.65, fontSize: '0.95rem' }}>{description}</p>
-    </motion.a>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: colors.text }}>{title}</h3>
+        <span style={{ color: colors.pink, fontSize: '1.2rem' }}>{open ? '−' : '+'}</span>
+      </div>
+      <p style={{ color: colors.textMuted, lineHeight: 1.65, fontSize: '0.95rem', marginBottom: '0.75rem' }}>{description}</p>
+      
+      {open && content && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: `1px solid ${colors.border}` }}
+        >
+          <pre style={{ 
+            background: colors.darker, 
+            borderRadius: 8, 
+            padding: '1rem', 
+            overflowX: 'auto',
+            fontSize: '0.85rem',
+            color: colors.pink,
+            fontFamily: "'Fira Code', monospace"
+          }}>
+            {content}
+          </pre>
+        </motion.div>
+      )}
+      
+      {!open && content && (
+        <p style={{ color: colors.pink, fontSize: '0.85rem', marginTop: '0.5rem' }}>
+          Click to show commands ↓
+        </p>
+      )}
+    </motion.div>
   )
 }
 
