@@ -598,7 +598,7 @@ sudo reboot
       </Section>
 
       {/* WIKI SECTION - Full knowledge base */}
-      <div id="wiki" style={{ padding: '6rem 0' }}>
+      <div style={{ padding: '6rem 0' }}>
         <Wiki />
       </div>
 
@@ -695,8 +695,8 @@ sudo reboot
           <div>
             <h4 style={{ fontWeight: 600, marginBottom: '1rem' }}>Project</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <a href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>License</a>
-              <a href="#" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Contribute</a>
+              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/blob/main/LICENSE" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>License</a>
+              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/blob/main/README.md" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Contribute</a>
               <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Issues</a>
             </div>
           </div>
