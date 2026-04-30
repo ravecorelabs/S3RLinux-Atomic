@@ -958,6 +958,42 @@ function BlogSection() {
   
   const posts = [
     { 
+      id: 'ravecore-rebrand',
+      title: "We Became an Org (Kinda) - Introducing RaveCore Labs", 
+      date: "2026-04-30",
+      author: "RaveCore-Labs",
+      avatar: "💀",
+      readTime: "3 min read",
+      excerpt: "moonlightOS-Meow is dead. Long live RaveCore Labs! We rebranded from a personal account to an org-like presence because looking professional is easy when you're the only one here.",
+      tags: ["Branding", "RaveCore", "Announcement"],
+      content: `Big changes today! We've officially rebranded from moonlightOS-Meow to RaveCore Labs.
+
+The Rebrand
+Remember when we were just one person with a weird GitHub username? Yeah, that. Now we're an "org." Technically it's still one person. But now we look like a team. And that's what matters.
+
+Why RaveCore Labs?
+- "Rave" - because S3RL
+- "Core" - because we build atomic images
+- "Labs" - because we sound like mad scientists
+
+What Changes?
+Honestly? Almost nothing. The website moved. The container images moved. But your installed S3RLinux keeps working fine. Updates will come from the new registry. We'll handle the redirect magic.
+
+What Stays the Same?
+- Same chaos
+- Same S3RL requirement
+- Same no tech support policy
+- Same purple/pink aesthetic
+- Same one-person operation (with lots of bots)
+
+The Future
+We're building this like a real project now. Better docs, better branding, better vibes. The "org" name gives us room to grow — if anyone ever wants to join the rave.
+
+For now, it's just me, the bots, and S3RL at 3AM. And honestly? That's enough.
+
+RAVE ALL NIGHT 💀`,
+    },
+    { 
       id: 'aurora-f44-update',
       title: "Aurora F44 Spring 2026 Update - SDDM Replaced by Plasma Login Manager", 
       date: "2026-04-30",
