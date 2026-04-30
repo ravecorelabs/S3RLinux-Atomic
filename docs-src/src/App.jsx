@@ -927,47 +927,226 @@ function CompareTable() {
   )
 }
 
-// BLOG SECTION
+// BLOG SECTION - Interactive with animated modals
 function BlogSection() {
+  const [activePost, setActivePost] = useState(null)
+  
   const posts = [
     { 
+      id: 'first-release',
       title: "S3RLinux Atomic - First Release", 
       date: "2026-04-29",
-      excerpt: "Introducing S3RLinux Atomic - the ultimate Happy Hardcore Linux experience. Built on bootc with KDE Plasma and fully themed with S3RL purple/pink magic."
+      author: "moonlightOS-Meow",
+      avatar: "🌈",
+      readTime: "5 min read",
+      excerpt: "Introducing S3RLinux Atomic - the ultimate Happy Hardcore Linux experience. Built on bootc with KDE Plasma and fully themed with S3RL purple/pink magic.",
+      tags: ["Release", "bootc", "KDE"],
+      content: `Today we're releasing the first version of S3RLinux Atomic - a custom bootc image built on top of Aurora (KDE Plasma). 
+
+The idea came from a simple question: what if Fedora decided to go to a rave? Purple and pink everywhere, S3RL pumping through your speakers, and an immutable system that just works.
+
+S3RLinux features:
+- Full S3RL theming (SDDM login, Plymouth boot splash, KDE color scheme)
+- bootc/OSTree atomic updates with easy rollbacks
+- Pre-configured KDE Plasma with custom color scheme
+- Homebrew, Flatpak, and DNF package management
+- Gaming ready with Steam, Lutris, and Wine support
+
+The build process uses GitHub Actions to create both container images and disk images (ISO/VM). Everything is open source and community maintained.
+
+This is just the beginning. We're planning more themes, better documentation, and a full wiki like Arch Wiki but purple. RAVE ALL NIGHT 💀`
     },
     { 
+      id: 'why-bootc',
       title: "Why bootc?", 
       date: "2026-04-29",
-      excerpt: "bootc provides atomic updates, easy rollbacks, and unified container/host management. Learn why we chose bootc for S3RLinux."
+      author: "moonlightOS-Meow",
+      avatar: "⚡",
+      readTime: "7 min read",
+      excerpt: "bootc provides atomic updates, easy rollbacks, and unified container/host management. Learn why we chose bootc for S3RLinux.",
+      tags: ["bootc", "Immutable", "Technical"],
+      content: `bootc is a container-native approach to Linux system management. Instead of traditional package managers touching your root filesystem, your entire OS is defined as a container image.
+
+Why we chose bootc over rpm-ostree:
+1. Container-native - Define your OS as a Dockerfile
+2. Easy to reproduce - Same image, same result everywhere
+3. Simple updates - bootc upgrade pulls the latest container image
+4. Rollback support - bootc rollback gets you back to the previous working state
+5. No more "what package broke my system?" - entire system updates atomically
+
+The beauty of bootc is that it treats your OS like any other container. You can build it locally, test it, push it to a registry, and deploy it. The same workflow you use for applications now works for your entire operating system.
+
+For S3RLinux, this means we can:
+- Update the entire OS with one command
+- Roll back if something breaks (it happens)
+- Build custom images with all our theming pre-applied
+- Switch between different OS images easily
+
+The future of Linux desktop is immutable, and bootc is leading the charge.`
     },
     { 
+      id: 's3rl-theme',
       title: "The S3RL Theme", 
       date: "2026-04-29",
-      excerpt: "Custom SDDM login, Plymouth boot splash, KDE color scheme - everything themed around S3RL."
+      author: "moonlightOS-Meow",
+      avatar: "🎵",
+      readTime: "4 min read",
+      excerpt: "Custom SDDM login, Plymouth boot splash, KDE color scheme - everything themed around S3RL.",
+      tags: ["Theme", "KDE", "Design"],
+      content: `S3RLinux isn't just another Linux distro - it's a visual experience themed around S3RL, the legendary Happy Hardcore DJ from Brisbane.
+
+What we themed:
+1. Plymouth Boot Splash - Custom boot animation with S3RL logo
+2. SDDM Login Screen - Custom theme with purple/pink gradients
+3. KDE Color Scheme - Full purple theme with pink accents
+4. Desktop Wallpaper - Aurora-inspired but with S3RL branding
+
+The color palette:
+- Primary: #9c27b0 (Purple)
+- Accent: #ff0080 (Pink)
+- Background: #050308 (Almost black)
+- Text: #e8e6ee (Light purple-white)
+
+Every element was carefully chosen to create that club atmosphere. Purple represents the darkness at 3AM. Pink represents the UV lights. Together they create the perfect Happy Hardcore energy.
+
+The SDDM theme features a custom Main.qml with gradient backgrounds, glowing text effects, and the S3RL logo. The Plymouth theme uses a custom script with animation frames that play during boot.
+
+We also created a custom logo that combines the S3RL aesthetic with Linux vibes. Everything ties together into one cohesive theme.`
     },
   ]
   
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-      {posts.map((post, i) => (
+    <>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        {posts.map((post, i) => (
+          <motion.div
+            key={post.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -6, borderColor: colors.pink }}
+            onClick={() => setActivePost(post)}
+            style={{
+              background: colors.cardBg,
+              border: `1px solid ${colors.border}`,
+              borderRadius: 14,
+              padding: '1.75rem',
+              cursor: 'pointer',
+              transition: 'border-color 0.2s'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+              {post.tags.map(tag => (
+                <span key={tag} style={{
+                  background: 'rgba(156, 39, 176, 0.2)',
+                  color: colors.pink,
+                  fontSize: '0.7rem',
+                  padding: '0.2rem 0.6rem',
+                  borderRadius: 20,
+                  fontWeight: 600,
+                  textTransform: 'uppercase'
+                }}>{tag}</span>
+              ))}
+            </div>
+            <p style={{ color: colors.textMuted, fontSize: '0.8rem', marginBottom: '0.5rem' }}>{post.date} · {post.readTime}</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.75rem', color: colors.text }}>{post.title}</h3>
+            <p style={{ color: colors.textMuted, lineHeight: 1.6, fontSize: '0.95rem' }}>{post.excerpt}</p>
+            <p style={{ color: colors.pink, fontSize: '0.85rem', marginTop: '1rem', fontWeight: 500 }}>Read more →</p>
+          </motion.div>
+        ))}
+      </div>
+      
+      {/* Blog Modal */}
+      {activePost && (
         <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ borderColor: colors.purple }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setActivePost(null)}
           style={{
-            background: colors.cardBg,
-            border: `1px solid ${colors.border}`,
-            borderRadius: 14,
-            padding: '1.75rem'
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(5, 3, 8, 0.85)',
+            backdropFilter: 'blur(10px)',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem'
           }}
         >
-          <p style={{ color: colors.textMuted, fontSize: '0.8rem', marginBottom: '0.5rem' }}>{post.date}</p>
-          <h3 style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.75rem', color: colors.text }}>{post.title}</h3>
-          <p style={{ color: colors.textMuted, lineHeight: 1.6, fontSize: '0.95rem' }}>{post.excerpt}</p>
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 30 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 30 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: colors.gray,
+              border: `1px solid ${colors.border}`,
+              borderRadius: 20,
+              maxWidth: 700,
+              width: '100%',
+              maxHeight: '80vh',
+              overflowY: 'auto',
+              padding: '2.5rem',
+              position: 'relative'
+            }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              onClick={() => setActivePost(null)}
+              style={{
+                position: 'absolute',
+                top: '1.5rem',
+                right: '1.5rem',
+                background: 'rgba(255,255,255,0.1)',
+                border: 'none',
+                color: colors.text,
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                cursor: 'pointer',
+                fontSize: '1.2rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >✕</motion.button>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+              <span style={{ fontSize: '2.5rem' }}>{activePost.avatar}</span>
+              <div>
+                <p style={{ color: colors.text, fontWeight: 600 }}>{activePost.author}</p>
+                <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>{activePost.date} · {activePost.readTime}</p>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+              {activePost.tags.map(tag => (
+                <span key={tag} style={{
+                  background: 'rgba(156, 39, 176, 0.2)',
+                  color: colors.pink,
+                  fontSize: '0.7rem',
+                  padding: '0.2rem 0.6rem',
+                  borderRadius: 20,
+                  fontWeight: 600,
+                  textTransform: 'uppercase'
+                }}>{tag}</span>
+              ))}
+            </div>
+            
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, color: colors.text, marginBottom: '1.5rem', lineHeight: 1.3 }}>{activePost.title}</h2>
+            
+            <div style={{ color: colors.textMuted, lineHeight: 1.9, fontSize: '1rem' }}>
+              {activePost.content.split('\n\n').map((paragraph, i) => (
+                <p key={i} style={{ marginBottom: '1.25rem' }}>{paragraph}</p>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
-      ))}
-    </div>
+      )}
+    </>
   )
 }
 

@@ -123,14 +123,16 @@ const wikiStyles = {
     border: `1px solid ${colors.green}`,
     borderRadius: 8,
     padding: '1rem',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    color: colors.text
   },
   warning: {
     background: 'rgba(255, 152, 0, 0.15)',
     border: '1px solid #ff9800',
     borderRadius: 8,
     padding: '1rem',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    color: colors.text
   },
   table: {
     width: '100%',
@@ -917,27 +919,60 @@ sudo passwd root  # Optional but recommended
       </pre>
       
       <h4 style={wikiStyles.subheading}>Enable RPMFusion</h4>
-      <p style={wikiStyles.paragraph}>Needed for multimedia codecs and gaming stuff:</p>
+      <p style={wikiStyles.paragraph}>Needed for multimedia codecs, NVIDIA drivers, and gaming stuff:</p>
       <pre style={wikiStyles.codeBlock}>
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf groupupdate core
       </pre>
       
-      <h4 style={wikiStyles.subheading}>Hardware Acceleration (Optional)</h4>
+      <h4 style={wikiStyles.subheading}>Install Essential Packages</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Gaming
+sudo dnf install steam lutris wine
+
+# Productivity
+sudo dnf install libreoffice
+
+# System tools
+sudo dnf install htop neovim git
+
+# Codecs (after enabling RPMFusion)
+sudo dnf groupupdate multimedia
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Hardware Acceleration</h4>
       <pre style={wikiStyles.codeBlock}>
 # For AMD GPUs (most users)
-sudo dnf install mesa-vulkan-drivers # Already installed usually
+sudo dnf install mesa-vulkan-drivers
 
 # For NVIDIA (proprietary)
 sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+sudo reboot
       </pre>
       
-      <h4 style={wikiStyles.subheading}>Flatpak Support</h4>
+      <h4 style={wikiStyles.subheading}>Flatpak Setup</h4>
       <pre style={wikiStyles.codeBlock}>
-sudo dnf install flatpak
+# Add Flathub (if not already)
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Install popular apps
+flatpak install flathub com.spotify.Client
+flatpak install flathub com.discordapp.Discord
+flatpak install flathub com.visualstudio.code
       </pre>
+      
+      <h4 style={wikiStyles.subheading}>Configure S3RL Theme</h4>
+      <p style={wikiStyles.paragraph}>The S3RL theme should be pre-applied. If something looks off:</p>
+      <pre style={wikiStyles.codeBlock}>
+# Reset KDE theme
+# System Settings → Appearance → Colors → Apply "S3RL-Atomic"
+# System Settings → Appearance → Window Decorations → Choose S3RL theme
+      </pre>
+      
+      <div style={wikiStyles.note}>
+        <strong>💡 Pro Tip:</strong> Check the <Link href="/wiki/configuration" style={{ color: colors.pink }}>Configuration</Link> guide for more customization options!
+      </div>
     </div>
   )
 }
@@ -947,28 +982,73 @@ function Bootc() {
     <div style={wikiStyles.article}>
       <h3 style={wikiStyles.heading}>Bootc Guide</h3>
       
-      <p style={wikiStyles.paragraph}>bootc is Fedora's new atomic update system. Here's how to use it:</p>
+      <p style={wikiStyles.paragraph}>bootc is Fedora's container-native approach to system management. Your entire OS is defined as a container image, making updates atomic and rollbacks trivial.</p>
+      
+      <h4 style={wikiStyles.subheading}>How bootc Works</h4>
+      <p style={wikiStyles.paragraph}>
+        Unlike traditional package managers, bootc doesn't modify files on your root filesystem. Instead:
+      </p>
+      <ul style={{ color: colors.textMuted, lineHeight: 2, marginLeft: '1.5rem', marginBottom: '1rem' }}>
+        <li>Your OS is built as a container image (Containerfile)</li>
+        <li>Images are stored in a registry (GHCR for S3RLinux)</li>
+        <li><code style={wikiStyles.code}>bootc upgrade</code> downloads the new image</li>
+        <li>On reboot, the new deployment is activated</li>
+        <li>Previous deployments are kept for rollback</li>
+      </ul>
       
       <h4 style={wikiStyles.subheading}>Check Status</h4>
+      <p style={wikiStyles.paragraph}>View your current deployment and available rollbacks:</p>
       <pre style={wikiStyles.codeBlock}>
 bootc status
+# Shows current booted image, pending updates, and rollback options
       </pre>
       
       <h4 style={wikiStyles.subheading}>Update System</h4>
+      <p style={wikiStyles.paragraph}>
+        Updates are automatic, but you can force one:
+      </p>
       <pre style={wikiStyles.codeBlock}>
 sudo bootc upgrade
+# Downloads latest image and stages it for next boot
+sudo reboot
+# Reboot to apply
       </pre>
       
       <h4 style={wikiStyles.subheading}>Rollback (if things break)</h4>
+      <p style={wikiStyles.paragraph}>
+        Something broke? Roll back instantly:
+      </p>
       <pre style={wikiStyles.codeBlock}>
 sudo bootc rollback
+# Stages the previous deployment
 sudo reboot
+# Reboot into the working version
       </pre>
       
       <h4 style={wikiStyles.subheading}>Switch to Different Image</h4>
+      <p style={wikiStyles.paragraph}>
+        Switch to a completely different OS:
+      </p>
       <pre style={wikiStyles.codeBlock}>
+# Switch back to Aurora
 sudo bootc switch ghcr.io/ublue-os/aurora:stable
+
+# Switch to Silverblue
+sudo bootc switch ghcr.io/ublue-os/silverblue-main:stable
+
+# Reboot to apply
+sudo reboot
       </pre>
+      
+      <h4 style={wikiStyles.subheading}>View Deployments</h4>
+      <pre style={wikiStyles.codeBlock}>
+bootc upgrade --check
+# Check for available updates without applying
+      </pre>
+      
+      <div style={wikiStyles.note}>
+        <strong>💡 Pro Tip:</strong> Your /home directory is separate and preserved across updates and rollbacks. Only / changes.
+      </div>
     </div>
   )
 }
@@ -982,13 +1062,47 @@ function Graphics() {
       <p style={wikiStyles.paragraph}>AMD GPUs work out of the box with Mesa. For best performance:</p>
       <pre style={wikiStyles.codeBlock}>
 # Wayland session (default) handles this automatically
+# Verify driver is active:
+glxinfo | grep "OpenGL renderer"
       </pre>
+      <div style={wikiStyles.note}>
+        <strong>💡 Pro Tip:</strong> AMD's open-source drivers are included in the kernel. No proprietary drivers needed!
+      </div>
       
       <h4 style={wikiStyles.subheading}>NVIDIA (Proprietary)</h4>
+      <p style={wikiStyles.paragraph}>NVIDIA requires proprietary drivers from RPMFusion:</p>
       <pre style={wikiStyles.codeBlock}>
+# Enable RPMFusion first (if not already)
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Install drivers
 sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+
+# Wait for kernel module to build (5-10 min)
+sudo reboot
       </pre>
-      <div style={wikiStyles.note}>⚠️ <strong>Note:</strong> NVIDIA on Wayland can be problematic. Consider using X11 or AMD.</div>
+      <div style={wikiStyles.warning}>
+        <strong>⚠️ Warning:</strong> NVIDIA on Wayland can be problematic. If you experience issues, try X11 session from SDDM.
+      </div>
+      
+      <h4 style={wikiStyles.subheading}>Check GPU Info</h4>
+      <pre style={wikiStyles.codeBlock}>
+# List GPUs
+lspci | grep -i vga
+
+# Check driver in use
+lspci -k | grep -A 2 -i vga
+
+# Vulkan support
+vulkaninfo --summary
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Hardware Acceleration in Browser</h4>
+      <p style={wikiStyles.paragraph}>Both Firefox and Chrome support hardware acceleration:</p>
+      <pre style={wikiStyles.codeBlock}>
+# Firefox: about:support → Check WebRender status
+# Chrome: chrome://gpu → Check GPU acceleration status
+      </pre>
     </div>
   )
 }
@@ -999,20 +1113,57 @@ function Audio() {
       <h3 style={wikiStyles.heading}>Audio</h3>
       
       <h4 style={wikiStyles.subheading}>Basic Audio Works</h4>
-      <p style={wikiStyles.paragraph}>PulseAudio + PipeWire are pre-installed and work out of the box.</p>
+      <p style={wikiStyles.paragraph}>PipeWire and PulseAudio are pre-installed and work out of the box. S3RLinux uses PipeWire as the default audio server.</p>
       
       <h4 style={wikiStyles.subheading}>No Sound?</h4>
       <pre style={wikiStyles.codeBlock}>
 # Check with Pulse Audio controls
 pavucontrol
 
-# Or restart PipeWire
-systemctl --user restart pipewire
+# Restart PipeWire
+systemctl --user restart pipewire pipewire-pulse
+
+# Check PipeWire status
+pw-cli list objects
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Bluetooth Audio</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Ensure Bluetooth is enabled
+sudo systemctl enable --now bluetooth
+
+# Install Bluetooth audio codecs (if missing)
+sudo dnf install pipewire-pulseaudio-plugin-bluetooth
       </pre>
       
       <h4 style={wikiStyles.subheading}>Jack Audio (Pro Audio)</h4>
+      <p style={wikiStyles.paragraph}>For music production and audio work:</p>
       <pre style={wikiStyles.codeBlock}>
+# Install QJackCtl (GUI for JACK)
 sudo dnf install qjackctl
+
+# Install Pipewire-JACK compatibility
+sudo dnf install pipewire-jack-audio-connection-kit
+
+# Or for full JACK
+sudo dnf install jack2
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>USB Audio Interface</h4>
+      <p style={wikiStyles.paragraph}>Most USB audio interfaces work plug-and-play. Check with:</p>
+      <pre style={wikiStyles.codeBlock}>
+# List audio devices
+cat /proc/asound/cards
+
+# Or with PipeWire
+pw-cli list-objects | grep -i Audio
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Equalizer (EasyEffects)</h4>
+      <p style={wikiStyles.paragraph}>For audio enhancement:</p>
+      <pre style={wikiStyles.codeBlock}>
+# Install EasyEffects (PipeWire compatible)
+flatpak install flathub com.github.wwmm.easyeffects
       </pre>
     </div>
   )
@@ -1023,20 +1174,81 @@ function Development() {
     <div style={wikiStyles.article}>
       <h3 style={wikiStyles.heading}>Development</h3>
       
-      <h4 style={wikiStyles.subheading}>Common Tools</h4>
+      <h4 style={wikiStyles.subheading}>IDEs and Editors</h4>
+      <p style={wikiStyles.paragraph}>S3RLinux comes with several development tools:</p>
       <pre style={wikiStyles.codeBlock}>
-# Install dev tools
-sudo dnf install git code
+# VS Code (if not installed)
+sudo dnf install code
 
-# For Python
+# Or use Flatpak
+flatpak install flathub com.visualstudio.code
+
+# Neovim
+sudo dnf install neovim
+
+# JetBrains (via Toolbox)
+flatpak install flathub com.jetbrains.Toolbox
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Python</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Install Python
 sudo dnf install python3 python3-pip
 
-# For Node.js
+# Create virtual environment (recommended)
+python3 -m venv ~/myproject
+source ~/myproject/bin/activate
+
+# Or use Homebrew
+brew install python
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Node.js</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Install Node.js and npm
 sudo dnf install nodejs npm
 
-# For Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Or use nvm (recommended for version management)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+source ~/.bashrc
+nvm install --lts
       </pre>
+      
+      <h4 style={wikiStyles.subheading}>Rust</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Install Rust via rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+cargo --version
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Git</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Configure Git
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+# SSH Key (for GitHub/GitLab)
+ssh-keygen -t ed25519 -C "your@email.com"
+cat ~/.ssh/id_ed25519.pub
+# Add to GitHub Settings → SSH Keys
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Docker/Podman</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Podman (pre-installed)
+podman run hello-world
+
+# Docker (if needed)
+sudo dnf install docker
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+# Reboot or run: newgrp docker
+      </pre>
+      
+      <div style={wikiStyles.note}>
+        <strong>💡 Pro Tip:</strong> Since S3RLinux is immutable, install dev tools in your home directory or use containers/Flatpak for isolated environments.
+      </div>
     </div>
   )
 }
@@ -1047,17 +1259,73 @@ function Multimedia() {
       <h3 style={wikiStyles.heading}>Multimedia</h3>
       
       <h4 style={wikiStyles.subheading}>Video Playback</h4>
+      <p style={wikiStyles.paragraph}>
+        <strong>Important:</strong> Enable RPMFusion first for multimedia codecs!
+      </p>
       <pre style={wikiStyles.codeBlock}>
-# Make sure RPMFusion is enabled first!
+# Enable RPMFusion
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Install VLC
 sudo dnf install vlc
+
+# Or FFmpeg for command-line
 sudo dnf install ffmpeg
+
+# Install all multimedia codecs
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate sound-and-video
       </pre>
       
       <h4 style={wikiStyles.subheading}>Audio Editors</h4>
       <pre style={wikiStyles.codeBlock}>
+# Audacity (simple editing)
 sudo dnf install audacity
+
+# Ardour (professional DAW)
 sudo dnf install ardour
+
+# Or via Flatpak
+flatpak install flathub org.audacityteam.Audacity
       </pre>
+      
+      <h4 style={wikiStyles.subheading}>Video Editing</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Kdenlive (KDE native, recommended)
+sudo dnf install kdenlive
+
+# Or DaVinci Resolve (see Gaming wiki for FUSE2 workaround!)
+# Flatpak version
+flatpak install flathub com.davinciproducts.Resolve
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Image Editing</h4>
+      <pre style={wikiStyles.codeBlock}>
+# GIMP
+flatpak install flathub org.gimp.GIMP
+
+# Krita (digital painting)
+flatpak install flathub org.kde.krita
+
+# Inkscape (vector graphics)
+flatpak install flathub org.inkscape.Inkscape
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Music Players</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Spotify (Flatpak)
+flatpak install flathub com.spotify.Client
+
+# Spotify CLI (for the terminal ravers)
+brew install spotify-tui
+
+# Or use web Spotify in your browser
+      </pre>
+      
+      <div style={wikiStyles.note}>
+        <strong>💡 Pro Tip:</strong> S3RLinux comes with Spicetify (Spotify theming) support. Check the main README for setup instructions!
+      </div>
     </div>
   )
 }
@@ -1068,16 +1336,45 @@ function FAQ() {
       <h3 style={wikiStyles.heading}>Frequently Asked Questions</h3>
       
       <h4 style={wikiStyles.subheading}>Is this Fedora?</h4>
-      <p style={wikiStyles.paragraph}>Yes! S3RLinux is based on Aurora (Fedora-based KDE distro).</p>
+      <p style={wikiStyles.paragraph}>Yes! S3RLinux is based on Aurora (Fedora-based KDE distro). It uses bootc/OSTree for immutable atomic updates. Think of it as Fedora that went to a rave.</p>
       
       <h4 style={wikiStyles.subheading}>Is this Arch?</h4>
-      <p style={wikiStyles.paragraph}>NO! It's Fedora with bootc. Check out the backup folder for Arch packages list.</p>
+      <p style={wikiStyles.paragraph}><strong>NO!</strong> It's Fedora with bootc. We made a promise. We kept the promise. No AUR here. Use Flatpak or DNF instead.</p>
+      
+      <h4 style={wikiStyles.subheading}>What does "Immutable" mean?</h4>
+      <p style={wikiStyles.paragraph}>Your root filesystem (/) is read-only. You can't accidentally break your system by deleting system files. Updates are applied atomically - all or nothing. If something breaks, rollback is instant.</p>
       
       <h4 style={wikiStyles.subheading}>Can I use sudo?</h4>
-      <p style={wikiStyles.paragraph}>Yes! Default user (s3rl) can use sudo.</p>
+      <p style={wikiStyles.paragraph}>Yes! Default user <code style={wikiStyles.code}>s3rl</code> is in the wheel group and can use sudo.</p>
       
       <h4 style={wikiStyles.subheading}>Where is the AUR?</h4>
-      <p style={wikiStyles.paragraph}>There is no AUR! Use Flatpak or standard DNF packages instead.</p>
+      <p style={wikiStyles.paragraph}>There is no AUR! This is Fedora, not Arch. Use these alternatives:</p>
+      <ul style={{ color: colors.textMuted, lineHeight: 2, marginLeft: '1.5rem', marginBottom: '1rem' }}>
+        <li><strong>Flatpak:</strong> Desktop apps (Spotify, Discord, etc.)</li>
+        <li><strong>Homebrew:</strong> CLI tools (htop, neovim, etc.)</li>
+        <li><strong>DNF:</strong> System packages</li>
+        <li><strong>Containers:</strong> Development environments</li>
+      </ul>
+      
+      <h4 style={wikiStyles.subheading}>How do I install new software?</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Desktop apps - use Flatpak
+flatpak install flathub com.spotify.Client
+
+# CLI tools - use Homebrew (pre-installed)
+brew install htop neovim
+
+# System packages - use DNF (read-only filesystem!)
+sudo dnf install package-name
+# May not work on immutable systems! Use layered packages:
+sudo rpm-ostree install package-name
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Can I customize everything?</h4>
+      <p style={wikiStyles.paragraph}>Absolutely! KDE Plasma is the most customizable desktop environment. Plus your /home directory is fully writable. Customize your dotfiles, install themes, do whatever you want.</p>
+      
+      <h4 style={wikiStyles.subheading}>Why listen to S3RL?</h4>
+      <p style={wikiStyles.paragraph}>Because it's required by the SAL license. But seriously - S3RL is amazing Happy Hardcore. Just give it a try. Your soul will ascend. 💀</p>
     </div>
   )
 }
