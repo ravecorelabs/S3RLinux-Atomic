@@ -202,7 +202,13 @@ function Wiki() {
   ]
   
   return (
-    <div style={{ padding: '2rem', maxWidth: 1400, margin: '0 auto' }}>
+    // Full page wrapper when standalone
+    <div style={{ 
+      minHeight: '100vh', 
+      background: colors.darker,
+      padding: '2rem'
+    }}>
+      <div style={{ padding: '2rem', maxWidth: 1400, margin: '0 auto' }}>
       {/* Wiki Header - Arch Wiki style */}
       <div style={{
         background: colors.gray,
@@ -332,6 +338,7 @@ function Wiki() {
           {selectedArticle === 'troubleshooting' && <Troubleshooting />}
           {selectedArticle === 'faq' && <FAQ />}
         </main>
+      </div>
       </div>
     </div>
   )
