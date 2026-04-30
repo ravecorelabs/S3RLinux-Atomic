@@ -370,6 +370,10 @@ function GettingStarted() {
         S3RLinux is based on Fedora/Aurora with bootc for atomic updates. Think of it as Fedora decided to go to a rave.
       </p>
       
+      <div style={wikiStyles.warning}>
+        <strong>🚀 Aurora F44 Update:</strong> SDDM has been replaced with Plasma Login Manager (PLM) on Fedora 44. AppImages require FUSE2 workarounds. See our <a href="#blog" style={{ color: colors.pink }}>blog post</a> for details.
+      </div>
+      
       <h4 style={wikiStyles.subheading}>Overview</h4>
       <p style={wikiStyles.paragraph}>
         S3RLinux Atomic is an immutable Linux distribution. This means:
@@ -388,7 +392,7 @@ function GettingStarted() {
       </p>
       <ul style={{ color: colors.textMuted, lineHeight: 2, marginLeft: '1.5rem', marginBottom: '1rem' }}>
         <li>🌈 S3RL-themed Plymouth boot splash</li>
-        <li>SDDM login screen with S3RL theme</li>
+        <li>Plasma Login Manager (PLM) login screen with S3RL theme</li>
         <li>Auto-login as user <code style={wikiStyles.code}>s3rl</code></li>
         <li>KDE Plasma desktop ready to go</li>
       </ul>

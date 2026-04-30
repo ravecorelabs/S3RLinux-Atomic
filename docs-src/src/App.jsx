@@ -86,7 +86,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = ['Features', 'Download', 'Install', 'Compare', 'Wiki', 'Blog', 'FAQ']
+  const navLinks = ['Features', 'Blog', 'Download', 'Install', 'Compare', 'Wiki', 'FAQ']
 
   return (
     <div style={{
@@ -154,16 +154,13 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             )}
             
             {/* Desktop Nav Links */}
-            {navLinks.map(link => (
-              <motion.div
-                key={link}
-                whileHover={{ color: colors.pink }}
-                style={{ 
-                  display: 'inline'
-                }}
-              >
-                <Link 
-                  href={link === 'Wiki' ? '/wiki' : `#${link.toLowerCase()}`}
+            {navLinks.map(link => {
+              const isWiki = link === 'Wiki'
+              return (
+                <motion.a
+                  key={link}
+                  href={isWiki ? '/wiki' : `#${link.toLowerCase()}`}
+                  whileHover={{ color: colors.pink }}
                   style={{ 
                     color: scrolled ? colors.text : colors.textMuted, 
                     textDecoration: 'none', 
@@ -173,9 +170,9 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
                   }}
                 >
                   {link}
-                </Link>
-              </motion.div>
-            ))}
+                </motion.a>
+              )
+            })}
             <motion.a
               href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
               target="_blank"
@@ -219,28 +216,31 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             gap: '1.5rem'
           }}
         >
-          {navLinks.map(link => (
-            <motion.div
-              key={link}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href={link === 'Wiki' ? '/wiki' : `#${link.toLowerCase()}`}
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  color: colors.text,
-                  fontSize: isMobile ? '1.2rem' : '1.5rem',
-                  fontWeight: 500,
-                  textDecoration: 'none',
-                  padding: '0.75rem 0',
-                  borderBottom: `1px solid ${colors.border}`,
-                  display: 'block'
-                }}
+          {navLinks.map(link => {
+            const isWiki = link === 'Wiki'
+            return (
+              <motion.div
+                key={link}
+                whileTap={{ scale: 0.95 }}
               >
-                {link}
-              </Link>
-            </motion.div>
-          ))}
+                <a
+                  href={isWiki ? '/wiki' : `#${link.toLowerCase()}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    color: colors.text,
+                    fontSize: isMobile ? '1.2rem' : '1.5rem',
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    padding: '0.75rem 0',
+                    borderBottom: `1px solid ${colors.border}`,
+                    display: 'block'
+                  }}
+                >
+                  {link}
+                </a>
+              </motion.div>
+            )
+          })}
           <motion.a
             href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
             target="_blank"
@@ -433,13 +433,18 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
         </div>
       </Section>
 
+      {/* BLOG SECTION */}
+      <Section id="blog" title="Latest from the Blog">
+        <BlogSection />
+      </Section>
+
       {/* KDE SECTION */}
       <Section id="kde" title="Built with KDE Plasma">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
           <FeatureCard 
             icon="🎨"
             title="Fully Themed"
-            description="Complete S3RL theming - SDDM login screen, Plymouth boot splash, KDE color scheme, icons, and more."
+            description="Complete S3RL theming - Plasma Login Manager (PLM) login screen, Plymouth boot splash, KDE color scheme, icons, and more."
           />
           <FeatureCard 
             icon="🔧"
@@ -577,11 +582,6 @@ sudo reboot
       {/* COMPARE SECTION */}
       <Section id="compare" title="S3RLinux vs other distros">
         <CompareTable />
-      </Section>
-
-      {/* BLOG SECTION */}
-      <Section id="blog" title="Latest from the Blog">
-        <BlogSection />
       </Section>
 
       {/* FAQ SECTION - MORE FUNNY */}
@@ -933,6 +933,44 @@ function BlogSection() {
   
   const posts = [
     { 
+      id: 'aurora-f44-update',
+      title: "Aurora F44 Spring 2026 Update - SDDM Replaced by Plasma Login Manager", 
+      date: "2026-04-30",
+      author: "moonlightOS-Meow",
+      avatar: "🚀",
+      readTime: "6 min read",
+      excerpt: "Aurora Spring26 brings Fedora 44, Plasma Login Manager replaces SDDM, Konsole as default terminal, and more major changes.",
+      tags: ["Aurora", "Fedora 44", "Plasma"],
+      content: `The Aurora Spring 2026 Update has arrived, and the latest stream is now based on Fedora 44! Here's everything you need to know for S3RLinux.
+
+SDDM Replaced with Plasma Login Manager
+The biggest visible change: SDDM is gone. Fedora 44 images now use the native Plasma Login Manager (PLM), introduced with Plasma 6.6. Visually, it looks nearly identical to SDDM — but under the hood it's KDE's own login manager.
+
+For S3RLinux, this means we'll need to update our custom login theme. The SDDM theme files (Main.qml) won't work with PLM. We're working on a PLM-compatible theme with the same purple/pink S3RL aesthetic.
+
+Konsole Becomes the Default Terminal
+Ptyxis has been replaced by Konsole as the default terminal. Konsole now has distrobox/container integration, making the switch a no-brainer.
+
+AppImages and the FUSE2 Removal
+Fedora 44 removed FUSE2 from Atomic Desktops. This means many older AppImage formats won't work. DaVinci Resolve and other AppImage-based apps need the --appimage-extract workaround or FUSE2 layered back via rpm-ostree.
+
+Starship Removed
+Starship has been removed from the image. Install it easily via Homebrew: brew install starship
+
+Distroshelf Switched to Kontainer
+The new Distroshelf alternative is Kontainer, a KDE-native container management tool available on Flathub.
+
+What About S3RLinux?
+Our S3RLinux Atomic image is based on Aurora, so these changes will flow through to us. The main items we need to address:
+- PLM theme to replace SDDM theme
+- Update documentation for Konsole
+- Ensure AppImage workarounds are documented
+- Update post-install guides
+
+Read the full Aurora announcement: https://docs.getaurora.dev/blog/aurora-spring26-update/`,
+      link: { text: "Read full Aurora blog post", url: "https://docs.getaurora.dev/blog/aurora-spring26-update/" }
+    },
+    { 
       id: 'first-release',
       title: "S3RLinux Atomic - First Release", 
       date: "2026-04-29",
@@ -1143,6 +1181,18 @@ We also created a custom logo that combines the S3RL aesthetic with Linux vibes.
                 <p key={i} style={{ marginBottom: '1.25rem' }}>{paragraph}</p>
               ))}
             </div>
+            
+            {activePost.link && (
+              <a href={activePost.link.url} target="_blank" rel="noopener noreferrer" style={{
+                display: 'inline-block',
+                marginTop: '1.5rem',
+                color: colors.pink,
+                fontWeight: 600,
+                textDecoration: 'none'
+              }}>
+                {activePost.link.text} →
+              </a>
+            )}
           </motion.div>
         </motion.div>
       )}
