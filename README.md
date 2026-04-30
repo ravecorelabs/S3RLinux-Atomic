@@ -92,7 +92,7 @@ sudo reboot
 
 > **⚠️ WAIT - WE HAVEN'T TESTED IT YET !!!**
 >
-> **DO NOT INSTALL THIS YET.** We literally just built it. It might not boot. It might brick everything. Wait until someone (probably us, later, when we're less lazy) confirms it actually works.
+> ✅ **S3RLINUX ATOMIC is now installable!** It boots, it works, NVIDIA functions, Spicetify runs on an immutable distro somehow. Only known issues are cosmetic bugs (Plymouth black screen, minor theming stuff). Nothing that'll brick you. Go ahead and rave.
 >
 > We warned you. lol no tech support included
 
