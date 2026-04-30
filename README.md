@@ -46,6 +46,18 @@ sudo reboot
 
 *Building an immutable distro from scratch, one bug at a time.*
 
+### 2026-04-30: Grill Day & Update Notice 🔥
+- Dev is currently at a school grill event (yes, really)
+- Updates may be slower than usual for a bit — school stuff, life stuff, you know how it is
+- S3RLINUX ATOMIC is NOT dead, just chilling 🌈
+- Lucyfer (Head of QA) is still alive and judging the codebase from a safe distance
+
+### 2026-04-28: HoloISO Tangent 💀
+- Dev briefly installed HoloISO on main machine
+- NVIDIA actually worked (shocking)
+- Plasma 5 said no to Plasma 6 upgrade
+- Returned to sensible distro shortly after. As always.
+
 ### 2026-04-25: First Working Build! 🎉
 - Fixed VERSION_ID missing (bootc-image-builder requirement)
 - Added --rootfs=xfs to fix disk builds
