@@ -642,13 +642,13 @@ sudo reboot
         <strong>Note:</strong> You need to run with sudo for full features! Create a launcher:
       </p>
       <pre style={wikiStyles.codeBlock}>
-# Create a desktop file
+{`# Create a desktop file
 cat > ~/Desktop/Resolve.desktop << 'EOF'
 [Desktop Entry]
 Name=DaVinci Resolve
 Exec=sudo /path/to/squashfs-root/bin/Resolve
 Type=Application
-EOF
+EOF`}
       </pre>
     </div>
   )
