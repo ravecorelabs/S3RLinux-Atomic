@@ -125,6 +125,19 @@ dnf5 update -y
 # this installs a package from fedora repos
 dnf5 install -y tmux 
 
+# DaVinci Resolve - Fedora 44 broke AppImages!
+# Fedora 44 removed FUSE2 from kernel, so AppImages won't work
+# WORKAROUND: Use --appimage-extract instead of running directly:
+#   1. Download DaVinci Resolve .run file
+#   2. chmod +x DaVinci_Resolve* .run
+#   3. ./DaVinci_Resolve* --appimage-extract
+#   4. cd squashfs-root/
+#   5. ./bin/Resolve
+# This extracts the AppImage contents and runs the binary directly
+
+# NOTE: The proper solution is using the .run with --appimage-extract
+# We don't install fuse2 in the image - users extract manually
+
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
