@@ -658,9 +658,6 @@ sudo reboot
         </div>
       </Section>
 
-      {/* WIKI SECTION - Full knowledge base like Arch Wiki */}
-      <Wiki />
-
       {/* FOOTER */}
       <footer style={{ 
         padding: '4rem 2rem 2rem', 
