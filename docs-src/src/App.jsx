@@ -86,6 +86,13 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const navLinks = ['Features', 'Blog', 'Download', 'Install', 'Compare', 'Wiki', 'FAQ']
 
   return (
@@ -156,26 +163,28 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             {/* Desktop Nav Links */}
             {navLinks.map(link => {
               const isWiki = link === 'Wiki'
-              const Comp = isWiki ? 'div' : 'a'
-              const href = isWiki ? '#/wiki' : `#${link.toLowerCase()}`
+              const href = isWiki ? '#/wiki' : null
               return (
-                <Comp key={link} href={href}>
+                <div key={link}>
                   {isWiki ? (
                     <a href={href} style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <motion.span whileHover={{ color: colors.pink }} style={{ color: scrolled ? colors.text : colors.textMuted, textDecoration: 'none', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}>
+                      <motion.span
+                        whileHover={{ color: colors.pink }}
+                        style={{ color: scrolled ? colors.text : colors.textMuted, textDecoration: 'none', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}
+                      >
                         {link}
                       </motion.span>
                     </a>
                   ) : (
-                    <motion.a
-                      href={href}
+                    <motion.div
                       whileHover={{ color: colors.pink }}
-                      style={{ color: scrolled ? colors.text : colors.textMuted, textDecoration: 'none', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}
+                      onClick={() => scrollToSection(link.toLowerCase())}
+                      style={{ color: scrolled ? colors.text : colors.textMuted, cursor: 'pointer', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}
                     >
                       {link}
-                    </motion.a>
+                    </motion.div>
                   )}
-                </Comp>
+                </div>
               )
             })}
             <motion.a
@@ -242,21 +251,19 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
                     </div>
                   </a>
                 ) : (
-                  <a
-                    href={`#${link.toLowerCase()}`}
-                    onClick={() => setMobileMenuOpen(false)}
+                  <div
+                    onClick={() => { scrollToSection(link.toLowerCase()); setMobileMenuOpen(false) }}
                     style={{
                       color: colors.text,
                       fontSize: isMobile ? '1.2rem' : '1.5rem',
                       fontWeight: 500,
-                      textDecoration: 'none',
                       padding: '0.75rem 0',
                       borderBottom: `1px solid ${colors.border}`,
-                      display: 'block'
+                      cursor: 'pointer'
                     }}
                   >
                     {link}
-                  </a>
+                  </div>
                 )}
               </motion.div>
             )
