@@ -338,9 +338,35 @@ function App() {
           <p style={{ color: colors.textMuted, marginBottom: '0.75rem', fontSize: '0.95rem' }}>
             Get the latest S3RLinux Atomic image. Built on bootc with KDE Plasma.
           </p>
-          <p style={{ color: colors.textMuted, marginBottom: '1.5rem', fontSize: '0.85rem' }}>
+          <p style={{ color: colors.textMuted, marginBottom: '0.5rem', fontSize: '0.85rem' }}>
             💀 Don't be shy — just try it. It won't bite. Probably. We need downloads. Please. The dev is literally at a school grill right now counting on you.
           </p>
+          <p style={{ color: colors.textMuted, marginBottom: '0.5rem', fontSize: '0.85rem' }}>
+            🌈 Every download makes the dev 0.01% happier. You want them to be happy right? RIGHT?
+          </p>
+          <p style={{ color: colors.textMuted, marginBottom: '0.5rem', fontSize: '0.85rem' }}>
+            ⭐ Star the repo. Fork it. Tell your friends. Tell your enemies. Tell your cat. TELL EVERYONE.
+          </p>
+
+          <div style={{
+            background: 'rgba(255,0,0,0.06)',
+            border: '1px solid rgba(255,0,0,0.25)',
+            borderRadius: 10,
+            padding: '16px 20px',
+            marginBottom: '1.5rem',
+            textAlign: 'left',
+            fontSize: '0.8rem',
+            fontFamily: 'monospace',
+            color: '#ff8080'
+          }}>
+            <div style={{ fontWeight: 700, marginBottom: 8, color: '#ff4444', letterSpacing: 1 }}>⚕️ PUCK CITY HOSPITAL — INCIDENT REPORT #2026-04-30</div>
+            <div><strong>Patient:</strong> Ash (XALATATH), age 14, Dark Wizard King</div>
+            <div><strong>Incident:</strong> Forcibly fed hot sausage by school teacher during outdoor grill event</div>
+            <div><strong>Symptoms:</strong> Mild trauma, satisfaction, slight guilt about enjoying it</div>
+            <div><strong>Treatment:</strong> Patient was instructed to download S3RLinux Atomic to cope</div>
+            <div><strong>Doctor's note:</strong> "We have reviewed the case. The sausage was good. We recommend 1x S3RLinux install daily."</div>
+            <div><strong>Status:</strong> <span style={{ color: '#4caf50' }}>DISCHARGED — condition: raving</span></div>
+          </div>
           
           <motion.a
             href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic"
