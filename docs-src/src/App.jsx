@@ -2,6 +2,32 @@ import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Wiki from './Wiki.jsx'
 
+// Device detection hook
+function useDeviceType() {
+  const [deviceType, setDeviceType] = useState('desktop')
+  
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth
+      const height = window.innerHeight
+      const isMobile = width < 768 || height < 500
+      const isTablet = width >= 768 && width < 1024
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      
+      if (isMobile) setDeviceType('mobile')
+      else if (isTablet) setDeviceType('tablet')
+      else if (isTouch) setDeviceType('touch')
+      else setDeviceType('desktop')
+    }
+    
+    checkDevice()
+    window.addEventListener('resize', checkDevice)
+    return () => window.removeEventListener('resize', checkDevice)
+  }, [])
+  
+  return deviceType
+}
+
 // S3RL THEME - Aurora inspired but with purple/pink 💀
 const colors = {
   purple: '#9c27b0',
@@ -23,14 +49,41 @@ const colors = {
 
 function App() {
   const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const deviceType = useDeviceType()
+  const isMobile = deviceType === 'mobile'
+  const isTablet = deviceType === 'tablet'
+  const isTouch = deviceType === 'touch'
+  
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
+
+  // Responsive sizes
+  const fontSizes = {
+    hero: isMobile ? '2.5rem' : isTablet ? '3rem' : '4rem',
+    heading: isMobile ? '1.5rem' : isTablet ? '1.8rem' : '2.2rem',
+    body: isMobile ? '0.9rem' : '1rem',
+    button: isMobile ? '0.85rem' : '1rem'
+  }
+  
+  const paddings = {
+    section: isMobile ? '3rem 1rem' : isTablet ? '4rem 1.5rem' : '6rem 2rem',
+    card: isMobile ? '1rem' : '1.5rem'
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Nav links (responsive)
+  const navLinks = ['Features', 'Download', 'Install', 'Compare', 'Docs', 'Blog', 'FAQ']
+  const navLinkStyle = {
+    display: isMobile ? 'none' : 'flex',
+    gap: isMobile ? 0 : '1.5rem',
+    alignItems: 'center'
+  }
 
   return (
     <div style={{
@@ -79,7 +132,26 @@ function App() {
           </div>
           
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            {['Features', 'Download', 'Install', 'Compare', 'Docs', 'Blog', 'FAQ'].map(link => (
+            {/* Mobile Menu Button */}
+            {(isMobile || isTablet) && (
+              <motion.button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                whileTap={{ scale: 0.9 }}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: colors.text,
+                  fontSize: '1.5rem',
+                  cursor: 'pointer',
+                  padding: '0.5rem'
+                }}
+              >
+                {mobileMenuOpen ? '✕' : '☰'}
+              </motion.button>
+            )}
+            
+            {/* Desktop Nav Links */}
+            {navLinks.map(link => (
               <motion.a
                 key={link}
                 href={`#${link.toLowerCase()}`}
@@ -87,14 +159,14 @@ function App() {
                 style={{ 
                   color: scrolled ? colors.text : colors.textMuted, 
                   textDecoration: 'none', 
-                  fontSize: '0.9rem', 
+                  fontSize: isMobile ? '0.8rem' : '0.9rem', 
                   fontWeight: 500,
                   transition: 'color 0.2s' 
                 }}
               >
                 {link}
               </motion.a>
-            ))}
+            ))}}
             <motion.a
               href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
               target="_blank"
@@ -116,6 +188,64 @@ function App() {
           </div>
         </div>
       </motion.nav>
+      
+      {/* Mobile Menu Panel */}
+      {mobileMenuOpen && (
+        <motion.div
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+          style={{
+            position: 'fixed',
+            top: 70,
+            right: 0,
+            bottom: 0,
+            width: isMobile ? '80%' : '60%',
+            background: colors.gray,
+            borderLeft: `1px solid ${colors.border}`,
+            padding: '2rem',
+            zIndex: 1000,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem'
+          }}
+        >
+          {navLinks.map(link => (
+            <motion.a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              onClick={() => setMobileMenuOpen(false)}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                color: colors.text,
+                fontSize: isMobile ? '1.2rem' : '1.5rem',
+                fontWeight: 500,
+                textDecoration: 'none',
+                padding: '0.75rem 0',
+                borderBottom: `1px solid ${colors.border}`
+              }}
+            >
+              {link}
+            </motion.a>
+          ))}
+          <motion.a
+            href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
+            target="_blank"
+            style={{
+              background: colors.purple,
+              color: '#fff',
+              padding: '1rem',
+              borderRadius: 8,
+              textAlign: 'center',
+              textDecoration: 'none',
+              fontWeight: 600,
+              marginTop: '1rem'
+            }}
+          >
+            ⭐ Star on GitHub
+          </motion.a>
+        </motion.div>
+      )}
 
       {/* HERO SECTION */}
       <motion.section
@@ -150,7 +280,7 @@ function App() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
               style={{
-                fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+                fontSize: isMobile ? '0.8rem' : isTablet ? '0.9rem' : '1rem',
                 color: colors.pink,
                 fontWeight: 600,
                 marginBottom: '1.5rem',
