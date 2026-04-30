@@ -322,8 +322,24 @@ function App() {
           margin: '0 auto',
           textAlign: 'center'
         }}>
-          <p style={{ color: colors.textMuted, marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+          <div style={{
+            background: 'rgba(0,200,100,0.08)',
+            border: '1px solid rgba(0,200,100,0.3)',
+            borderRadius: 10,
+            padding: '12px 20px',
+            marginBottom: '1.5rem',
+            color: '#4caf50',
+            fontSize: '0.9rem',
+            fontWeight: 600
+          }}>
+            ✅ STABLE ENOUGH TO DAILY DRIVE — Only cosmetic bugs remain. Go ahead and rave. 🌈
+          </div>
+
+          <p style={{ color: colors.textMuted, marginBottom: '0.75rem', fontSize: '0.95rem' }}>
             Get the latest S3RLinux Atomic image. Built on bootc with KDE Plasma.
+          </p>
+          <p style={{ color: colors.textMuted, marginBottom: '1.5rem', fontSize: '0.85rem' }}>
+            💀 Don't be shy — just try it. It won't bite. Probably. We need downloads. Please. The dev is literally at a school grill right now counting on you.
           </p>
           
           <motion.a
