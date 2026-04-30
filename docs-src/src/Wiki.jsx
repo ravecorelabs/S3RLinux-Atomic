@@ -604,8 +604,10 @@ sudo dnf install gamemode
       
       <h4 style={wikiStyles.subheading}>🎬 DaVinci Resolve (IMPORTANT!)</h4>
       <div style={wikiStyles.warning}>
-        <strong>⚠️ Fedora 44 Alert:</strong> DaVinci Resolve is an AppImage, but Fedora 44 removed FUSE2 support! You MUST use the extraction method below.
+        <strong>⚠️ Fedora 44 Alert:</strong> DaVinci Resolve is an AppImage, but Fedora 44 removed FUSE2 from Atomic Desktops! You MUST use one of the methods below.
       </div>
+      
+      <h5 style={{ color: colors.pink, marginTop: '1rem' }}>Method 1: --appimage-extract (Recommended)</h5>
       <p style={wikiStyles.paragraph}>
         <strong>The AppImage method doesn't work! </strong> Follow these steps exactly:
       </p>
@@ -623,6 +625,19 @@ cd squashfs-root/
 # 5. Run Resolve directly
 sudo ./bin/Resolve
       </pre>
+      
+      <h5 style={{ color: colors.pink, marginTop: '1rem' }}>Method 2: Layer FUSE2 back (rpm-ostree)</h5>
+      <p style={wikiStyles.paragraph}>
+        If extraction doesn't work, layer FUSE2 back:
+      </p>
+      <pre style={wikiStyles.codeBlock}>
+# Layer fuse packages back
+sudo rpm-ostree install fuse fuse-libs
+
+# Reboot to apply
+sudo reboot
+      </pre>
+      
       <p style={wikiStyles.paragraph}>
         <strong>Note:</strong> You need to run with sudo for full features! Create a launcher:
       </p>
