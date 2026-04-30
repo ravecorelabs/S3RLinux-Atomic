@@ -24,7 +24,8 @@ const wikiStyles = {
     gap: '2rem',
     maxWidth: 1400,
     margin: '0 auto',
-    minHeight: '80vh'
+    minHeight: '80vh',
+    fontFamily: "'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif"
   },
   sidebar: {
     width: 280,
@@ -123,6 +124,13 @@ const wikiStyles = {
     padding: '1rem',
     marginBottom: '1rem'
   },
+  warning: {
+    background: 'rgba(255, 152, 0, 0.15)',
+    border: '1px solid #ff9800',
+    borderRadius: 8,
+    padding: '1rem',
+    marginBottom: '1rem'
+  },
   table: {
     width: '100%',
     borderCollapse: 'collapse',
@@ -206,7 +214,8 @@ function Wiki() {
     <div style={{ 
       minHeight: '100vh', 
       background: colors.darker,
-      padding: '2rem'
+      padding: '2rem',
+      fontFamily: "'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif"
     }}>
       <div style={{ padding: '2rem', maxWidth: 1400, margin: '0 auto' }}>
       {/* Wiki Header - Arch Wiki style */}
