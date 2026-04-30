@@ -156,21 +156,26 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             {/* Desktop Nav Links */}
             {navLinks.map(link => {
               const isWiki = link === 'Wiki'
+              const Comp = isWiki ? 'div' : 'a'
+              const href = isWiki ? '#/wiki' : `#${link.toLowerCase()}`
               return (
-                <motion.a
-                  key={link}
-                  href={isWiki ? '/wiki' : `#${link.toLowerCase()}`}
-                  whileHover={{ color: colors.pink }}
-                  style={{ 
-                    color: scrolled ? colors.text : colors.textMuted, 
-                    textDecoration: 'none', 
-                    fontSize: isMobile ? '0.8rem' : '0.9rem', 
-                    fontWeight: 500,
-                    transition: 'color 0.2s' 
-                  }}
-                >
-                  {link}
-                </motion.a>
+                <Comp key={link} href={href}>
+                  {isWiki ? (
+                    <a href={href} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <motion.span whileHover={{ color: colors.pink }} style={{ color: scrolled ? colors.text : colors.textMuted, textDecoration: 'none', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}>
+                        {link}
+                      </motion.span>
+                    </a>
+                  ) : (
+                    <motion.a
+                      href={href}
+                      whileHover={{ color: colors.pink }}
+                      style={{ color: scrolled ? colors.text : colors.textMuted, textDecoration: 'none', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}
+                    >
+                      {link}
+                    </motion.a>
+                  )}
+                </Comp>
               )
             })}
             <motion.a
@@ -223,21 +228,36 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
                 key={link}
                 whileTap={{ scale: 0.95 }}
               >
-                <a
-                  href={isWiki ? '/wiki' : `#${link.toLowerCase()}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    color: colors.text,
-                    fontSize: isMobile ? '1.2rem' : '1.5rem',
-                    fontWeight: 500,
-                    textDecoration: 'none',
-                    padding: '0.75rem 0',
-                    borderBottom: `1px solid ${colors.border}`,
-                    display: 'block'
-                  }}
-                >
-                  {link}
-                </a>
+                {isWiki ? (
+                  <a href="#/wiki" onClick={() => setMobileMenuOpen(false)}>
+                    <div style={{
+                      color: colors.text,
+                      fontSize: isMobile ? '1.2rem' : '1.5rem',
+                      fontWeight: 500,
+                      padding: '0.75rem 0',
+                      borderBottom: `1px solid ${colors.border}`,
+                      cursor: 'pointer'
+                    }}>
+                      {link}
+                    </div>
+                  </a>
+                ) : (
+                  <a
+                    href={`#${link.toLowerCase()}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      color: colors.text,
+                      fontSize: isMobile ? '1.2rem' : '1.5rem',
+                      fontWeight: 500,
+                      textDecoration: 'none',
+                      padding: '0.75rem 0',
+                      borderBottom: `1px solid ${colors.border}`,
+                      display: 'block'
+                    }}
+                  >
+                    {link}
+                  </a>
+                )}
               </motion.div>
             )
           })}
@@ -343,7 +363,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <PrimaryButton>Get S3RLinux</PrimaryButton>
-              <SecondaryButton href="/wiki">Documentation</SecondaryButton>
+              <SecondaryButton href="#/wiki">Documentation</SecondaryButton>
               <SpotifyButton />
             </motion.div>
             
