@@ -14,15 +14,15 @@
 
 | Type | Link | Size |
 |:---|:---|:---|
-| 🖥️ VM Image (qcow2) | [Actions Run](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/runs/25122556798) | ~4GB |
-| 💿 Live ISO | [Actions Run](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/runs/25122556798) | ~4GB |
-| 🐳 Container | [GH Packages](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic) | ~2GB |
+| 🖥️ VM Image (qcow2) | [Actions Run](https://github.com/RaveCore-Labs/S3RLinux-Atomic/actions/runs/25122556798) | ~4GB |
+| 💿 Live ISO | [Actions Run](https://github.com/RaveCore-Labs/S3RLinux-Atomic/actions/runs/25122556798) | ~4GB |
+| 🐳 Container | [GH Packages](https://github.com/RaveCore-Labs/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic) | ~2GB |
 
 > **Note:** Download artifacts from the Actions run above. Click the run → find your artifact → download!
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic)](https://artifacthub.io/packages/search?repo=s3rlinux-atomic)
-[![Container Image](https://img.shields.io/github/v/tag/moonlightOS-Meow/S3RLinux-Atomic?include_prereleases&label=Latest)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic)
-[![Disk Builds](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build-disk.yml/badge.svg)](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions)
+[![Container Image](https://img.shields.io/github/v/tag/RaveCore-Labs/S3RLinux-Atomic?include_prereleases&label=Latest)](https://github.com/RaveCore-Labs/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic)
+[![Disk Builds](https://github.com/RaveCore-Labs/S3RLinux-Atomic/actions/workflows/build-disk.yml/badge.svg)](https://github.com/RaveCore-Labs/S3RLinux-Atomic/actions)
 
 ---
 
@@ -30,7 +30,7 @@
 
 | 🌐 Website | ⭐ Stars | 💬 Discussion | 🐛 Issues |
 |:---:|:---:|:---:|:---:|
-| [Live Site](https://moonlightOS-Meow.github.io/S3RLinux-Atomic) | [Stargazers](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/stargazers) | [Chat](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/discussions) | [Report Bugs](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues) |
+| [Live Site](https://RaveCore-Labs.github.io/S3RLinux-Atomic) | [Stargazers](https://github.com/RaveCore-Labs/S3RLinux-Atomic/stargazers) | [Chat](https://github.com/RaveCore-Labs/S3RLinux-Atomic/discussions) | [Report Bugs](https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues) |
 
 ---
 
@@ -38,7 +38,7 @@
 
 ```bash
 # Switch from existing Fedora/Bootc system
-sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 sudo reboot
 ```
 
@@ -80,13 +80,13 @@ sudo reboot
 
 <div align="center">
 
-[![Star History](https://api.star-history.com/svg?repos=moonlightOS-Meow/S3RLinux-Atomic&type=Date)](https://star-history.com/#moonlightOS-Meow/S3RLinux-Atomic)
+[![Star History](https://api.star-history.com/svg?repos=RaveCore-Labs/S3RLinux-Atomic&type=Date)](https://star-history.com/#RaveCore-Labs/S3RLinux-Atomic)
 
 ---
 
 ## 💬 Discussion
 
-[Discussions](https://github.com/moonlightOS-Meow/S3RLinux-Atomic/discussions)
+[Discussions](https://github.com/RaveCore-Labs/S3RLinux-Atomic/discussions)
 
 ---
 
@@ -129,7 +129,7 @@ S3RLinux Atomic is a **bootc** image themed around **S3RL** — the legendary Ha
 
 ```bash
 # Switch to our image
-sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 
 # Reboot
 sudo reboot
@@ -176,7 +176,7 @@ We have one! Check `s3rlinux-a-logo.png`. It's... a logo.
 
 ## 📞 SUPPORT
 
-- GitHub Issues: https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues
+- GitHub Issues: https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues
 - We'll try to help but no promises
 
 ---

@@ -55,7 +55,7 @@ Now I need to add this to the ISO config as well. Let me also check the iso-kde.
 1: [customizations.installer.kickstart]
 2: contents = """
 3: %post
-4: bootc switch --mutate-in-place --transport registry ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+4: bootc switch --mutate-in-place --transport registry ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 5: %end
 6: """
 7: 
@@ -93,8 +93,8 @@ I need to add the same root filesystem type to the ISO config too.
 ```json
 {
   "filePath": "/home/xalatath/S3RLinux-Atomic/disk_config/iso-kde.toml",
-  "newString": "[customizations.installer.kickstart]\ncontents = \"\"\"\n%post\nbootc switch --mutate-in-place --transport registry ghcr.io/moonlightos-meow/s3rlinux-atomic:latest\n%end\n\"\"\"\n\n[customizations.installer.modules]\nenable = [\n  \"org.fedoraproject.Anaconda.Modules.Storage\",\n  \"org.fedoraproject.Anaconda.Modules.Runtime\",\n  \"org.fedoraproject.Anaconda.Modules.Network\",\n  \"org.fedoraproject.Anaconda.Modules.Security\",\n  \"org.fedoraproject.Anaconda.Modules.Services\",\n  \"org.fedoraproject.Anaconda.Modules.Users\",\n  \"org.fedoraproject.Anaconda.Modules.Timezone\"\n]\n\ndisable = [\n  \"org.fedoraproject.Anaconda.Modules.Subscription\",\n]\n\n[customizations.storage]\nroot filesystem = { type = \"xfs\" }",
-  "oldString": "[customizations.installer.kickstart]\ncontents = \"\"\"\n%post\nbootc switch --mutate-in-place --transport registry ghcr.io/moonlightos-meow/s3rlinux-atomic:latest\n%end\n\"\"\"\n\n[customizations.installer.modules]\nenable = [\n  \"org.fedoraproject.Anaconda.Modules.Storage\",\n  \"org.fedoraproject.Anaconda.Modules.Runtime\",\n  \"org.fedoraproject.Anaconda.Modules.Network\",\n  \"org.fedoraproject.Anaconda.Modules.Security\",\n  \"org.fedoraproject.Anaconda.Modules.Services\",\n  \"org.fedoraproject.Anaconda.Modules.Users\",\n  \"org.fedoraproject.Anaconda.Modules.Timezone\"\n]\n\ndisable = [\n  \"org.fedoraproject.Anaconda.Modules.Subscription\",\n]"
+  "newString": "[customizations.installer.kickstart]\ncontents = \"\"\"\n%post\nbootc switch --mutate-in-place --transport registry ghcr.io/ravecore-labs/s3rlinux-atomic:latest\n%end\n\"\"\"\n\n[customizations.installer.modules]\nenable = [\n  \"org.fedoraproject.Anaconda.Modules.Storage\",\n  \"org.fedoraproject.Anaconda.Modules.Runtime\",\n  \"org.fedoraproject.Anaconda.Modules.Network\",\n  \"org.fedoraproject.Anaconda.Modules.Security\",\n  \"org.fedoraproject.Anaconda.Modules.Services\",\n  \"org.fedoraproject.Anaconda.Modules.Users\",\n  \"org.fedoraproject.Anaconda.Modules.Timezone\"\n]\n\ndisable = [\n  \"org.fedoraproject.Anaconda.Modules.Subscription\",\n]\n\n[customizations.storage]\nroot filesystem = { type = \"xfs\" }",
+  "oldString": "[customizations.installer.kickstart]\ncontents = \"\"\"\n%post\nbootc switch --mutate-in-place --transport registry ghcr.io/ravecore-labs/s3rlinux-atomic:latest\n%end\n\"\"\"\n\n[customizations.installer.modules]\nenable = [\n  \"org.fedoraproject.Anaconda.Modules.Storage\",\n  \"org.fedoraproject.Anaconda.Modules.Runtime\",\n  \"org.fedoraproject.Anaconda.Modules.Network\",\n  \"org.fedoraproject.Anaconda.Modules.Security\",\n  \"org.fedoraproject.Anaconda.Modules.Services\",\n  \"org.fedoraproject.Anaconda.Modules.Users\",\n  \"org.fedoraproject.Anaconda.Modules.Timezone\"\n]\n\ndisable = [\n  \"org.fedoraproject.Anaconda.Modules.Subscription\",\n]"
 }
 ```
 
@@ -126,7 +126,7 @@ Now commit both fixes
 ```
 [main f54c7b1] fix: add xfs root filesystem type to disk configs
  2 files changed, 6 insertions(+)
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    140d88a..f54c7b1  main -> main
 
 ```
@@ -152,7 +152,7 @@ Run the ISO build again from Actions!
 
 0H SHIT!!! Warning: This package has high severity fixable vulnerabilities older than 2 years old that haven't been addressed yet.
 Image	Rating	Type	critical	high	medium	low	unknown	Total
-ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 	
 F
 	Fixable	11	81	95	8	0	195
@@ -248,7 +248,7 @@ Now commit and push.
 ```
 [main 8e98526] fix: update all packages during build for security fixes
  1 file changed, 3 insertions(+)
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    f54c7b1..8e98526  main -> main
 
 ```
@@ -273,7 +273,7 @@ Trigger a new build from Actions - it will rebuild with latest updates.
 ## User
 
 LOOK Vulnerabilities details
-Image:ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+Image:ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 Target:sysroot/ostree/repo/objects/32/6b76781d1b39b2780cef0b73fde446d8806043f63cc0f4f5d56c9e736e851b.file
 Rating:
 D
@@ -651,7 +651,7 @@ Let me commit and push this fix.
 ```
 [main 00a13cd] fix: syntax error in website code
  1 file changed, 3 insertions(+), 5 deletions(-)
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    8e98526..00a13cd  main -> main
 
 ```
@@ -739,7 +739,7 @@ Let me commit and push this fix to disable the linting step that was canceled.
 ```
 [main 291690f] fix: disable bootc container lint (causes cancel)
  1 file changed, 2 insertions(+), 2 deletions(-)
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    00a13cd..291690f  main -> main
 
 ```
@@ -859,19 +859,19 @@ They want to back up the repo files. Maybe they want to see what's being tracked
 
 
 
-All files are already committed to your repo: `https://github.com/moonlightOS-Meow/S3RLinux-Atomic`
+All files are already committed to your repo: `https://github.com/RaveCore-Labs/S3RLinux-Atomic`
 
 Or do you want to download them as a zip backup?
 
 ```bash
 # Download from GitHub as zip:
-# https://github.com/moonlightOS-Meow/S3RLinux-Atomic/archive/refs/heads/main.zip
+# https://github.com/RaveCore-Labs/S3RLinux-Atomic/archive/refs/heads/main.zip
 ```
 
 **After you install Aurora:**
 ```bash
 # Switch to your image
-sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 sudo reboot
 ```
 
@@ -1195,7 +1195,7 @@ Now commit and push this backup to the repo.
 [main c9c5ef6] docs: add Arch packages backup (1125 packages)
  1 file changed, 1125 insertions(+)
  create mode 100644 backup/packages-arch.txt
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    291690f..c9c5ef6  main -> main
 
 ```
@@ -3969,7 +3969,7 @@ Now I'll commit this to the repo:
 [main 9a77807] docs: add Fedora equivalents guide
  1 file changed, 59 insertions(+)
  create mode 100644 backup/fedora-equivalents.txt
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    c9c5ef6..9a77807  main -> main
 
 ```
@@ -4008,7 +4008,7 @@ Good luck with Aurora! 🎉
 NOOOOOOOOOOOOOOOOOO :(((( Run redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c
 Creating temporary Podman image storage for pulling from Docker daemon
 Storage driver is not 'overlay', so not overriding storage configuration
-Combining image name "s3rlinux-atomic" and registry "ghcr.io/moonlightos-meow" to form registry path "ghcr.io/moonlightos-meow/s3rlinux-atomic"
+Combining image name "s3rlinux-atomic" and registry "ghcr.io/ravecore-labs" to form registry path "ghcr.io/ravecore-labs/s3rlinux-atomic"
 🔍 Checking if the given image is manifest or not.
 /usr/bin/podman version
 /usr/bin/podman manifest exists s3rlinux-atomic:latest
@@ -4024,8 +4024,8 @@ Tags "s3rlinux-atomic:latest, s3rlinux-atomic:latest.20260425, s3rlinux-atomic:2
 /usr/bin/podman --root /tmp/podman-from-docker-4T3Cpv pull docker-daemon:s3rlinux-atomic:latest.20260425
 /usr/bin/podman --root /tmp/podman-from-docker-4T3Cpv pull docker-daemon:s3rlinux-atomic:20260425
 Tag "s3rlinux-atomic:latest" was found in the Podman image storage, but not in the Docker image storage. The image(s) will be pushed from Podman image storage.
-⏳ Pushing "s3rlinux-atomic:latest, s3rlinux-atomic:latest.20260425, s3rlinux-atomic:20260425" to "ghcr.io/moonlightos-meow/s3rlinux-atomic:latest, ghcr.io/moonlightos-meow/s3rlinux-atomic:latest.20260425, ghcr.io/moonlightos-meow/s3rlinux-atomic:20260425" respectively as "moonlightOS-Meow"
-/usr/bin/podman push --quiet --digestfile s3rlinux-atomic-latest_digest.txt s3rlinux-atomic:latest ghcr.io/moonlightos-meow/s3rlinux-atomic:latest --tls-verify=true --creds=moonlightOS-Meow:***
+⏳ Pushing "s3rlinux-atomic:latest, s3rlinux-atomic:latest.20260425, s3rlinux-atomic:20260425" to "ghcr.io/ravecore-labs/s3rlinux-atomic:latest, ghcr.io/ravecore-labs/s3rlinux-atomic:latest.20260425, ghcr.io/ravecore-labs/s3rlinux-atomic:20260425" respectively as "RaveCore-Labs"
+/usr/bin/podman push --quiet --digestfile s3rlinux-atomic-latest_digest.txt s3rlinux-atomic:latest ghcr.io/ravecore-labs/s3rlinux-atomic:latest --tls-verify=true --creds=RaveCore-Labs:***
 Error: The operation was canceled. 
 
 ---
@@ -4198,7 +4198,7 @@ Now let me create a basic all-contributors file and config.
 **Input:**
 ```json
 {
-  "content": "# .all-contributorsrc configuration\n{\n  \"projectName\": \"S3RLinux-Atomic\",\n  \"projectOwner\": \"moonlightOS-Meow\",\n  \"repoType\": \"github\",\n  \"repoHost\": \"https://github.com\",\n  \"files\": [\n    \"README.md\"\n  ],\n  \"imageSize\": 100,\n  \"commitConvention\": \"gitmoji\",\n  \"commitAuthors\": [\n    \"S3RLinux Maintainer\"\n  ],\n  \"prColumnTitle\": \"Pull Requests\",\n  \"openSourceTitle\": \"Open Source Contributors\",\n  \"allowFailedContribution\": true,\n  \"contributors\": [\n    {\n      \"login\": \"moonlightOS-Meow\",\n      \"name\": \"Maintainer\",\n      \"profile\": \"https://github.com/moonlightOS-Meow\",\n      \"contributions\": [\n        \"code\",\n        \"doc\",\n        \"design\",\n        \"ideas\"\n      ]\n    }\n  ]\n}",
+  "content": "# .all-contributorsrc configuration\n{\n  \"projectName\": \"S3RLinux-Atomic\",\n  \"projectOwner\": \"RaveCore-Labs\",\n  \"repoType\": \"github\",\n  \"repoHost\": \"https://github.com\",\n  \"files\": [\n    \"README.md\"\n  ],\n  \"imageSize\": 100,\n  \"commitConvention\": \"gitmoji\",\n  \"commitAuthors\": [\n    \"S3RLinux Maintainer\"\n  ],\n  \"prColumnTitle\": \"Pull Requests\",\n  \"openSourceTitle\": \"Open Source Contributors\",\n  \"allowFailedContribution\": true,\n  \"contributors\": [\n    {\n      \"login\": \"RaveCore-Labs\",\n      \"name\": \"Maintainer\",\n      \"profile\": \"https://github.com/RaveCore-Labs\",\n      \"contributions\": [\n        \"code\",\n        \"doc\",\n        \"design\",\n        \"ideas\"\n      ]\n    }\n  ]\n}",
   "filePath": "/home/xalatath/S3RLinux-Atomic/.all-contributorsrc"
 }
 ```
@@ -4318,7 +4318,7 @@ Now I'll update all these bot configs and commit them.
 **Input:**
 ```json
 {
-  "content": "enabled: true\nremoveStates: CHANGES_REQUESTED\n\n# Star history settings\nspecs:\n  - repository: moonlightOS-Meow/S3RLinux-Atomic\n    branch: main",
+  "content": "enabled: true\nremoveStates: CHANGES_REQUESTED\n\n# Star history settings\nspecs:\n  - repository: RaveCore-Labs/S3RLinux-Atomic\n    branch: main",
   "filePath": "/home/xalatath/S3RLinux-Atomic/.github/star-history.json"
 }
 ```
@@ -4358,7 +4358,7 @@ Now let me commit and push all these bot configs.
  create mode 100644 .github/workflows/stale.yml
  create mode 100644 .github/workflows/welcome.yml
  create mode 100644 release-drafter-config.yml
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    9a77807..933b1f1  main -> main
 
 ```
@@ -4452,7 +4452,7 @@ Let me commit and push the fix.
 ```
 [main 41a913c] fix: emoji bot script error
  1 file changed, 6 insertions(+), 18 deletions(-)
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    933b1f1..41a913c  main -> main
 
 ```
@@ -4540,7 +4540,7 @@ Quick save options:
 
 Or just keep the tab open! 
 
-Your S3RLinux repo has everything: https://github.com/moonlightOS-Meow/S3RLinux-Atomic
+Your S3RLinux repo has everything: https://github.com/RaveCore-Labs/S3RLinux-Atomic
 
 Good luck with Aurora! 🎉
 
@@ -4657,7 +4657,7 @@ The user wants me to create a detailed AGENTS.md file for the repo. This is a do
 **Input:**
 ```json
 {
-  "content": "# 🤖 S3RLinux Atomic - Agent Guide\n\n> \"RAVE ALL NIGHT 💀\"\n\n## Project Overview\n\nS3RLinux Atomic is a custom bootc image built on top of Aurora (KDE Fedora-based immutable distro). It's themed around S3RL - the legendary Happy Hardcore DJ from Brisbane, Australia.\n\n### Core Facts\n- **Type**: bootc/OSTree immutable system\n- **Base**: Aurora (KDE Plasma)\n- **Image Registry**: ghcr.io/moonlightos-meow/s3rlinux-atomic\n- **License**: SAL (S3RLinux Atomic License) - See LICENSE file\n- **Language**: Mostly Bash, YAML, some React for website\n\n---\n\n## 📁 Repository Structure\n\n```\nS3RLinux-Atomic/\n├── .github/\n│   ├── workflows/\n│   │   ├── build.yml          # Main container build\n│   │   ├── build-disk.yml     # ISO/VM image building\n│   │   ├── pages.yml         # Website deployment (React+Vite)\n│   │   ├── welcome.yml      # Welcome first-time contributors\n│   │   ├── stale.yml         # Close inactive issues\n│   │   ├── emoji.yml         # Auto-react to new issues/PRs\n│   │   └── release-drafter.yml # Auto-generate releases\n│   ├── dependabot.yml        # Dependency updates\n│   ├── renovate.json5        # Advanced dependency updates\n│   └── star-history.json     # Star tracking\n├── backup/\n│   ├── packages-arch.txt      # 1125 Arch packages (backup)\n│   └── fedora-equivalents.txt # Fedora package guide\n├── build_files/\n│   ├── build.sh              # Main build script (RUN THIS)\n│   ├── S3RL-Atomic.colors    # KDE color scheme\n│   ├── s3rlinux-a-logo.png   # Main logo\n│   ├── s3rlinux-logo-are-you-fucking-blind.png # Plymouth logo\n│   ├── sddm/                 # SDDM login theme\n│   │   ├── theme.conf\n│   │   └── Main.qml\n│   └── plymouth/              # Boot splash theme\n│       ├── s3rl-atomic.plymouth\n│       └── script.script\n├── disk_config/\n│   ├── disk.toml             # Disk image config\n│   ├── iso-kde.toml           # ISO config\n│   └── iso-gnome.toml\n├── docs-src/                  # Website source (React+Vite)\n│   ├── src/\n│   │   ├── App.jsx           # Main website component\n│   │   └── main.jsx\n│   ├── index.html\n│   ├── package.json\n│   └── vite.config.js\n├── Containerfile              # Main container build\n├── Justfile                   # Build commands\n├── README.md                  # Main documentation\n├── tutorial.md               # Original template tutorial\n├── LICENSE                   # SAL (very funny, read it)\n└── artifacthub-repo.yml       # ArtifactHub config\n```\n\n---\n\n## 🔨 Building\n\n### Local Build (Recommended)\n\n```bash\n# Install dependencies first\njust build\n\n# Build VM image (qcow2)\njust build-qcow2\n\n# Build ISO\njust build-iso\n\n# Run in VM\njust run-vm-qcow2\n```\n\n### GitHub Actions\n\n1. Go to **Actions** tab\n2. Run **Build container image** for container\n3. Run **Build disk images** for ISO\n\n---\n\n## 🎨 Customizations\n\n### OS Branding\nEdit `build_files/build.sh` - lines 5-18 contain os-release configuration.\n\n### KDE Theme\nEdit `build_files/S3RL-Atomic.colors` - Contains all KDE color scheme.\n\n### SDDM Login\nEdit `build_files/sddm/` - Main.qml and theme.conf.\n\n### Plymouth Boot Splash\nEdit `build_files/plymouth/` - script.script controls boot animation.\n\n### Website\nEdit `docs-src/src/App.jsx` - React website code.\n\n---\n\n## 🔧 Common Tasks\n\n### Update Package Version\n1. Edit `build_files/build.sh` - find the dnf install line\n2. Update version number\n3. Commit and push\n\n### Add New Package\nAdd to `build_files/build.sh`:\n```bash\ndnf5 install -y package-name\n```\n\n### Change Base Image\nEdit `Containerfile` line 6:\n```dockerfile\nFROM ghcr.io/ublue-os/aurora:stable\n```\n\n### Add GitHub Bot\nAdd workflow to `.github/workflows/`\n\n---\n\n## 🐛 Troubleshooting\n\n### Build Fails\n- Check `build_files/build.sh` syntax\n- Ensure all files in build_files/ are properly copied\n- Verify Containerfile paths\n\n### Website Fails\n- Check `docs-src/` has npm install in CI\n- Verify vite.config.js output directory\n- Check node version in workflow\n\n### Image Won't Boot\n- Check Plymouth theme syntax\n- Verify disk_config/ has xfs filesystem type\n- Check ISO kickstart for correct image URL\n\n---\n\n## 🎵 Important Notes\n\n### S3RL License Requirements\nPer the SAL license: Users MUST listen to S3RL while using this OS. This is a joke but please don't remove references to S3RL.\n\n### Fun References to Keep\n- \"RAVE ALL NIGHT 💀\" - Main slogan\n- \"OOH-OOH OOH-OOH\" - Easter egg\n- \"lol no tech support included\" - From LICENSE\n\n---\n\n## 🤖 Bot Configuration\n\n### Dependabot\nAutomatically updates GitHub Actions weekly.\n- Config: `.github/dependabot.yml`\n\n### Renovate\nAdvanced dependency updates.\n- Config: `.github/renovate.json5`\n\n### Stale Bot\nCloses inactive issues after 60 days.\n- Config: `.github/workflows/stale.yml`\n\n### Emoji Bot\nReacts 🎉 to new issues, 🚀 to new PRs.\n- Config: `.github/workflows/emoji.yml`\n\n### Release Drafter\nAuto-generates release notes.\n- Config: `release-drafter-config.yml`\n\n### All Contributors\nCredits contributors in README.\n- Config: `.all-contributorsrc`\n\n---\n\n## 📞 Getting Help\n\n- GitHub Issues: https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues\n- Auroras Docs: https://docs.getaurora.dev\n- Universal Blue: https://universal-blue.org\n- bootc Docs: https://github.com/bootc-dev/bootc\n\n---\n\n*Built with 💜 and UNTZ UNTZ by moonlightOS-Meow*\n\n*RAVE ALL NIGHT 💀*",
+  "content": "# 🤖 S3RLinux Atomic - Agent Guide\n\n> \"RAVE ALL NIGHT 💀\"\n\n## Project Overview\n\nS3RLinux Atomic is a custom bootc image built on top of Aurora (KDE Fedora-based immutable distro). It's themed around S3RL - the legendary Happy Hardcore DJ from Brisbane, Australia.\n\n### Core Facts\n- **Type**: bootc/OSTree immutable system\n- **Base**: Aurora (KDE Plasma)\n- **Image Registry**: ghcr.io/ravecore-labs/s3rlinux-atomic\n- **License**: SAL (S3RLinux Atomic License) - See LICENSE file\n- **Language**: Mostly Bash, YAML, some React for website\n\n---\n\n## 📁 Repository Structure\n\n```\nS3RLinux-Atomic/\n├── .github/\n│   ├── workflows/\n│   │   ├── build.yml          # Main container build\n│   │   ├── build-disk.yml     # ISO/VM image building\n│   │   ├── pages.yml         # Website deployment (React+Vite)\n│   │   ├── welcome.yml      # Welcome first-time contributors\n│   │   ├── stale.yml         # Close inactive issues\n│   │   ├── emoji.yml         # Auto-react to new issues/PRs\n│   │   └── release-drafter.yml # Auto-generate releases\n│   ├── dependabot.yml        # Dependency updates\n│   ├── renovate.json5        # Advanced dependency updates\n│   └── star-history.json     # Star tracking\n├── backup/\n│   ├── packages-arch.txt      # 1125 Arch packages (backup)\n│   └── fedora-equivalents.txt # Fedora package guide\n├── build_files/\n│   ├── build.sh              # Main build script (RUN THIS)\n│   ├── S3RL-Atomic.colors    # KDE color scheme\n│   ├── s3rlinux-a-logo.png   # Main logo\n│   ├── s3rlinux-logo-are-you-fucking-blind.png # Plymouth logo\n│   ├── sddm/                 # SDDM login theme\n│   │   ├── theme.conf\n│   │   └── Main.qml\n│   └── plymouth/              # Boot splash theme\n│       ├── s3rl-atomic.plymouth\n│       └── script.script\n├── disk_config/\n│   ├── disk.toml             # Disk image config\n│   ├── iso-kde.toml           # ISO config\n│   └── iso-gnome.toml\n├── docs-src/                  # Website source (React+Vite)\n│   ├── src/\n│   │   ├── App.jsx           # Main website component\n│   │   └── main.jsx\n│   ├── index.html\n│   ├── package.json\n│   └── vite.config.js\n├── Containerfile              # Main container build\n├── Justfile                   # Build commands\n├── README.md                  # Main documentation\n├── tutorial.md               # Original template tutorial\n├── LICENSE                   # SAL (very funny, read it)\n└── artifacthub-repo.yml       # ArtifactHub config\n```\n\n---\n\n## 🔨 Building\n\n### Local Build (Recommended)\n\n```bash\n# Install dependencies first\njust build\n\n# Build VM image (qcow2)\njust build-qcow2\n\n# Build ISO\njust build-iso\n\n# Run in VM\njust run-vm-qcow2\n```\n\n### GitHub Actions\n\n1. Go to **Actions** tab\n2. Run **Build container image** for container\n3. Run **Build disk images** for ISO\n\n---\n\n## 🎨 Customizations\n\n### OS Branding\nEdit `build_files/build.sh` - lines 5-18 contain os-release configuration.\n\n### KDE Theme\nEdit `build_files/S3RL-Atomic.colors` - Contains all KDE color scheme.\n\n### SDDM Login\nEdit `build_files/sddm/` - Main.qml and theme.conf.\n\n### Plymouth Boot Splash\nEdit `build_files/plymouth/` - script.script controls boot animation.\n\n### Website\nEdit `docs-src/src/App.jsx` - React website code.\n\n---\n\n## 🔧 Common Tasks\n\n### Update Package Version\n1. Edit `build_files/build.sh` - find the dnf install line\n2. Update version number\n3. Commit and push\n\n### Add New Package\nAdd to `build_files/build.sh`:\n```bash\ndnf5 install -y package-name\n```\n\n### Change Base Image\nEdit `Containerfile` line 6:\n```dockerfile\nFROM ghcr.io/ublue-os/aurora:stable\n```\n\n### Add GitHub Bot\nAdd workflow to `.github/workflows/`\n\n---\n\n## 🐛 Troubleshooting\n\n### Build Fails\n- Check `build_files/build.sh` syntax\n- Ensure all files in build_files/ are properly copied\n- Verify Containerfile paths\n\n### Website Fails\n- Check `docs-src/` has npm install in CI\n- Verify vite.config.js output directory\n- Check node version in workflow\n\n### Image Won't Boot\n- Check Plymouth theme syntax\n- Verify disk_config/ has xfs filesystem type\n- Check ISO kickstart for correct image URL\n\n---\n\n## 🎵 Important Notes\n\n### S3RL License Requirements\nPer the SAL license: Users MUST listen to S3RL while using this OS. This is a joke but please don't remove references to S3RL.\n\n### Fun References to Keep\n- \"RAVE ALL NIGHT 💀\" - Main slogan\n- \"OOH-OOH OOH-OOH\" - Easter egg\n- \"lol no tech support included\" - From LICENSE\n\n---\n\n## 🤖 Bot Configuration\n\n### Dependabot\nAutomatically updates GitHub Actions weekly.\n- Config: `.github/dependabot.yml`\n\n### Renovate\nAdvanced dependency updates.\n- Config: `.github/renovate.json5`\n\n### Stale Bot\nCloses inactive issues after 60 days.\n- Config: `.github/workflows/stale.yml`\n\n### Emoji Bot\nReacts 🎉 to new issues, 🚀 to new PRs.\n- Config: `.github/workflows/emoji.yml`\n\n### Release Drafter\nAuto-generates release notes.\n- Config: `release-drafter-config.yml`\n\n### All Contributors\nCredits contributors in README.\n- Config: `.all-contributorsrc`\n\n---\n\n## 📞 Getting Help\n\n- GitHub Issues: https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues\n- Auroras Docs: https://docs.getaurora.dev\n- Universal Blue: https://universal-blue.org\n- bootc Docs: https://github.com/bootc-dev/bootc\n\n---\n\n*Built with 💜 and UNTZ UNTZ by RaveCore-Labs*\n\n*RAVE ALL NIGHT 💀*",
   "filePath": "/home/xalatath/S3RLinux-Atomic/AGENTS.md"
 }
 ```
@@ -4691,7 +4691,7 @@ Now I need to copy this to the repo's docs directory or commit it directly.
 [main 99bc0f7] docs: add detailed AGENTS.md guide
  1 file changed, 208 insertions(+)
  create mode 100644 AGENTS.md
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    41a913c..99bc0f7  main -> main
 
 ```
@@ -4750,7 +4750,7 @@ The user wants to add memory/context about our conversation to the AGENTS.md so 
 ```json
 {
   "filePath": "/home/xalatath/S3RLinux-Atomic/AGENTS.md",
-  "newString": "---\n\n## 📜 Session History (For Future Reference)\n\n### What We Built (2026-04-25 Session)\n\nThis project was created during a long session where we built S3RLinux Atomic from scratch. Key decisions:\n\n1. **Base Image**: Chose Aurora (KDE) instead of Bazzite because user wanted KDE, and Aurora IS KDE now\n2. **Bootc**: Using bootc/OSTree system (not Arch!) - immutable Fedora-based\n3. **Branding**: Created full custom theming (KDE colors, SDDM login, Plymouth splash)\n4. **Website**: Built React+Vite site with Framer Motion animations, Aurora-styled\n5. **Bots**: Added all the fun GitHub bots (welcome, stale, emoji, release drafter, etc.)\n6. **Container Build**: Had multiple failures due to:\n   - Missing logo in build_files\n   - plymouth directory not created before copying files\n   - plymouth-set-default not available in container (used systemd service instead)\n   - bootc container lint causing cancels (disabled)\n   - Syntax error in website code\n   - Various network timeouts\n\n### Known Issues\n- Container image has ~195 vulnerabilities from base Aurora (can't fix - comes with base)\n- ISO build failed initially - needed xfs filesystem type added to disk configs\n- Need to enable RPMFusion on installed systems for gaming packages\n\n### User Requirements\n- User was on Arch/EndeavourOS, wanted to switch to bootc-based distro\n- Audio: S3RL playlist on Spotify: https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2\n- Email: ash8820@proton.me\n- GitHub: moonlightOS-Meow\n\n### Backups Created\n- `backup/packages-arch.txt` - 1125 Arch packages list\n- `backup/fedora-equivalents.txt` - Fedora package equivalents guide\n\n### Quick Install After Switch to Aurora\n```bash\n# Enable RPMFusion\nsudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm\n\n# Gaming\nsudo dnf install steam lutris wine discord\n```\n\n---\n\n## 📞 Getting Help",
+  "newString": "---\n\n## 📜 Session History (For Future Reference)\n\n### What We Built (2026-04-25 Session)\n\nThis project was created during a long session where we built S3RLinux Atomic from scratch. Key decisions:\n\n1. **Base Image**: Chose Aurora (KDE) instead of Bazzite because user wanted KDE, and Aurora IS KDE now\n2. **Bootc**: Using bootc/OSTree system (not Arch!) - immutable Fedora-based\n3. **Branding**: Created full custom theming (KDE colors, SDDM login, Plymouth splash)\n4. **Website**: Built React+Vite site with Framer Motion animations, Aurora-styled\n5. **Bots**: Added all the fun GitHub bots (welcome, stale, emoji, release drafter, etc.)\n6. **Container Build**: Had multiple failures due to:\n   - Missing logo in build_files\n   - plymouth directory not created before copying files\n   - plymouth-set-default not available in container (used systemd service instead)\n   - bootc container lint causing cancels (disabled)\n   - Syntax error in website code\n   - Various network timeouts\n\n### Known Issues\n- Container image has ~195 vulnerabilities from base Aurora (can't fix - comes with base)\n- ISO build failed initially - needed xfs filesystem type added to disk configs\n- Need to enable RPMFusion on installed systems for gaming packages\n\n### User Requirements\n- User was on Arch/EndeavourOS, wanted to switch to bootc-based distro\n- Audio: S3RL playlist on Spotify: https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2\n- Email: ash8820@proton.me\n- GitHub: RaveCore-Labs\n\n### Backups Created\n- `backup/packages-arch.txt` - 1125 Arch packages list\n- `backup/fedora-equivalents.txt` - Fedora package equivalents guide\n\n### Quick Install After Switch to Aurora\n```bash\n# Enable RPMFusion\nsudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm\n\n# Gaming\nsudo dnf install steam lutris wine discord\n```\n\n---\n\n## 📞 Getting Help",
   "oldString": "---\n\n## 📞 Getting Help"
 }
 ```
@@ -4783,7 +4783,7 @@ Now push it.
 ```
 [main 6b3ec78] docs: add session history to AGENTS.md
  1 file changed, 45 insertions(+)
-To https://github.com/moonlightOS-Meow/S3RLinux-Atomic.git
+To https://github.com/RaveCore-Labs/S3RLinux-Atomic.git
    99bc0f7..6b3ec78  main -> main
 
 ```
@@ -4825,7 +4825,7 @@ Goodbye! 🎉
 **After Aurora install:**
 ```bash
 # Switch to your custom image (after running container build)
-sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 sudo reboot
 ```
 

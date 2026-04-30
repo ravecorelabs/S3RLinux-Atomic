@@ -9,7 +9,7 @@ S3RLinux Atomic is a custom bootc image built on top of Aurora (KDE Fedora-based
 ### Core Facts
 - **Type**: bootc/OSTree immutable system
 - **Base**: Aurora (KDE Plasma)
-- **Image Registry**: ghcr.io/moonlightos-meow/s3rlinux-atomic
+- **Image Registry**: ghcr.io/ravecore-labs/s3rlinux-atomic
 - **License**: SAL (S3RLinux Atomic License) - See LICENSE file
 - **Language**: Mostly Bash, YAML, some React for website
 
@@ -231,7 +231,7 @@ This project was created during a long session where we built S3RLinux Atomic fr
 - User was on Arch/EndeavourOS, wanted to switch to bootc-based distro
 - Audio: S3RL playlist on Spotify: https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2
 - Email: ash8820@proton.me
-- GitHub: moonlightOS-Meow
+- GitHub: RaveCore-Labs
 
 ### Backups Created
 - `backup/packages-arch.txt` - 1125 Arch packages list
@@ -250,13 +250,13 @@ sudo dnf install steam lutris wine discord
 
 ## 📞 Getting Help
 
-- GitHub Issues: https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues
+- GitHub Issues: https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues
 - Auroras Docs: https://docs.getaurora.dev
 - Universal Blue: https://universal-blue.org
 - bootc Docs: https://github.com/bootc-dev/bootc
 
 ---
 
-*Built with 💜 and UNTZ UNTZ by moonlightOS-Meow*
+*Built with 💜 and UNTZ UNTZ by RaveCore-Labs*
 
 *RAVE ALL NIGHT 💀*

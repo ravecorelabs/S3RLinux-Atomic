@@ -1,14 +1,14 @@
 # CODEOWNERS
 
 # Default owner
-* @moonlightOS-Meow
+* @RaveCore-Labs
 
 # Container stuff
-Containerfile @moonlightOS-Meow
-.github/workflows/ @moonlightOS-Meow
+Containerfile @RaveCore-Labs
+.github/workflows/ @RaveCore-Labs
 
 # Build files
-build_files/ @moonlightOS-Meow
+build_files/ @RaveCore-Labs
 
 # Website
-docs-src/ @moonlightOS-Meow
+docs-src/ @RaveCore-Labs

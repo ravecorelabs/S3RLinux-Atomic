@@ -449,7 +449,7 @@ function InstallationGuide() {
 sudo dnf install bootc
 
 # Switch to S3RLinux
-sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 
 # Reboot
 sudo reboot
@@ -489,10 +489,10 @@ wsl --import S3RLinux .\ "path\to\rootfs.tar" --version 2
       </p>
       <pre style={wikiStyles.codeBlock}>
 # Docker
-docker run -it ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+docker run -it ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 
 # Or with persistent home
-docker run -it -v ~/s3rl-home:/home ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+docker run -it -v ~/s3rl-home:/home ghcr.io/ravecore-labs/s3rlinux-atomic:latest
       </pre>
       
       <div style={wikiStyles.warning}>

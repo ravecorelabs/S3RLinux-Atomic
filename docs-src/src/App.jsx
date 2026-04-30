@@ -188,7 +188,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
               )
             })}
             <motion.a
-              href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
+              href="https://github.com/RaveCore-Labs/S3RLinux-Atomic"
               target="_blank"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -269,7 +269,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             )
           })}
           <motion.a
-            href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
+            href="https://github.com/RaveCore-Labs/S3RLinux-Atomic"
             target="_blank"
             style={{
               background: colors.purple,
@@ -403,9 +403,9 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             marginTop: '3rem'
           }}
         >
-          <img src="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg" alt="Build" style={{ height: 24 }} />
+          <img src="https://github.com/RaveCore-Labs/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg" alt="Build" style={{ height: 24 }} />
           <img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic" alt="ArtifactHub" style={{ height: 24 }} />
-          <img src="https://img.shields.io/docker/pull/ghcr.io/moonlightos-meow/s3rlinux-atomic?label=pulls" alt="Pulls" style={{ height: 24 }} />
+          <img src="https://img.shields.io/docker/pull/ghcr.io/ravecore-labs/s3rlinux-atomic?label=pulls" alt="Pulls" style={{ height: 24 }} />
         </motion.div>
 
         {/* Scroll indicator */}
@@ -544,7 +544,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
           </div>
           
           <motion.a
-            href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic"
+            href="https://github.com/RaveCore-Labs/S3RLinux-Atomic/pkgs/container/s3rlinux-atomic"
             target="_blank"
             whileHover={{ scale: 1.02 }}
             style={{
@@ -567,7 +567,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             Or use bootc to switch:
           </p>
           <CodeBlock>
-sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest
+sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 sudo reboot
           </CodeBlock>
         </div>
@@ -582,7 +582,7 @@ sudo reboot
               "Enable RPMFusion (optional for gaming): sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm",
               "Install bootc: sudo dnf install bootc",
               "Reboot into bootc: sudo bootc install to-disk --replace",
-              "Or run: sudo bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest && sudo reboot"
+              "Or run: sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest && sudo reboot"
             ]}
           />
           <InstallCard 
@@ -590,7 +590,7 @@ sudo reboot
             steps={[
               "Install WSL2: wsl --install",
               "Install bootc: wsl -d fedora -- yum install bootc",
-              "Switch: bootc switch ghcr.io/moonlightos-meow/s3rlinux-atomic:latest",
+              "Switch: bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest",
               "Reboot and select S3RLinux in BIOS/UEFI"
             ]}
           />
@@ -688,7 +688,7 @@ sudo reboot
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <a href="#" onClick={(e) => { e.preventDefault(); const el = document.getElementById('download'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }} style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Download</a>
               <a href="#" onClick={(e) => { e.preventDefault(); const el = document.getElementById('install'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }} style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Installation</a>
-              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>GitHub</a>
+              <a href="https://github.com/RaveCore-Labs/S3RLinux-Atomic" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>GitHub</a>
               <a href="https://artifacthub.io/packages/helm/s3rlinux-atomic/s3rlinux-atomic" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>ArtifactHub</a>
             </div>
           </div>
@@ -696,16 +696,16 @@ sudo reboot
           <div>
             <h4 style={{ fontWeight: 600, marginBottom: '1rem' }}>Project</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/blob/main/LICENSE" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>License</a>
-              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/blob/main/CONTRIBUTING.md" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Contribute</a>
-              <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic/issues" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Issues</a>
+              <a href="https://github.com/RaveCore-Labs/S3RLinux-Atomic/blob/main/LICENSE" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>License</a>
+              <a href="https://github.com/RaveCore-Labs/S3RLinux-Atomic/blob/main/CONTRIBUTING.md" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Contribute</a>
+              <a href="https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Issues</a>
             </div>
           </div>
         </div>
         
         <div style={{ maxWidth: 1200, margin: '3rem auto 0', paddingTop: '2rem', borderTop: `1px solid ${colors.border}`, textAlign: 'center' }}>
           <p style={{ color: colors.textMuted, fontSize: '0.85rem' }}>
-            © 2026 S3RLinux. Built with 💜 by moonlightOS-Meow. 
+            © 2026 S3RLinux. Built with 💜 by RaveCore-Labs. 
             <span style={{ marginLeft: '1rem' }}>RAVE ALL NIGHT 💀</span>
           </p>
           <p style={{ color: colors.textMuted, fontSize: '0.75rem', marginTop: '0.5rem', opacity: 0.7 }}>
@@ -961,7 +961,7 @@ function BlogSection() {
       id: 'aurora-f44-update',
       title: "Aurora F44 Spring 2026 Update - SDDM Replaced by Plasma Login Manager", 
       date: "2026-04-30",
-      author: "moonlightOS-Meow",
+      author: "RaveCore-Labs",
       avatar: "🚀",
       readTime: "6 min read",
       excerpt: "Aurora Spring26 brings Fedora 44, Plasma Login Manager replaces SDDM, Konsole as default terminal, and more major changes.",
@@ -999,7 +999,7 @@ Read the full Aurora announcement: https://docs.getaurora.dev/blog/aurora-spring
       id: 'first-release',
       title: "S3RLinux Atomic - First Release", 
       date: "2026-04-29",
-      author: "moonlightOS-Meow",
+      author: "RaveCore-Labs",
       avatar: "🌈",
       readTime: "5 min read",
       excerpt: "Introducing S3RLinux Atomic - the ultimate Happy Hardcore Linux experience. Built on bootc with KDE Plasma and fully themed with S3RL purple/pink magic.",
@@ -1023,7 +1023,7 @@ This is just the beginning. We're planning more themes, better documentation, an
       id: 'why-bootc',
       title: "Why bootc?", 
       date: "2026-04-29",
-      author: "moonlightOS-Meow",
+      author: "RaveCore-Labs",
       avatar: "⚡",
       readTime: "7 min read",
       excerpt: "bootc provides atomic updates, easy rollbacks, and unified container/host management. Learn why we chose bootc for S3RLinux.",
@@ -1051,7 +1051,7 @@ The future of Linux desktop is immutable, and bootc is leading the charge.`
       id: 's3rl-theme',
       title: "The S3RL Theme", 
       date: "2026-04-29",
-      author: "moonlightOS-Meow",
+      author: "RaveCore-Labs",
       avatar: "🎵",
       readTime: "4 min read",
       excerpt: "Custom SDDM login, Plymouth boot splash, KDE color scheme - everything themed around S3RL.",

@@ -16,9 +16,9 @@ on:
 env:
   IMAGE_DESC: "S3RL-themed bootc image - RAVE ALL NIGHT 💀"
   IMAGE_KEYWORDS: "bootc,s3rl,kde,atomic,immutable,fedora,linux-distribution,kde-plasma,custom-linux,universial-blue"
-  IMAGE_LOGO_URL: "https://raw.githubusercontent.com/moonlightOS-Meow/S3RLinux-Atomic/main/s3rlinux-a-logo.png"
+  IMAGE_LOGO_URL: "https://raw.githubusercontent.com/RaveCore-Labs/S3RLinux-Atomic/main/s3rlinux-a-logo.png"
   IMAGE_NAME: "s3rlinux-atomic"  # output image name, usually same as repo name
-  IMAGE_REGISTRY: "ghcr.io/moonlightos-meow"  # do not edit
+  IMAGE_REGISTRY: "ghcr.io/ravecore-labs"  # do not edit
   DEFAULT_TAG: "latest"
 
 concurrency:
