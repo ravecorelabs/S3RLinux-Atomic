@@ -566,39 +566,23 @@ sudo reboot
         <CompareTable />
       </Section>
 
-      {/* WIKI SECTION - Link to full Wiki */}
-      <Section id="wiki" title="📖 Documentation">
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ color: colors.textMuted, fontSize: '1.2rem', marginBottom: '2rem' }}>
-            Click below for the full S3RLinux Wiki! 📚
-          </p>
-          
-          <motion.a
-            href="#wiki"
-            whileHover={{ scale: 1.05, boxShadow: `0 0 30px ${colors.purple}` }}
-            style={{
-              display: 'inline-block',
-              background: colors.purple,
-              color: '#fff',
-              padding: '1rem 2.5rem',
-              borderRadius: 12,
-              fontSize: '1.3rem',
-              fontWeight: 600,
-              textDecoration: 'none',
-              boxShadow: `0 0 20px ${colors.purpleGlow}`
-            }}
-          >
-            📖 Open Full S3RLinux Wiki →
-          </motion.a>
-          
-          <p style={{ color: colors.textMuted, marginTop: '2rem', fontSize: '0.95rem' }}>
-            Like Arch Wiki, but purple. And with more raves. 🎵
-          </p>
-        </div>
-      </Section>
-
-      {/* WIKI SECTION - Full knowledge base */}
-      <div style={{ padding: '6rem 0' }}>
+      {/* WIKI SECTION - Standalone Wiki Page */}
+      <div id="wiki" style={{ 
+        minHeight: '100vh', 
+        padding: '4rem 0',
+        background: colors.darker 
+      }}>
+        <h2 style={{ 
+          maxWidth: 1200, 
+          margin: '0 auto 2rem', 
+          padding: '0 2rem',
+          fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', 
+          fontWeight: 700, 
+          textAlign: 'center',
+          color: colors.pink
+        }}>
+          📖 S3RLinux Wiki
+        </h2>
         <Wiki />
       </div>
 
