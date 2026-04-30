@@ -166,7 +166,7 @@ function App() {
               >
                 {link}
               </motion.a>
-            ))}}
+            ))}
             <motion.a
               href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
               target="_blank"
