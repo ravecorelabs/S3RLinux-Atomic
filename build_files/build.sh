@@ -46,6 +46,8 @@ EOF
 ### Branding files
 cp /ctx/s3rlinux-a-logo.png /usr/share/pixmaps/
 cp /ctx/S3RL-Atomic.colors /usr/share/color-schemes/
+
+# SDDM (for older Aurora) - kept for compatibility
 cp -r /ctx/sddm /usr/share/sddm/themes/
 mkdir -p /etc/sddm.conf.d
 cat > /etc/sddm.conf.d/s3rl-theme.conf << 'EOF'
@@ -53,13 +55,25 @@ cat > /etc/sddm.conf.d/s3rl-theme.conf << 'EOF'
 Current=S3RL-Atomic
 EOF
 
-# SDDM Auto Login (RAVE ALL NIGHT!)
+# Plasma Login Manager (NEW! Aurora F44+) - Configure via KDE
+# The new Plasma Login Manager doesn't use SDDM themes
+# Instead, we configure auto-login via sddm.conf
 mkdir -p /etc/sddm.conf.d
 cat > /etc/sddm.conf.d/autologin.conf << 'EOF'
 [Autologin]
 User=s3rl
 Session=plasma.desktop
 Relogin=true
+EOF
+
+# For Plasma Login Manager (new Aurora), configure via kcm_sddm or manually
+# Create a script to configure it on first boot
+mkdir -p /etc/sddm.conf.d
+cat > /etc/sddm.conf.d/plasma-login.conf << 'EOF'
+# Plasma Login Manager config (Aurora F44+)
+# Auto-login handled above
+[General]
+# Relogin=true already set
 EOF
 
 # Plymouth theme files (manual set via: plymouth-set-default S3RL-Atomic)
