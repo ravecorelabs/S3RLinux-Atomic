@@ -1,3 +1,5 @@
+<div align="center">
+
 # 💀 S3RLINUX ATOMIC
 
 **S3RL-themed bootc Distribution** — The ultimate happy hardcore Linux experience!
@@ -182,3 +184,5 @@ We have one! Check `s3rlinux-a-logo.png`. It's... a logo.
 *Welcome to the future. The S3RL spirit flows through your OSTree. Your bootc commands are weapons.*
 
 *RAVE ALL NIGHT. 💀🌈*
+
+</div>
