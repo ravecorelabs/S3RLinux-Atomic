@@ -1,76 +1,76 @@
 [General]
 Author=S3RLinux
-Comment=S3RL themed color scheme
-Name=S3RL Atomic
+Comment=S3RL RAVE color scheme - Purple/Pink Happy Hardcore energy
+Name=S3RL-Atomic
 X11GenerateHighContrast=false
 contrast=1.00
 
 [Colors:Window][Background]
-Color=45,45,48
+Color=5,3,8
 Alpha=255
 
 [Colors:Window][Foreground]
-Color=210,210,210
+Color=232,230,238
 Alpha=255
 
 [Colors:Window][InactiveBackground]
-Color=35,35,38
+Color=13,10,20
 Alpha=255
 
 [Colors:Window][InactiveForeground]
-Color=130,130,130
+Color=158,154,170
 Alpha=255
 
 [Colors:Window][Decoration]
-Color=0,188,212
+Color=255,0,128
 Alpha=255
 
 [Colors:Window][DecorationInactive]
-Color=80,80,80
+Color=80,60,90
 Alpha=255
 
 [Colors:Button][Background]
-Color=30,30,35
+Color=15,15,24
 Alpha=255
 
 [Colors:Button][Foreground]
-Color=210,210,210
+Color=232,230,238
 Alpha=255
 
 [Colors:Button][Decoration]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:Button][Hover]
-Color=0,210,230
+Color=255,0,128
 Alpha=255
 
 [Colors:Button][Focus]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:Generic][Background]
-Color=30,30,35
+Color=15,15,24
 Alpha=255
 
 [Colors:Generic][Foreground]
-Color=210,210,210
+Color=232,230,238
 Alpha=255
 
 [Colors:Generic][Decoration]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:Generic][Hover]
-Color=0,210,230
+Color=255,0,128
 Alpha=255
 
 [Colors:Generic][Focus]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:Generic][Link]
-Color=0,188,212
+Color=255,0,128
 Alpha=255
 
 [Colors:Generic][Visited]
@@ -78,39 +78,39 @@ Color=156,39,176
 Alpha=255
 
 [Colors:Generic][AlternateBackground]
-Color=40,40,45
+Color=21,21,32
 Alpha=255
 
 [Colors:Selection][Background]
-Color=0,150,168
+Color=156,39,176
 Alpha=255
 
 [Colors:Selection][Foreground]
-Color=0,0,0
+Color=255,255,255
 Alpha=255
 
 [Colors:Selection][Decoration]
-Color=0,210,230
+Color=255,0,128
 Alpha=255
 
 [Colors:Selection][InActiveBackground]
-Color=60,60,65
+Color=60,30,80
 Alpha=255
 
 [Colors:Selection][InActiveForeground]
-Color=150,150,150
+Color=180,160,200
 Alpha=255
 
 [Colors:Tooltip][Background]
-Color=25,25,30
+Color=10,5,15
 Alpha=240
 
 [Colors:Tooltip][Foreground]
-Color=200,200,200
+Color=232,230,238
 Alpha=255
 
 [Colors:Tooltip][Decoration]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:Icon][Background]
@@ -118,47 +118,47 @@ Color=0,0,0
 Alpha=0
 
 [Colors:Icon][Foreground]
-Color=200,200,200
+Color=255,0,128
 Alpha=255
 
 [Colors:Icon][Decoration]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:Icon][Hover]
-Color=0,210,230
+Color=255,0,128
 Alpha=255
 
 [Colors:Icon][Focus]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:View][Background]
-Color=30,30,35
+Color=5,3,8
 Alpha=255
 
 [Colors:View][Foreground]
-Color=210,210,210
+Color=232,230,238
 Alpha=255
 
 [Colors:View][Decoration]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:View][Hover]
-Color=35,35,40
+Color=21,21,32
 Alpha=255
 
 [Colors:View][Focus]
-Color=0,188,212
+Color=156,39,176
 Alpha=255
 
 [Colors:View][AlternateBackground]
-Color=40,40,45
+Color=15,15,24
 Alpha=255
 
 [Colors:View][Link]
-Color=0,188,212
+Color=255,0,128
 Alpha=255
 
 [Colors:View][Visited]
@@ -166,27 +166,27 @@ Color=156,39,176
 Alpha=255
 
 [Colors:Palette]
-WindowBackground=45,45,48
-WindowForeground=210,210,210
-ButtonBackground=30,30,35
-ButtonForeground=210,210,210
-LinkColor=0,188,212
+WindowBackground=5,3,8
+WindowForeground=232,230,238
+ButtonBackground=15,15,24
+ButtonForeground=232,230,238
+LinkColor=255,0,128
 LinkVisitColor=156,39,176
-AlternativeBackground=40,40,45
-GroupOxidation=0,188,212
-LightColor=0,188,212
-MidColor=0,150,168
-MidlightColor=0,170,190
-ShadowColor=10,10,12
-WindowTitleActive=0,188,212
-WindowTitleInactive=80,80,80
-SelectionBackground=0,150,168
-SelectionForeground=0,0,0
-SelectionInactiveBackground=60,60,65
-SelectionInactiveForeground=150,150,150
-TooltipBackground=25,25,30
-TooltipForeground=200,200,200
-Link=0,188,212
+AlternativeBackground=21,21,32
+GroupOxidation=156,39,176
+LightColor=255,0,128
+MidColor=156,39,176
+MidlightColor=200,80,180
+ShadowColor=3,1,5
+WindowTitleActive=255,0,128
+WindowTitleInactive=80,60,90
+SelectionBackground=156,39,176
+SelectionForeground=255,255,255
+SelectionInactiveBackground=60,30,80
+SelectionInactiveForeground=180,160,200
+TooltipBackground=10,5,15
+TooltipForeground=232,230,238
+Link=255,0,128
 VisitedLink=156,39,176
-TitlebarForeground=0,188,212
-TitlebarInactiveForeground=80,80,80
+TitlebarForeground=255,0,128
+TitlebarInactiveForeground=80,60,90

@@ -47,33 +47,40 @@ EOF
 cp /ctx/s3rlinux-a-logo.png /usr/share/pixmaps/
 cp /ctx/S3RL-Atomic.colors /usr/share/color-schemes/
 
-# SDDM (for older Aurora) - kept for compatibility
-cp -r /ctx/sddm /usr/share/sddm/themes/
-mkdir -p /etc/sddm.conf.d
+# SDDM (for older Aurora pre-F44) - kept for backwards compatibility
+cp -r /ctx/sddm /usr/share/sddm/themes/ 2>/dev/null || true
+mkdir -p /etc/sddm.conf.d 2>/dev/null || true
 cat > /etc/sddm.conf.d/s3rl-theme.conf << 'EOF'
 [Theme]
 Current=S3RL-Atomic
 EOF
 
-# Plasma Login Manager (NEW! Aurora F44+) - Configure via KDE
-# The new Plasma Login Manager doesn't use SDDM themes
-# Instead, we configure auto-login via sddm.conf
-mkdir -p /etc/sddm.conf.d
+# Plasma Login Manager (Aurora F44+) - NEW theming system
+# PLM uses Plasma's native theming (color schemes + wallpaper)
+# instead of custom SDDM QML themes.
+# Configuration: /etc/plasmalogin.conf
+mkdir -p /etc/plasmalogin.conf.d
+
+# Autologin for PLM
+cat > /etc/plasmalogin.conf.d/autologin.conf << 'EOF'
+[Autologin]
+User=s3rl
+Session=plasma.desktop
+EOF
+
+# PLM default config - use our color scheme
+cat > /etc/plasmalogin.conf << 'EOF'
+[Greeter]
+# Use the default Breeze greeter (PLM doesn't support custom QML themes)
+# The color scheme and wallpaper will be applied via Plasma settings
+EOF
+
+# For older SDDM, also set autologin
 cat > /etc/sddm.conf.d/autologin.conf << 'EOF'
 [Autologin]
 User=s3rl
 Session=plasma.desktop
 Relogin=true
-EOF
-
-# For Plasma Login Manager (new Aurora), configure via kcm_sddm or manually
-# Create a script to configure it on first boot
-mkdir -p /etc/sddm.conf.d
-cat > /etc/sddm.conf.d/plasma-login.conf << 'EOF'
-# Plasma Login Manager config (Aurora F44+)
-# Auto-login handled above
-[General]
-# Relogin=true already set
 EOF
 
 # Plymouth theme files (manual set via: plymouth-set-default S3RL-Atomic)
