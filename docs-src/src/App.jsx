@@ -2,6 +2,23 @@ import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Wiki from './Wiki.jsx'
 
+// Simple hash router - Wiki is a SEPARATE page!
+function useHashRouter() {
+  const [page, setPage] = useState('main')
+  
+  useEffect(() => {
+    const checkHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      setPage(hash || 'main')
+    }
+    checkHash()
+    window.addEventListener('hashchange', checkHash)
+    return () => window.removeEventListener('hashchange', checkHash)
+  }, [])
+  
+  return page
+}
+
 // Device detection hook
 function useDeviceType() {
   const [deviceType, setDeviceType] = useState('desktop')
@@ -51,9 +68,15 @@ function App() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const deviceType = useDeviceType()
+  const currentPage = useHashRouter() // Separate page routing!
   const isMobile = deviceType === 'mobile'
   const isTablet = deviceType === 'tablet'
   const isTouch = deviceType === 'touch'
+  
+  // If Wiki page, render ONLY the Wiki - completely separate!
+  if (currentPage === 'wiki') {
+    return <Wiki />
+  }
   
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
@@ -565,26 +588,6 @@ sudo reboot
       <Section id="compare" title="S3RLinux vs other distros">
         <CompareTable />
       </Section>
-
-      {/* WIKI SECTION - Standalone Wiki Page */}
-      <div id="wiki" style={{ 
-        minHeight: '100vh', 
-        padding: '4rem 0',
-        background: colors.darker 
-      }}>
-        <h2 style={{ 
-          maxWidth: 1200, 
-          margin: '0 auto 2rem', 
-          padding: '0 2rem',
-          fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', 
-          fontWeight: 700, 
-          textAlign: 'center',
-          color: colors.pink
-        }}>
-          📖 S3RLinux Wiki
-        </h2>
-        <Wiki />
-      </div>
 
       {/* BLOG SECTION */}
       <Section id="blog" title="Latest from the Blog">
