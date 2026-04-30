@@ -78,7 +78,7 @@ function App() {
   }, [])
 
   // Nav links (responsive)
-  const navLinks = ['Features', 'Download', 'Install', 'Compare', 'Docs', 'Blog', 'FAQ']
+  const navLinks = ['Features', 'Download', 'Install', 'Compare', 'Wiki', 'Blog', 'FAQ']
   const navLinkStyle = {
     display: isMobile ? 'none' : 'flex',
     gap: isMobile ? 0 : '1.5rem',
@@ -330,7 +330,7 @@ function App() {
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <PrimaryButton>Get S3RLinux</PrimaryButton>
-              <SecondaryButton href="#docs">Documentation</SecondaryButton>
+              <SecondaryButton href="#wiki">Documentation</SecondaryButton>
               <SpotifyButton />
             </motion.div>
             
@@ -566,8 +566,8 @@ sudo reboot
         <CompareTable />
       </Section>
 
-      {/* DOCS SECTION - Link to full Wiki */}
-      <Section id="docs" title="📖 Documentation">
+      {/* WIKI SECTION - Link to full Wiki */}
+      <Section id="wiki" title="📖 Documentation">
         <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
           <p style={{ color: colors.textMuted, fontSize: '1.2rem', marginBottom: '2rem' }}>
             Click below for the full S3RLinux Wiki! 📚
