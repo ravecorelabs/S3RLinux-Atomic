@@ -160,19 +160,13 @@ const wikiStyles = {
 function Wiki() {
   const [, setLocation] = useLocation()
   const [match, params] = useRoute('/wiki/:article')
+  const [isMobile, setIsMobile] = useState(false)
+  
+  const selectedArticle = (match && params && params.article) || 'getting-started'
   
   useEffect(() => {
-    if (match && params && params.article) {
-      setSelectedArticle(params.article)
-    }
-  }, [match, params])
-  
-  const [selectedArticle, setSelectedArticle] = useState(() => {
-    const hash = window.location.hash.replace('#', '')
-    if (hash.startsWith('wiki/')) return hash.slice(5)
-    return 'getting-started'
-  })
-  const [isMobile, setIsMobile] = useState(false)
+    window.scrollTo(0, 0)
+  }, [selectedArticle])
   
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -231,7 +225,7 @@ function Wiki() {
       padding: '2rem',
       fontFamily: "'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif"
     }}>
-      <div style={{ padding: '2rem', maxWidth: 1400, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto' }}>
       {/* Wiki Header - Arch Wiki style */}
       <div style={{
         background: colors.gray,
@@ -285,11 +279,6 @@ function Wiki() {
                   <Link
                     key={article.id}
                     href={`/wiki/${article.id}`}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setSelectedArticle(article.id)
-                      document.getElementById(article.id)?.scrollIntoView({ behavior: 'smooth' })
-                    }}
                     style={{
                       ...wikiStyles.navLink,
                       ...(selectedArticle === article.id ? wikiStyles.navLinkActive : {})
@@ -320,7 +309,7 @@ function Wiki() {
         {isMobile && (
           <select
             value={selectedArticle}
-            onChange={(e) => setSelectedArticle(e.target.value)}
+            onChange={(e) => setLocation(`/wiki/${e.target.value}`)}
             style={{
               width: '100%',
               padding: '1rem',
