@@ -601,6 +601,40 @@ sudo dnf install gamemode
       <p style={wikiStyles.paragraph}>
         Enable in: System Settings → Display and Monitor → Refresh Rate → "Allow VRR"
       </p>
+      
+      <h4 style={wikiStyles.subheading}>🎬 DaVinci Resolve (IMPORTANT!)</h4>
+      <div style={wikiStyles.warning}>
+        <strong>⚠️ Fedora 44 Alert:</strong> DaVinci Resolve is an AppImage, but Fedora 44 removed FUSE2 support! You MUST use the extraction method below.
+      </div>
+      <p style={wikiStyles.paragraph}>
+        <strong>The AppImage method doesn't work! </strong> Follow these steps exactly:
+      </p>
+      <pre style={wikiStyles.codeBlock}>
+# 1. Download DaVinci Resolve .run from Blackmagic Design
+# 2. Make it executable
+chmod +x DaVinci_Resolve*
+
+# 3. EXTRACT the AppImage (don't run directly!)
+./DaVinci_Resolve* --appimage-extract
+
+# 4. Go into the extracted folder
+cd squashfs-root/
+
+# 5. Run Resolve directly
+sudo ./bin/Resolve
+      </pre>
+      <p style={wikiStyles.paragraph}>
+        <strong>Note:</strong> You need to run with sudo for full features! Create a launcher:
+      </p>
+      <pre style={wikiStyles.codeBlock}>
+# Create a desktop file
+cat > ~/Desktop/Resolve.desktop << 'EOF'
+[Desktop Entry]
+Name=DaVinci Resolve
+Exec=sudo /path/to/squashfs-root/bin/Resolve
+Type=Application
+EOF
+      </pre>
     </div>
   )
 }
