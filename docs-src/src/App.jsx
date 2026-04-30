@@ -1,25 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Wiki from './Wiki.jsx'
-
-// Hash router - Wiki has sub-routes (#wiki/getting-started)
-function useHashRouter() {
-  const getHash = () => {
-    const hash = window.location.hash.replace('#', '') || 'main'
-    if (hash.startsWith('wiki/')) return 'wiki'
-    if (hash.startsWith('wiki')) return 'wiki'
-    return hash
-  }
-  const [page, setPage] = useState(getHash)
-  
-  useEffect(() => {
-    const checkHash = () => setPage(getHash())
-    window.addEventListener('hashchange', checkHash)
-    return () => window.removeEventListener('hashchange', checkHash)
-  }, [])
-  
-  return page
-}
+import { Route, Link, useLocation, Router } from 'wouter'
+import { useHashLocation } from 'wouter/use-hash-location'
 
 // Device detection hook
 function useDeviceType() {
@@ -67,34 +50,35 @@ const colors = {
 }
 
 function App() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const deviceType = useDeviceType()
-  const currentPage = useHashRouter() // Separate page routing!
   const isMobile = deviceType === 'mobile'
   const isTablet = deviceType === 'tablet'
   const isTouch = deviceType === 'touch'
   
-  // If Wiki page, render ONLY the Wiki - completely separate!
-  if (currentPage === 'wiki') {
-    return <Wiki />
-  }
-  
+  return (
+    <Router hook={useHashLocation}>
+      <Route path="/">
+        {() => <HomePage deviceType={deviceType} isMobile={isMobile} isTablet={isTablet} isTouch={isTouch} />}
+      </Route>
+      <Route path="/wiki">
+        {() => <WikiPage />}
+      </Route>
+      <Route path="/wiki/:article">
+        {() => <WikiPage />}
+      </Route>
+    </Router>
+  )
+}
+
+function WikiPage() {
+  return <Wiki />
+}
+
+function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
-
-  // Responsive sizes
-  const fontSizes = {
-    hero: isMobile ? '2.5rem' : isTablet ? '3rem' : '4rem',
-    heading: isMobile ? '1.5rem' : isTablet ? '1.8rem' : '2.2rem',
-    body: isMobile ? '0.9rem' : '1rem',
-    button: isMobile ? '0.85rem' : '1rem'
-  }
-  
-  const paddings = {
-    section: isMobile ? '3rem 1rem' : isTablet ? '4rem 1.5rem' : '6rem 2rem',
-    card: isMobile ? '1rem' : '1.5rem'
-  }
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -102,13 +86,7 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Nav links (responsive)
   const navLinks = ['Features', 'Download', 'Install', 'Compare', 'Wiki', 'Blog', 'FAQ']
-  const navLinkStyle = {
-    display: isMobile ? 'none' : 'flex',
-    gap: isMobile ? 0 : '1.5rem',
-    alignItems: 'center'
-  }
 
   return (
     <div style={{
@@ -177,20 +155,26 @@ function App() {
             
             {/* Desktop Nav Links */}
             {navLinks.map(link => (
-              <motion.a
+              <motion.div
                 key={link}
-                href={`#${link.toLowerCase()}`}
                 whileHover={{ color: colors.pink }}
                 style={{ 
-                  color: scrolled ? colors.text : colors.textMuted, 
-                  textDecoration: 'none', 
-                  fontSize: isMobile ? '0.8rem' : '0.9rem', 
-                  fontWeight: 500,
-                  transition: 'color 0.2s' 
+                  display: 'inline'
                 }}
               >
-                {link}
-              </motion.a>
+                <Link 
+                  href={link === 'Wiki' ? '/wiki' : `#${link.toLowerCase()}`}
+                  style={{ 
+                    color: scrolled ? colors.text : colors.textMuted, 
+                    textDecoration: 'none', 
+                    fontSize: isMobile ? '0.8rem' : '0.9rem', 
+                    fontWeight: 500,
+                    transition: 'color 0.2s' 
+                  }}
+                >
+                  {link}
+                </Link>
+              </motion.div>
             ))}
             <motion.a
               href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
@@ -236,22 +220,26 @@ function App() {
           }}
         >
           {navLinks.map(link => (
-            <motion.a
+            <motion.div
               key={link}
-              href={`#${link.toLowerCase()}`}
-              onClick={() => setMobileMenuOpen(false)}
               whileTap={{ scale: 0.95 }}
-              style={{
-                color: colors.text,
-                fontSize: isMobile ? '1.2rem' : '1.5rem',
-                fontWeight: 500,
-                textDecoration: 'none',
-                padding: '0.75rem 0',
-                borderBottom: `1px solid ${colors.border}`
-              }}
             >
-              {link}
-            </motion.a>
+              <Link 
+                href={link === 'Wiki' ? '/wiki' : `#${link.toLowerCase()}`}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  color: colors.text,
+                  fontSize: isMobile ? '1.2rem' : '1.5rem',
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  padding: '0.75rem 0',
+                  borderBottom: `1px solid ${colors.border}`,
+                  display: 'block'
+                }}
+              >
+                {link}
+              </Link>
+            </motion.div>
           ))}
           <motion.a
             href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic"
@@ -355,7 +343,7 @@ function App() {
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <PrimaryButton>Get S3RLinux</PrimaryButton>
-              <SecondaryButton href="#wiki">Documentation</SecondaryButton>
+              <SecondaryButton href="/wiki">Documentation</SecondaryButton>
               <SpotifyButton />
             </motion.div>
             
@@ -763,6 +751,31 @@ function PrimaryButton({ children }) {
 }
 
 function SecondaryButton({ children, href = "#" }) {
+  const isInternal = href.startsWith('/')
+  
+  if (isInternal) {
+    return (
+      <motion.div
+        whileHover={{ scale: 1.05, borderColor: colors.pink }}
+        whileTap={{ scale: 0.98 }}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          padding: '0.8rem 1.75rem',
+          borderRadius: 10,
+          fontWeight: 500,
+          fontSize: '1rem',
+          textDecoration: 'none',
+          background: 'transparent',
+          color: colors.text,
+          border: `1px solid ${colors.border}`
+        }}
+      >
+        <Link href={href} style={{ textDecoration: 'none', color: 'inherit' }}>{children}</Link>
+      </motion.div>
+    )
+  }
+  
   return (
     <motion.a
       href={href}

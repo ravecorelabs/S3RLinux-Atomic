@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useRoute, useLocation, Link } from 'wouter'
 
 const colors = {
   purple: '#9c27b0',
@@ -157,12 +158,20 @@ const wikiStyles = {
 }
 
 function Wiki() {
-  const getInitialArticle = () => {
+  const [, setLocation] = useLocation()
+  const [match, params] = useRoute('/wiki/:article')
+  
+  useEffect(() => {
+    if (match && params && params.article) {
+      setSelectedArticle(params.article)
+    }
+  }, [match, params])
+  
+  const [selectedArticle, setSelectedArticle] = useState(() => {
     const hash = window.location.hash.replace('#', '')
     if (hash.startsWith('wiki/')) return hash.slice(5)
     return 'getting-started'
-  }
-  const [selectedArticle, setSelectedArticle] = useState(getInitialArticle)
+  })
   const [isMobile, setIsMobile] = useState(false)
   
   useEffect(() => {
@@ -171,20 +180,6 @@ function Wiki() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-  
-  useEffect(() => {
-    const handleHash = () => {
-      const hash = window.location.hash.replace('#', '')
-      if (hash.startsWith('wiki/')) {
-        const article = hash.slice(5)
-        if (article && article !== selectedArticle) {
-          setSelectedArticle(article)
-        }
-      }
-    }
-    window.addEventListener('hashchange', handleHash)
-    return () => window.removeEventListener('hashchange', handleHash)
-  }, [selectedArticle])
   
   const articleCategories = [
     {
@@ -287,9 +282,9 @@ function Wiki() {
               <div key={idx}>
                 <div style={wikiStyles.sidebarSection}>{cat.category}</div>
                 {cat.articles.map(article => (
-                  <a
+                  <Link
                     key={article.id}
-                    href={`#wiki/${article.id}`}
+                    href={`/wiki/${article.id}`}
                     onClick={(e) => {
                       e.preventDefault()
                       setSelectedArticle(article.id)
@@ -301,7 +296,7 @@ function Wiki() {
                     }}
                   >
                     {article.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             ))}
@@ -347,7 +342,7 @@ function Wiki() {
         <main style={wikiStyles.content}>
           {/* Breadcrumb */}
           <div style={wikiStyles.breadcrumb}>
-            <a href="#wiki" style={{ color: colors.purple, textDecoration: 'none' }}>Wiki</a> / {selectedArticle.replace('-', ' ')}
+            <Link href="/wiki" style={{ color: colors.purple, textDecoration: 'none' }}>Wiki</Link> / {selectedArticle.replace('-', ' ')}
           </div>
           
           {/* Articles */}
@@ -902,12 +897,12 @@ nmcli device wifi list
       <p style={wikiStyles.paragraph}>
         Try: Ctrl+Alt+F2 to get tty, then:
       </p>
-      <pre style={wikiStyles.codeBlock}>
+        <pre style={wikiStyles.codeBlock}>
 # Reset Plasma
-kquit --all plasmashell 2>/dev/null
+kquit --all plasmashell 2{'>'}/dev/null
 killall plasmashell
 # Or create new user and copy files
-      </pre>
+        </pre>
       
       <h4 style={wikiStyles.subheading}>Getting Help</h4>
       <p style={wikiStyles.paragraph}>
