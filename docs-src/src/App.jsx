@@ -686,8 +686,8 @@ sudo reboot
           <div>
             <h4 style={{ fontWeight: 600, marginBottom: '1rem' }}>Resources</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <a href="#download" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Download</a>
-              <a href="#install" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Installation</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); const el = document.getElementById('download'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }} style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Download</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); const el = document.getElementById('install'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }} style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>Installation</a>
               <a href="https://github.com/moonlightOS-Meow/S3RLinux-Atomic" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>GitHub</a>
               <a href="https://artifacthub.io/packages/helm/s3rlinux-atomic/s3rlinux-atomic" style={{ color: colors.textMuted, textDecoration: 'none', fontSize: '0.9rem' }}>ArtifactHub</a>
             </div>
@@ -753,7 +753,8 @@ function Section({ children, id, title }) {
 function PrimaryButton({ children }) {
   return (
     <motion.a
-      href="#download"
+      href="#"
+      onClick={(e) => { e.preventDefault(); const el = document.getElementById('download'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }}
       whileHover={{ scale: 1.05, boxShadow: `0 0 30px ${colors.purple}` }}
       whileTap={{ scale: 0.98 }}
       style={{
