@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const colors = {
@@ -12,11 +12,64 @@ const colors = {
   textMuted: '#9e9aaa',
   border: '#2a2a3a',
   cardBg: '#0f0f18',
-  green: '#238636'
+  green: '#238636',
+  sidebarBg: '#0a0a10',
+  accent: '#7b1fa2'
 }
 
-// Wiki styles like Arch Wiki
+// Arch Wiki style sidebar + content layout
 const wikiStyles = {
+  container: {
+    display: 'flex',
+    gap: '2rem',
+    maxWidth: 1400,
+    margin: '0 auto',
+    minHeight: '80vh'
+  },
+  sidebar: {
+    width: 280,
+    flexShrink: 0,
+    background: colors.sidebarBg,
+    border: `1px solid ${colors.border}`,
+    borderRadius: 12,
+    padding: '1.5rem',
+    height: 'fit-content',
+    position: 'sticky',
+    top: '2rem'
+  },
+  sidebarTitle: {
+    color: colors.purple,
+    fontSize: '1.4rem',
+    fontWeight: 700,
+    marginBottom: '1.5rem',
+    paddingBottom: '0.75rem',
+    borderBottom: `2px solid ${colors.purple}`
+  },
+  sidebarSection: {
+    color: colors.textMuted,
+    fontSize: '0.75rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    marginBottom: '0.5rem',
+    marginTop: '1.5rem'
+  },
+  navLink: {
+    display: 'block',
+    padding: '0.6rem 0.75rem',
+    color: colors.textMuted,
+    textDecoration: 'none',
+    borderRadius: 6,
+    fontSize: '0.95rem',
+    transition: 'all 0.2s'
+  },
+  navLinkActive: {
+    background: colors.purple,
+    color: '#fff'
+  },
+  content: {
+    flex: 1,
+    minWidth: 0
+  },
   article: {
     background: colors.cardBg,
     border: `1px solid ${colors.border}`,
@@ -70,13 +123,6 @@ const wikiStyles = {
     padding: '1rem',
     marginBottom: '1rem'
   },
-  warning: {
-    background: 'rgba(255, 0, 128, 0.15)',
-    border: `1px solid #ff0080`,
-    borderRadius: 8,
-    padding: '1rem',
-    marginBottom: '1rem'
-  },
   table: {
     width: '100%',
     borderCollapse: 'collapse',
@@ -94,87 +140,204 @@ const wikiStyles = {
     padding: '0.75rem',
     border: `1px solid ${colors.border}`,
     color: colors.textMuted
+  },
+  breadcrumb: {
+    color: colors.textMuted,
+    fontSize: '0.85rem',
+    marginBottom: '1rem'
   }
 }
 
 function Wiki() {
   const [selectedArticle, setSelectedArticle] = useState('getting-started')
+  const [isMobile, setIsMobile] = useState(false)
   
-  const articles = [
-    { id: 'getting-started', title: 'Getting Started', desc: 'Everything you need to know to get started' },
-    { id: 'installation', title: 'Installation Guide', desc: 'How to install S3RLinux' },
-    { id: 'configuration', title: 'Configuration', desc: 'Configure your system' },
-    { id: 'package-management', title: 'Package Management', desc: 'Installing and managing packages' },
-    { id: 'hardware', title: '硬件 Hardware', desc: 'Graphics, audio, and peripherals' },
-    { id: 'networking', title: 'Networking', desc: 'WiFi, Ethernet, VPN' },
-    { id: 'gaming', title: 'Gaming', desc: 'Steam, Lutris, wine' },
-    { id: 'troubleshooting', title: 'Troubleshooting', desc: 'When things break' },
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+  
+  const articleCategories = [
+    {
+      category: 'Getting Started',
+      articles: [
+        { id: 'getting-started', title: 'Getting Started' },
+        { id: 'installation', title: 'Installation' },
+        { id: 'post-install', title: 'Post Installation' }
+      ]
+    },
+    {
+      category: 'System',
+      articles: [
+        { id: 'configuration', title: 'Configuration' },
+        { id: 'package-management', title: 'Package Management' },
+        { id: 'bootc', title: 'Bootc' }
+      ]
+    },
+    {
+      category: 'Hardware',
+      articles: [
+        { id: 'graphics', title: 'Graphics' },
+        { id: 'audio', title: 'Audio' },
+        { id: 'networking', title: 'Networking' }
+      ]
+    },
+    {
+      category: 'Applications',
+      articles: [
+        { id: 'gaming', title: 'Gaming' },
+        { id: 'development', title: 'Development' },
+        { id: 'multimedia', title: 'Multimedia' }
+      ]
+    },
+    {
+      category: 'Support',
+      articles: [
+        { id: 'troubleshooting', title: 'Troubleshooting' },
+        { id: 'faq', title: 'FAQ' }
+      ]
+    }
   ]
   
   return (
-    <div style={{ padding: '2rem', maxWidth: 1200, margin: '0 auto' }}>
-      {/* Wiki Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        style={{
-          background: colors.gray,
-          border: `1px solid ${colors.border}`,
-          borderRadius: 12,
-          padding: '1.5rem 2rem',
-          marginBottom: '2rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem'
-        }}
-      >
-        <div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 700, color: colors.text, marginBottom: '0.25rem' }}>
-            📚 S3RLinux Wiki
-          </h2>
-          <p style={{ color: colors.textMuted, fontSize: '0.95rem' }}>
-            Like Arch Wiki, but purple. And with more raves. 🎵
-          </p>
+    <div style={{ padding: '2rem', maxWidth: 1400, margin: '0 auto' }}>
+      {/* Wiki Header - Arch Wiki style */}
+      <div style={{
+        background: colors.gray,
+        border: `1px solid ${colors.border}`,
+        borderRadius: 12,
+        padding: '1.5rem 2rem',
+        marginBottom: '2rem'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '2rem' }}>📚</span>
+          <div>
+            <h2 style={{ fontSize: '1.8rem', fontWeight: 700, color: colors.text, marginBottom: '0.25rem' }}>
+              S3RLinux Wiki
+            </h2>
+            <p style={{ color: colors.textMuted, fontSize: '0.95rem' }}>
+              Like Arch Wiki, but purple. And with more raves. 🎵
+            </p>
+          </div>
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          {articles.map(art => (
-            <motion.button
-              key={art.id}
-              onClick={() => setSelectedArticle(art.id)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              style={{
-                padding: '0.5rem 1rem',
-                borderRadius: 6,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                background: selectedArticle === art.id ? colors.purple : 'transparent',
-                color: selectedArticle === art.id ? '#fff' : colors.textMuted,
-                border: `1px solid ${selectedArticle === art.id ? colors.purple : colors.border}`,
-                fontWeight: 500
-              }}
-            >
-              {art.title}
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
+      </div>
       
-      {/* Article Content */}
-      {selectedArticle === 'getting-started' && <GettingStarted />}
-      {selectedArticle === 'installation' && <InstallationGuide />}
-      {selectedArticle === 'configuration' && <Configuration />}
-      {selectedArticle === 'package-management' && <PackageManagement />}
-      {selectedArticle === 'hardware' && <Hardware />}
-      {selectedArticle === 'networking' && <Networking />}
-      {selectedArticle === 'gaming' && <Gaming />}
-      {selectedArticle === 'troubleshooting' && <Troubleshooting />}
+      {/* Archive notice */}
+      <div style={{
+        background: 'rgba(255, 0, 128, 0.1)',
+        border: '1px solid #ff0080',
+        borderRadius: 8,
+        padding: '1rem',
+        marginBottom: '1.5rem',
+        color: colors.textMuted,
+        fontSize: '0.9rem'
+      }}>
+        ⚠️ <strong>Note:</strong> This wiki is for S3RLinux Atomic. Most guides also work for Fedora Atomic/nickelbase.
+      </div>
+      
+      {/* Main Wiki Layout */}
+      <div style={wikiStyles.container}>
+        {/* Sidebar */}
+        {!isMobile && (
+          <motion.aside
+            initial={{ opacity: 0, x: -20 }}
+            style={wikiStyles.sidebar}
+          >
+            <div style={wikiStyles.sidebarTitle}>
+              📖 Index
+            </div>
+            
+            {articleCategories.map((cat, idx) => (
+              <div key={idx}>
+                <div style={wikiStyles.sidebarSection}>{cat.category}</div>
+                {cat.articles.map(article => (
+                  <a
+                    key={article.id}
+                    href={`#${article.id}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setSelectedArticle(article.id)
+                      document.getElementById(article.id)?.scrollIntoView({ behavior: 'smooth' })
+                    }}
+                    style={{
+                      ...wikiStyles.navLink,
+                      ...(selectedArticle === article.id ? wikiStyles.navLinkActive : {})
+                    }}
+                  >
+                    {article.title}
+                  </a>
+                ))}
+              </div>
+            ))}
+            
+            <div style={{ ...wikiStyles.sidebarSection, marginTop: '2rem' }}>
+              ⚡ Quick Commands
+            </div>
+            <code style={{ ...wikiStyles.code, display: 'block', fontSize: '0.8rem' }}>
+              bootc upgrade
+            </code>
+            <code style={{ ...wikiStyles.code, display: 'block', fontSize: '0.8rem' }}>
+              bootc rollback
+            </code>
+            <code style={{ ...wikiStyles.code, display: 'block', fontSize: '0.8rem' }}>
+              bootc status
+            </code>
+          </motion.aside>
+        )}
+        
+        {/* Mobile: dropdown instead */}
+        {isMobile && (
+          <select
+            value={selectedArticle}
+            onChange={(e) => setSelectedArticle(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '1rem',
+              background: colors.sidebarBg,
+              color: colors.text,
+              border: `1px solid ${colors.border}`,
+              borderRadius: 12,
+              fontSize: '1rem',
+              marginBottom: '1.5rem'
+            }}
+          >
+            {articleCategories.flatMap(cat => cat.articles).map(article => (
+              <option key={article.id} value={article.id}>{article.title}</option>
+            ))}
+          </select>
+        )}
+        
+        {/* Content Area */}
+        <main style={wikiStyles.content}>
+          {/* Breadcrumb */}
+          <div style={wikiStyles.breadcrumb}>
+            <a href="#wiki" style={{ color: colors.purple, textDecoration: 'none' }}>Wiki</a> / {selectedArticle.replace('-', ' ')}
+          </div>
+          
+          {/* Articles */}
+          {selectedArticle === 'getting-started' && <GettingStarted />}
+          {selectedArticle === 'installation' && <InstallationGuide />}
+          {selectedArticle === 'post-install' && <PostInstall />}
+          {selectedArticle === 'configuration' && <Configuration />}
+          {selectedArticle === 'package-management' && <PackageManagement />}
+          {selectedArticle === 'bootc' && <Bootc />}
+          {selectedArticle === 'graphics' && <Graphics />}
+          {selectedArticle === 'audio' && <Audio />}
+          {selectedArticle === 'networking' && <Networking />}
+          {selectedArticle === 'gaming' && <Gaming />}
+          {selectedArticle === 'development' && <Development />}
+          {selectedArticle === 'multimedia' && <Multimedia />}
+          {selectedArticle === 'troubleshooting' && <Troubleshooting />}
+          {selectedArticle === 'faq' && <FAQ />}
+        </main>
+      </div>
     </div>
   )
 }
 
-// FULL ARTICLES
+// Article functions below
 
 function GettingStarted() {
   return (
@@ -717,6 +880,185 @@ killall plasmashell
         - Check logs: <code style={wikiStyles.code}>journalctl -xe</code><br/>
         - Read errors: They're usually helpful! 😄
       </p>
+    </div>
+  )
+}
+
+function PostInstall() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Post Installation</h3>
+      
+      <h4 style={wikiStyles.subheading}>First Things First</h4>
+      <p style={wikiStyles.paragraph}>Change default password immediately!</p>
+      <pre style={wikiStyles.codeBlock}>
+sudo passwd s3rl
+# Enter new password
+sudo passwd root  # Optional but recommended
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Enable RPMFusion</h4>
+      <p style={wikiStyles.paragraph}>Needed for multimedia codecs and gaming stuff:</p>
+      <pre style={wikiStyles.codeBlock}>
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf groupupdate core
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Hardware Acceleration (Optional)</h4>
+      <pre style={wikiStyles.codeBlock}>
+# For AMD GPUs (most users)
+sudo dnf install mesa-vulkan-drivers # Already installed usually
+
+# For NVIDIA (proprietary)
+sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Flatpak Support</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo dnf install flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      </pre>
+    </div>
+  )
+}
+
+function Bootc() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Bootc Guide</h3>
+      
+      <p style={wikiStyles.paragraph}>bootc is Fedora's new atomic update system. Here's how to use it:</p>
+      
+      <h4 style={wikiStyles.subheading}>Check Status</h4>
+      <pre style={wikiStyles.codeBlock}>
+bootc status
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Update System</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo bootc upgrade
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Rollback (if things break)</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo bootc rollback
+sudo reboot
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Switch to Different Image</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo bootc switch ghcr.io/ublue-os/aurora:stable
+      </pre>
+    </div>
+  )
+}
+
+function Graphics() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Graphics</h3>
+      
+      <h4 style={wikiStyles.subheading}>AMD (Recommended)</h4>
+      <p style={wikiStyles.paragraph}>AMD GPUs work out of the box with Mesa. For best performance:</p>
+      <pre style={wikiStyles.codeBlock}>
+# Wayland session (default) handles this automatically
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>NVIDIA (Proprietary)</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+      </pre>
+      <div style={wikiStyles.note}>⚠️ <strong>Note:</strong> NVIDIA on Wayland can be problematic. Consider using X11 or AMD.</div>
+    </div>
+  )
+}
+
+function Audio() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Audio</h3>
+      
+      <h4 style={wikiStyles.subheading}>Basic Audio Works</h4>
+      <p style={wikiStyles.paragraph}>PulseAudio + PipeWire are pre-installed and work out of the box.</p>
+      
+      <h4 style={wikiStyles.subheading}>No Sound?</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Check with Pulse Audio controls
+pavucontrol
+
+# Or restart PipeWire
+systemctl --user restart pipewire
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Jack Audio (Pro Audio)</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo dnf install qjackctl
+      </pre>
+    </div>
+  )
+}
+
+function Development() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Development</h3>
+      
+      <h4 style={wikiStyles.subheading}>Common Tools</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Install dev tools
+sudo dnf install git code
+
+# For Python
+sudo dnf install python3 python3-pip
+
+# For Node.js
+sudo dnf install nodejs npm
+
+# For Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      </pre>
+    </div>
+  )
+}
+
+function Multimedia() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Multimedia</h3>
+      
+      <h4 style={wikiStyles.subheading}>Video Playback</h4>
+      <pre style={wikiStyles.codeBlock}>
+# Make sure RPMFusion is enabled first!
+sudo dnf install vlc
+sudo dnf install ffmpeg
+      </pre>
+      
+      <h4 style={wikiStyles.subheading}>Audio Editors</h4>
+      <pre style={wikiStyles.codeBlock}>
+sudo dnf install audacity
+sudo dnf install ardour
+      </pre>
+    </div>
+  )
+}
+
+function FAQ() {
+  return (
+    <div style={wikiStyles.article}>
+      <h3 style={wikiStyles.heading}>Frequently Asked Questions</h3>
+      
+      <h4 style={wikiStyles.subheading}>Is this Fedora?</h4>
+      <p style={wikiStyles.paragraph}>Yes! S3RLinux is based on Aurora (Fedora-based KDE distro).</p>
+      
+      <h4 style={wikiStyles.subheading}>Is this Arch?</h4>
+      <p style={wikiStyles.paragraph}>NO! It's Fedora with bootc. Check out the backup folder for Arch packages list.</p>
+      
+      <h4 style={wikiStyles.subheading}>Can I use sudo?</h4>
+      <p style={wikiStyles.paragraph}>Yes! Default user (s3rl) can use sudo.</p>
+      
+      <h4 style={wikiStyles.subheading}>Where is the AUR?</h4>
+      <p style={wikiStyles.paragraph}>There is no AUR! Use Flatpak or standard DNF packages instead.</p>
     </div>
   )
 }
