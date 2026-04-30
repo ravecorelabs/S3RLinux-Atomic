@@ -4,14 +4,13 @@ import Wiki from './Wiki.jsx'
 
 // Simple hash router - Wiki is a SEPARATE page!
 function useHashRouter() {
-  const [page, setPage] = useState('main')
+  // Read initial hash immediately (not in useEffect!)
+  const [page, setPage] = useState(() => window.location.hash.replace('#', '') || 'main')
   
   useEffect(() => {
     const checkHash = () => {
-      const hash = window.location.hash.replace('#', '')
-      setPage(hash || 'main')
+      setPage(window.location.hash.replace('#', '') || 'main')
     }
-    checkHash()
     window.addEventListener('hashchange', checkHash)
     return () => window.removeEventListener('hashchange', checkHash)
   }, [])
