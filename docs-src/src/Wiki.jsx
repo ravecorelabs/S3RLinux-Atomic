@@ -157,7 +157,12 @@ const wikiStyles = {
 }
 
 function Wiki() {
-  const [selectedArticle, setSelectedArticle] = useState('getting-started')
+  const getInitialArticle = () => {
+    const hash = window.location.hash.replace('#', '')
+    if (hash.startsWith('wiki/')) return hash.slice(5)
+    return 'getting-started'
+  }
+  const [selectedArticle, setSelectedArticle] = useState(getInitialArticle)
   const [isMobile, setIsMobile] = useState(false)
   
   useEffect(() => {
@@ -166,6 +171,20 @@ function Wiki() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+  
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash.startsWith('wiki/')) {
+        const article = hash.slice(5)
+        if (article && article !== selectedArticle) {
+          setSelectedArticle(article)
+        }
+      }
+    }
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [selectedArticle])
   
   const articleCategories = [
     {
@@ -270,7 +289,7 @@ function Wiki() {
                 {cat.articles.map(article => (
                   <a
                     key={article.id}
-                    href={`#${article.id}`}
+                    href={`#wiki/${article.id}`}
                     onClick={(e) => {
                       e.preventDefault()
                       setSelectedArticle(article.id)

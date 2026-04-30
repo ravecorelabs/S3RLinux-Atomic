@@ -2,15 +2,18 @@ import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Wiki from './Wiki.jsx'
 
-// Simple hash router - Wiki is a SEPARATE page!
+// Hash router - Wiki has sub-routes (#wiki/getting-started)
 function useHashRouter() {
-  // Read initial hash immediately (not in useEffect!)
-  const [page, setPage] = useState(() => window.location.hash.replace('#', '') || 'main')
+  const getHash = () => {
+    const hash = window.location.hash.replace('#', '') || 'main'
+    if (hash.startsWith('wiki/')) return 'wiki'
+    if (hash.startsWith('wiki')) return 'wiki'
+    return hash
+  }
+  const [page, setPage] = useState(getHash)
   
   useEffect(() => {
-    const checkHash = () => {
-      setPage(window.location.hash.replace('#', '') || 'main')
-    }
+    const checkHash = () => setPage(getHash())
     window.addEventListener('hashchange', checkHash)
     return () => window.removeEventListener('hashchange', checkHash)
   }, [])
