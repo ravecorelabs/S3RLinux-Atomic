@@ -1,238 +1,190 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const colors = {
-  purple: '#9c27b0',
-  pink: '#ff0080',
-  purpleDark: '#7b1fa2',
-  pinkLight: '#ff3385',
-  cyanGlow: 'rgba(156, 39, 176, 0.4)',
-  pinkGlow: 'rgba(255, 0, 128, 0.4)',
-  dark: '#0d0a14',
-  darker: '#050308',
-  gray: '#151520',
-  grayLight: '#1e1e2a',
   text: '#e8e6ee',
   textMuted: '#9e9aaa',
   border: '#2a2a3a',
-  green: '#00ff88',
-  cyan: '#00ffff'
+  auroraBg: '#0d0a14',
+  auroraPurple: '#9146ff',
+  auroraBlue: '#3b82f6',
+  auroraPink: '#ec4899'
 }
 
 const characters = [
   {
     id: 'dj-s3r-l',
     name: 'DJ S3R-L',
-    emoji: '🎧',
     icon: '🎧',
     role: 'Main Mascot',
-    description: 'The main character - a chibi DJ representing S3RL himself! Pastel glowing hair, white-pink shining visor, slight forward stance. Main character energy!',
+    description: 'The main character - a chibi DJ representing S3RL himself! Pastel glowing hair, white-pink shining visor, slight forward stance.',
     color: '#ff0080',
     accent: '#ff3385'
   },
   {
     id: 'atom-chan',
     name: 'Atom-chan',
-    emoji: '⚛️',
     icon: '⚛️',
-    role: 'Mascot',
-    description: 'Tiny glowing girl with atomic rings orbiting! Blue/white particle aura. The OS mascot!',
+    role: 'OS Mascot',
+    description: 'Tiny glowing girl with atomic rings orbiting! Blue/white particle aura.',
     color: '#4488ff',
     accent: '#88ccff'
   },
   {
     id: 'nightcore-neko',
     name: 'Nightcore Neko',
-    emoji: '🌙',
     icon: '🐱',
     role: 'Roast Cannon',
-    description: 'Raver cat with glowing purple ribbon tails! Famous for grabbing Manjaro by the hoodie and dangling them. "I‑I do not have delayed updates~!!!" 😭💚',
+    description: 'Famous for grabbing Manjaro by the hoodie. "I‑I do not have delayed updates~!!!" 😭💚',
     color: '#aa00ff',
     accent: '#ff00ff'
   },
   {
     id: 'manjaro',
     name: 'Manjaro',
-    emoji: '🥺',
     icon: '🐰',
     role: 'Roast Victim',
-    description: 'Gets grabbed by the hoodie and dangled by Neko. Legs kicking mid-air. Watery eyes. "wahhhhhh~!!!" 💚',
+    description: 'Gets grabbed by the hoodie and dangled. Legs kicking mid-air. "wahhhhhh~!!!" 💚',
     color: '#00aa44',
     accent: '#44ff88'
   }
 ]
 
 export default function Characters() {
-  const [selected, setSelected] = useState(null)
   const [hovered, setHovered] = useState(null)
 
   return (
     <div style={{
       minHeight: '100vh',
-      background: colors.darker,
+      background: 'linear-gradient(135deg, #0d0a14 0%, #1a0a2e 50%, #0d1420 100%)',
       color: colors.text,
-      fontFamily: "'Inter', 'Segoe UI', -apple-system, sans-serif",
+      fontFamily: "'Inter', 'Segoe UI', sans-serif",
       paddingTop: '5rem',
-      paddingBottom: '4rem'
+      paddingBottom: '3rem',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
+      
+      {/* Aurora orbs */}
+      <motion.div
+        animate={{ x: [0, 20, 0], y: [0, -15, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        style={{
+          position: 'absolute',
+          top: '5%',
+          left: '5%',
+          width: 300,
+          height: 300,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(145, 70, 255, 0.15) 0%, transparent 70%)',
+          filter: 'blur(50px)'
+        }}
+      />
+      <motion.div
+        animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '5%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
+          filter: 'blur(60px)'
+        }}
+      />
       
       {/* HEADER */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        style={{
-          textAlign: 'center',
-          marginBottom: '3rem',
-          padding: '0 2rem'
-        }}
+        style={{ textAlign: 'center', marginBottom: '2rem', padding: '0 1rem', position: 'relative', zIndex: 1 }}
       >
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
           style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
             fontWeight: 800,
-            background: 'linear-gradient(135deg, #ff0080, #aa00ff, #00ffff)',
+            background: 'linear-gradient(135deg, #ff0080, #9146ff, #3b82f6)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            marginBottom: '0.5rem'
+            marginBottom: '0.3rem'
           }}
         >
-          S3RLINUX ATOMIC
+          MEET THE SQUAD ✨
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          style={{
-            fontSize: '1.3rem',
-            color: colors.textMuted,
-            fontWeight: 500
-          }}
-        >
-          Meet the Cast ✨
-        </motion.p>
+        <p style={{ fontSize: '1rem', color: colors.textMuted, fontWeight: 500 }}>
+          S3RLinux Atomic • Main Cast
+        </p>
       </motion.div>
 
-      {/* CHARACTERS GRID */}
+      {/* 2x2 GRID - TIGHT */}
       <div style={{
-        maxWidth: 1200,
+        maxWidth: 700,
         margin: '0 auto',
-        padding: '0 1.5rem',
+        padding: '0 1rem',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem'
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '0.75rem',
+        position: 'relative',
+        zIndex: 1
       }}>
         {characters.map((char, index) => (
           <motion.div
             key={char.id}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.08 }}
-            whileHover={{ 
-              scale: 1.03,
-              boxShadow: `0 0 40px ${char.color}40`
-            }}
-            onClick={() => setSelected(selected === char.id ? null : char.id)}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ scale: 1.02, boxShadow: `0 0 25px ${char.color}30` }}
             onMouseEnter={() => setHovered(char.id)}
             onMouseLeave={() => setHovered(null)}
             style={{
-              background: colors.gray,
-              border: `2px solid ${selected === char.id ? char.color : colors.border}`,
-              borderRadius: 20,
-              padding: '2rem',
+              background: 'rgba(21, 21, 32, 0.7)',
+              border: `2px solid ${hovered === char.id ? char.color : 'rgba(255,255,255,0.08)'}`,
+              borderRadius: 14,
+              padding: '1.25rem',
               cursor: 'pointer',
-              transition: 'all 0.3s ease',
+              transition: 'all 0.2s ease',
               position: 'relative',
-              overflow: 'hidden'
+              backdropFilter: 'blur(8px)'
             }}
           >
-            {/* Gradient overlay on hover */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: hovered === char.id ? 1 : 0 }}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: `radial-gradient(circle at center, ${char.color}15, transparent)`,
-                pointerEvents: 'none'
-              }}
-            />
-            
-            {/* Character Icon */}
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              style={{
-                fontSize: '4rem',
-                marginBottom: '1rem',
-                textAlign: 'center'
-              }}
-            >
+            {/* Icon */}
+            <motion.div whileHover={{ scale: 1.1 }} style={{ fontSize: '2.5rem', marginBottom: '0.5rem', textAlign: 'center' }}>
               {char.icon}
             </motion.div>
             
-            {/* Character Name */}
-            <h3 style={{
-              fontSize: '1.4rem',
-              fontWeight: 700,
-              color: colors.text,
-              marginBottom: '0.25rem',
-              textAlign: 'center'
-            }}>
+            {/* Name */}
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: colors.text, marginBottom: '0.15rem', textAlign: 'center' }}>
               {char.name}
             </h3>
             
             {/* Role */}
-            <p style={{
-              fontSize: '0.8rem',
-              color: char.color,
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              marginBottom: '1rem',
-              textAlign: 'center'
-            }}>
+            <p style={{ fontSize: '0.7rem', color: char.color, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem', textAlign: 'center' }}>
               {char.role}
             </p>
             
             {/* Description */}
-            <p style={{
-              fontSize: '0.9rem',
-              color: colors.textMuted,
-              lineHeight: 1.6,
-              textAlign: 'center'
-            }}>
+            <p style={{ fontSize: '0.8rem', color: colors.textMuted, lineHeight: 1.4, textAlign: 'center' }}>
               {char.description}
             </p>
             
-            {/* Color indicator */}
-            <div style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '4px',
-              background: char.gradient || `linear-gradient(90deg, ${char.color}, ${char.accent})`
-            }} />
+            {/* Bottom strip */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '3px', background: `linear-gradient(90deg, ${char.color}, ${char.accent})` }} />
           </motion.div>
         ))}
       </div>
       
-      {/* FOOTNOTE */}
+      {/* FOOTER */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        style={{
-          textAlign: 'center',
-          marginTop: '4rem',
-          padding: '0 2rem'
-        }}
+        transition={{ delay: 0.5 }}
+        style={{ textAlign: 'center', marginTop: '1.5rem', padding: '0 1rem', position: 'relative', zIndex: 1 }}
       >
-        <p style={{ color: colors.textMuted, fontSize: '0.9rem' }}>
-          Full cast poster coming soon! 🎨
-        </p>
+        <p style={{ color: '#4a4a5a', fontSize: '0.75rem' }}>S3RLINUX ATOMIC • 2026 💀</p>
       </motion.div>
     </div>
   )
