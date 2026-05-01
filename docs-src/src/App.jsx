@@ -47,7 +47,9 @@ const colors = {
   textMuted: '#9e9aaa',
   border: '#2a2a3a',
   green: '#238636',
-  cardBg: '#0f0f18'
+  cardBg: '#0f0f18',
+  auroraPurple: '#9146ff',
+  auroraPink: '#ec4899'
 }
 
 function App() {
@@ -116,57 +118,79 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
       {/* DECORATIVE CORNERS - No more white lines */}
       <CornerDecorations />
       
-      {/* Aurora floating orbs */}
+      {/* Aurora background orbs */}
       <motion.div
-        animate={{ x: [0, 40, 0], y: [0, -20, 0] }}
+        animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: 'absolute',
+          top: '-10%',
+          left: '-5%',
+          width: 600,
+          height: 600,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(145, 70, 255, 0.1) 0%, transparent 60%)',
+          filter: 'blur(80px)',
+          pointerEvents: 'none'
+        }}
+      />
+      <motion.div
+        animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.1, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          position: 'fixed',
-          top: '10%',
-          left: '-5%',
+          position: 'absolute',
+          bottom: '-5%',
+          right: '-10%',
           width: 500,
           height: 500,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(145, 70, 255, 0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 60%)',
           filter: 'blur(60px)',
-          pointerEvents: 'none',
-          zIndex: 0
+          pointerEvents: 'none'
         }}
       />
       <motion.div
-        animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ x: [0, 30, 0], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          position: 'fixed',
-          bottom: '5%',
-          right: '-10%',
-          width: 400,
-          height: 400,
+          position: 'absolute',
+          top: '40%',
+          right: '20%',
+          width: 300,
+          height: 300,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 60%)',
           filter: 'blur(50px)',
-          pointerEvents: 'none',
-          zIndex: 0
+          pointerEvents: 'none'
         }}
       />
-      <motion.div
-        animate={{ x: [0, 20, 0], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: 'fixed',
-          top: '50%',
-          right: '15%',
-          width: 250,
-          height: 250,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 60%)',
-          filter: 'blur(40px)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-      />
-
-      {/* NAVIGATION */}
+      
+      {/* Floating particles */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          animate={{
+            y: [0, -100, 0],
+            x: [0, Math.sin(i) * 30, 0],
+            opacity: [0, 0.4, 0]
+          }}
+          transition={{
+            duration: 4 + i,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.5
+          }}
+          style={{
+            position: 'absolute',
+            top: `${20 + i * 15}%`,
+            left: `${10 + i * 15}%`,
+            width: 4,
+            height: 4,
+            borderRadius: '50%',
+            background: i % 2 === 0 ? colors.auroraPurple : colors.auroraPink
+          }}
+        />
+      ))}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
