@@ -981,6 +981,41 @@ function BlogSection() {
   
   const posts = [
     { 
+      id: 'squad-reveal',
+      title: "INTRODUCING THE SQUAD: Meet DJ S3R-L, Atom-chan, and the Roast Cannon 💀", 
+      date: "2026-04-30",
+      author: "RaveCore-Labs",
+      avatar: "🎧",
+      readTime: "2 min read",
+      excerpt: "S3RLinux Atomic now has a MAIN SQUAD. DJ S3R-L is the hero, Atom-chan orbits everything, and Nightcore Neko is ARMED with a roast cannon pointed directly at Manjaro.",
+      tags: ["Mascot", "Characters", "Roast"],
+      content: `THE SQUAD IS HERE 💀🎵
+
+After months of development, we've finally revealed THE MAIN SQUAD for S3RLinux Atomic. No more generic penguin. No more boring Tux. We're going full anime chibi and honestly? It's incredible.
+
+DJ S3R-L (Main Hero)
+The main character himself! A chibi DJ with pastel glowing hair and a white-pink shining visor. Main character energy embodied. This is YOUR distro mascot now.
+
+Atom-chan (OS Mascot)
+A tiny glowing girl with atomic rings orbiting her! Blue/white particle aura. She's the representation of our ATOMIC system - particles spinning, always moving, never static.
+
+Nightcore Neko (Roast Cannon) 🐱
+Oh this one is SPECIAL. She's a raver cat with glowing purple ribbon tails. And she's always holding Manjaro by the hoodie like a misbehaving kitten. Manjaro's legs kicking mid-air, watery eyes, screaming "I-I do not have delayed updates~!!!" 😭💚
+
+This is the roast that started it all. When Manjaro users come at us with "but Arch has the best updates", Neko just grabs them by the hoodie and dangles them. It's beautiful.
+
+Manjaro (Roast Victim) 🐰
+She's the one who gets grabbed! Always getting dragged around by Neko. Legs kicking. Eyes watery. "wahhhhhh~!!!" 💚
+
+THE WHY
+Why do we need mascots? Because every great distro has them. Arch has the pacman, Fedora has the bubbles, Ubuntu has the circle friends. Now we have THE SQUAD.
+
+THE FUTURE
+More character art coming! Full cast poster in 16:9 with everyone in their positions. DJ S3R-L center, Neko roasting Manjaro, Atom-chan floating above.
+
+S3RLINUX ATOMIC - NOW WITH SQUAD 💀🎵`,
+    },
+    { 
       id: 'ravecore-rebrand',
       title: "We Became an Org (Kinda) - Introducing RaveCore Labs", 
       date: "2026-04-30",
