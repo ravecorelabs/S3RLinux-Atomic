@@ -112,7 +112,8 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
       color: colors.text,
       fontFamily: "'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif",
       position: 'relative',
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+      overflowY: 'auto'
     }}>
       
       {/* DECORATIVE CORNERS - No more white lines */}
@@ -200,9 +201,9 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
           left: 0,
           right: 0,
           zIndex: 100,
-          background: scrolled ? 'rgba(13, 10, 24, 0.9)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? `1px solid ${colors.border}` : 'none',
+          background: 'rgba(5, 3, 8, 0.95)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: `1px solid ${colors.border}`,
           transition: 'all 0.3s ease'
         }}
       >
