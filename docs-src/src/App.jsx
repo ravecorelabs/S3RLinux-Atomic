@@ -831,7 +831,10 @@ function Section({ children, id, title }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.5 }}
-      style={{ padding: '6rem 2rem', background: colors.darker }}
+      style={{ 
+        padding: '6rem 2rem', 
+        background: 'transparent'
+      }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <h2 style={{ 
