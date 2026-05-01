@@ -72,6 +72,9 @@ function App() {
       <Route path="/characters">
         {() => <CharactersPage />}
       </Route>
+      <Route path="/blog">
+        {() => <BlogOnlyPage />}
+      </Route>
     </Router>
   )
 }
@@ -82,6 +85,16 @@ function WikiPage() {
 
 function CharactersPage() {
   return <Characters />
+}
+function BlogOnlyPage() {
+  return (
+    <div style={{ minHeight: '100vh', background: colors.darker, color: colors.text, paddingTop: '5rem' }}>
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', color: colors.text }}>Blog 💀</h1>
+        <BlogSection />
+      </div>
+    </div>
+  )
 }
 
 function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
