@@ -46,7 +46,7 @@ const characters = [
     emoji: '🌙',
     icon: '🐱',
     role: 'Mid Left - Catgirl',
-    description: 'Raver cat with glowing purple ribbon tails! Stylish, aesthetic, full nightcore energy.',
+    description: 'Raver cat with glowing purple ribbon tails! Stylish, aesthetic, full nightcore energy. Famous for grabbing Manjaro by the hoodie and dangling them like a misbehaving kitten. "I‑I do not have delayed updates~!!!" 😭💚',
     color: '#aa00ff',
     accent: '#ff00ff'
   },
