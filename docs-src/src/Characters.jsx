@@ -25,70 +25,40 @@ const characters = [
     name: 'DJ S3R-L',
     emoji: '🎧',
     icon: '🎧',
-    role: 'Main Hero',
+    role: 'Main Mascot',
     description: 'The main character - a chibi DJ representing S3RL himself! Pastel glowing hair, white-pink shining visor, slight forward stance. Main character energy!',
     color: '#ff0080',
     accent: '#ff3385'
-  },
-  {
-    id: 'byteboi',
-    name: 'ByteBoi',
-    emoji: '💾',
-    icon: '💾',
-    role: 'Low Left - Gremlin',
-    description: 'A chaotic little goblin! Crouching gremlin pose with neon green toolbox. Digital mischief maker.',
-    color: '#00ff88',
-    accent: '#00cc66'
-  },
-  {
-    id: 'nightcore-neko',
-    name: 'Nightcore Neko',
-    emoji: '🌙',
-    icon: '🐱',
-    role: 'Mid Left - Catgirl',
-    description: 'Raver cat with glowing purple ribbon tails! Stylish, aesthetic, full nightcore energy. Famous for grabbing Manjaro by the hoodie and dangling them like a misbehaving kitten. "I‑I do not have delayed updates~!!!" 😭💚',
-    color: '#aa00ff',
-    accent: '#ff00ff'
-  },
-  {
-    id: 'overclock-oni',
-    name: 'Overclock Oni',
-    emoji: '🔥',
-    icon: '👹',
-    role: 'Mid Right - Demon',
-    description: 'Tiny demon with neon horns! Fans spinning, always sweaty from pushing FPS.',
-    color: '#ff4400',
-    accent: '#ff8800'
-  },
-  {
-    id: 'synth-sage',
-    name: 'Synth Sage',
-    emoji: '🧪',
-    icon: '🧙‍♀️',
-    role: 'High Right - Wizard',
-    description: 'Cloaked wizard with teal floating runes! Calm, wise, tall silhouette.',
-    color: '#00cccc',
-    accent: '#00ffcc'
   },
   {
     id: 'atom-chan',
     name: 'Atom-chan',
     emoji: '⚛️',
     icon: '⚛️',
-    role: 'Floating - Atomic',
-    description: 'Tiny glowing girl with atomic rings orbiting! Blue/white particle aura.',
+    role: 'Mascot',
+    description: 'Tiny glowing girl with atomic rings orbiting! Blue/white particle aura. The OS mascot!',
     color: '#4488ff',
     accent: '#88ccff'
   },
   {
-    id: 'bpm-sprite',
-    name: 'BPM Sprite',
-    emoji: '🌈',
-    icon: '✨',
-    role: 'Floating - Speed',
-    description: 'Tiny orb pet with rainbow wings! Sparkles and pure motion.',
-    color: '#ff44aa',
-    gradient: 'linear-gradient(45deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff)'
+    id: 'nightcore-neko',
+    name: 'Nightcore Neko',
+    emoji: '🌙',
+    icon: '🐱',
+    role: 'Roast Cannon',
+    description: 'Raver cat with glowing purple ribbon tails! Famous for grabbing Manjaro by the hoodie and dangling them. "I‑I do not have delayed updates~!!!" 😭💚',
+    color: '#aa00ff',
+    accent: '#ff00ff'
+  },
+  {
+    id: 'manjaro',
+    name: 'Manjaro',
+    emoji: '🥺',
+    icon: '🐰',
+    role: 'Roast Victim',
+    description: 'Gets grabbed by the hoodie and dangled by Neko. Legs kicking mid-air. Watery eyes. "wahhhhhh~!!!" 💚',
+    color: '#00aa44',
+    accent: '#44ff88'
   }
 ]
 
