@@ -81,8 +81,17 @@ function CharacterCard({ char, index }) {
 export default function Characters() {
   return (
     <div style={{ minHeight: '100vh', background: '#050308', color: colors.text, fontFamily: "'Inter', 'Segoe UI', sans-serif", paddingTop: '5rem', paddingBottom: '4rem' }}>
+      
       <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} style={{ textAlign: 'center', marginBottom: '2.5rem', padding: '0 1rem' }}>
-        <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 800, color: colors.text, marginBottom: '0.5rem' }}>
+        <h1 style={{ 
+          fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', 
+          fontWeight: 800, 
+          background: 'linear-gradient(135deg, #ff0080, #aa00ff, #4488ff)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          marginBottom: '0.5rem' 
+        }}>
           MEET THE DEGENERATES 💀
         </h1>
         <p style={{ fontSize: '1rem', color: colors.textMuted }}>S3RLinux Atomic</p>
