@@ -983,7 +983,7 @@ function BlogSection() {
     { 
       id: 'squad-reveal',
       title: "INTRODUCING THE SQUAD: Meet DJ S3R-L, Atom-chan, and the Roast Cannon 💀", 
-      date: "2026-04-30",
+      date: "2026-05-01",
       author: "RaveCore-Labs",
       avatar: "🎧",
       readTime: "2 min read",
