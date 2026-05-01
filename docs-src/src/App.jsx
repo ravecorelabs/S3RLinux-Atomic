@@ -108,7 +108,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(180deg, #08060f 0%, #0d0a18 50%, #0a0d15 100%)',
+      background: colors.darker,
       color: colors.text,
       fontFamily: "'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif",
       position: 'relative',
@@ -118,80 +118,8 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
       
       {/* DECORATIVE CORNERS - No more white lines */}
       <CornerDecorations />
-      
-      {/* Aurora background orbs */}
-      <motion.div
-        animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '-5%',
-          width: 600,
-          height: 600,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(145, 70, 255, 0.1) 0%, transparent 60%)',
-          filter: 'blur(80px)',
-          pointerEvents: 'none'
-        }}
-      />
-      <motion.div
-        animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: 'absolute',
-          bottom: '-5%',
-          right: '-10%',
-          width: 500,
-          height: 500,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 60%)',
-          filter: 'blur(60px)',
-          pointerEvents: 'none'
-        }}
-      />
-      <motion.div
-        animate={{ x: [0, 30, 0], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: 'absolute',
-          top: '40%',
-          right: '20%',
-          width: 300,
-          height: 300,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 60%)',
-          filter: 'blur(50px)',
-          pointerEvents: 'none'
-        }}
-      />
-      
-      {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, Math.sin(i) * 30, 0],
-            opacity: [0, 0.4, 0]
-          }}
-          transition={{
-            duration: 4 + i,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.5
-          }}
-          style={{
-            position: 'absolute',
-            top: `${20 + i * 15}%`,
-            left: `${10 + i * 15}%`,
-            width: 4,
-            height: 4,
-            borderRadius: '50%',
-            background: i % 2 === 0 ? colors.auroraPurple : colors.auroraPink
-          }}
-        />
-      ))}
+
+      {/* NAVIGATION */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}

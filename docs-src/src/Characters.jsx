@@ -210,7 +210,6 @@ export default function Characters() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(180deg, #08060f 0%, #0d0a18 50%, #0a0d15 100%)',
       color: colors.text,
       fontFamily: "'Inter', 'Segoe UI', sans-serif",
       paddingTop: '5rem',
