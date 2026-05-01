@@ -19,7 +19,8 @@ const characters = [
     role: 'Main Mascot',
     description: 'The main character - a chibi DJ representing S3RL himself! Pastel glowing hair, white-pink shining visor, slight forward stance.',
     color: '#ff0080',
-    accent: '#ff3385'
+    accent: '#ff3385',
+    image: 'https://i.imgur.com/9itwj9L_d.webp'
   },
   {
     id: 'atom-chan',
@@ -28,7 +29,8 @@ const characters = [
     role: 'OS Mascot',
     description: 'Tiny glowing girl with atomic rings orbiting! Blue/white particle aura.',
     color: '#4488ff',
-    accent: '#88ccff'
+    accent: '#88ccff',
+    image: 'https://i.imgur.com/tHZRzg2_d.webp'
   },
   {
     id: 'nightcore-neko',
@@ -37,7 +39,8 @@ const characters = [
     role: 'Roast Cannon',
     description: 'Famous for grabbing Manjaro by the hoodie. "I‑I do not have delayed updates~!!!" 😭💚',
     color: '#aa00ff',
-    accent: '#ff00ff'
+    accent: '#ff00ff',
+    image: 'https://i.imgur.com/RJlEU2w_d.webp'
   },
   {
     id: 'manjaro',
@@ -46,7 +49,8 @@ const characters = [
     role: 'Roast Victim',
     description: 'Gets grabbed by the hoodie and dangled. Legs kicking mid-air. "wahhhhhh~!!!" 💚',
     color: '#00aa44',
-    accent: '#44ff88'
+    accent: '#44ff88',
+    image: 'https://i.imgur.com/RJlEU2w_d.webp'
   }
 ]
 
@@ -151,9 +155,22 @@ export default function Characters() {
               backdropFilter: 'blur(8px)'
             }}
           >
-            {/* Icon */}
-            <motion.div whileHover={{ scale: 1.1 }} style={{ fontSize: '2.5rem', marginBottom: '0.5rem', textAlign: 'center' }}>
-              {char.icon}
+            {/* Icon or Image */}
+            <motion.div whileHover={{ scale: 1.05 }} style={{ fontSize: char.image ? 'auto' : '2.5rem', marginBottom: '0.5rem', textAlign: 'center' }}>
+              {char.image ? (
+                <img 
+                  src={char.image} 
+                  alt={char.name}
+                  style={{ 
+                    maxWidth: '100%', 
+                    maxHeight: 120,
+                    borderRadius: 12,
+                    objectFit: 'contain'
+                  }} 
+                />
+              ) : (
+                char.icon
+              )}
             </motion.div>
             
             {/* Name */}
