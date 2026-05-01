@@ -115,6 +115,56 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
       
       {/* DECORATIVE CORNERS - No more white lines */}
       <CornerDecorations />
+      
+      {/* Aurora floating orbs */}
+      <motion.div
+        animate={{ x: [0, 40, 0], y: [0, -20, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: 'fixed',
+          top: '10%',
+          left: '-5%',
+          width: 500,
+          height: 500,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(145, 70, 255, 0.08) 0%, transparent 60%)',
+          filter: 'blur(60px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+      <motion.div
+        animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: 'fixed',
+          bottom: '5%',
+          right: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.06) 0%, transparent 60%)',
+          filter: 'blur(50px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+      <motion.div
+        animate={{ x: [0, 20, 0], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: 'fixed',
+          top: '50%',
+          right: '15%',
+          width: 250,
+          height: 250,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 60%)',
+          filter: 'blur(40px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
 
       {/* NAVIGATION */}
       <motion.nav
@@ -126,7 +176,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
           left: 0,
           right: 0,
           zIndex: 100,
-          background: scrolled ? `rgba(5,3,8,0.95)` : 'transparent',
+          background: scrolled ? 'rgba(13, 10, 24, 0.9)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderBottom: scrolled ? `1px solid ${colors.border}` : 'none',
           transition: 'all 0.3s ease'
