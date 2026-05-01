@@ -171,12 +171,10 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             {/* Desktop Nav Links */}
             {navLinks.map(link => {
               const isWiki = link === 'Wiki'
-              const isChars = link === 'Characters'
-              const href = isWiki ? '#/wiki' : isChars ? '#/characters' : null
               return (
                 <div key={link}>
-                  {isWiki || isChars ? (
-                    <a href={href} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  {isWiki ? (
+                    <a href="#/wiki" style={{ textDecoration: 'none', color: 'inherit' }}>
                       <motion.span
                         whileHover={{ color: colors.pink }}
                         style={{ color: scrolled ? colors.text : colors.textMuted, textDecoration: 'none', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}
@@ -486,6 +484,10 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
       {/* BLOG SECTION */}
       <Section id="blog" title="Latest from the Blog">
         <BlogSection />
+      </Section>
+
+      <Section id="characters" title="Meet the Degenerates 💀">
+        <Characters />
       </Section>
 
       {/* KDE SECTION */}
