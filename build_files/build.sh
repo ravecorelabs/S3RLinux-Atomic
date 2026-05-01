@@ -33,7 +33,7 @@ NAME="S3RLinux Atomic"
 PRETTY_NAME="S3RLinux Atomic"
 ID="s3rlinux-atomic"
 ID_LIKE="fedora"
-VERSION_ID="42"
+VERSION_ID="44"
 BUILD_ID=latest
 ANSI_COLOR="38;2;23;147;209"
 HOME_URL="https://s3rlinux.github.io"
@@ -127,7 +127,7 @@ dnf5 update -y
 # Packages can be installed from any enabled yum repo on the image.
 # RPMfusion repos are available by default in ublue main images
 # List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
+# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/44/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
 dnf5 install -y tmux 
