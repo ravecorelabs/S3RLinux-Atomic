@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Wiki from './Wiki.jsx'
+import Characters from './Characters.jsx'
 import { Route, Link, useLocation, Router } from 'wouter'
 import { useHashLocation } from 'wouter/use-hash-location'
 
@@ -66,12 +67,19 @@ function App() {
       <Route path="/wiki/:article">
         {() => <WikiPage />}
       </Route>
+      <Route path="/characters">
+        {() => <CharactersPage />}
+      </Route>
     </Router>
   )
 }
 
 function WikiPage() {
   return <Wiki />
+}
+
+function CharactersPage() {
+  return <Characters />
 }
 
 function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
@@ -93,7 +101,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
     }
   }
 
-  const navLinks = ['Features', 'Blog', 'Download', 'Install', 'Compare', 'Wiki', 'FAQ']
+  const navLinks = ['Features', 'Blog', 'Download', 'Install', 'Compare', 'Wiki', 'Characters', 'FAQ']
 
   return (
     <div style={{
@@ -163,10 +171,11 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             {/* Desktop Nav Links */}
             {navLinks.map(link => {
               const isWiki = link === 'Wiki'
-              const href = isWiki ? '#/wiki' : null
+              const isChars = link === 'Characters'
+              const href = isWiki ? '#/wiki' : isChars ? '#/characters' : null
               return (
                 <div key={link}>
-                  {isWiki ? (
+                  {isWiki || isChars ? (
                     <a href={href} style={{ textDecoration: 'none', color: 'inherit' }}>
                       <motion.span
                         whileHover={{ color: colors.pink }}
@@ -232,6 +241,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
         >
           {navLinks.map(link => {
             const isWiki = link === 'Wiki'
+            const isChars = link === 'Characters'
             return (
               <motion.div
                 key={link}
@@ -239,6 +249,19 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
               >
                 {isWiki ? (
                   <a href="#/wiki" onClick={() => setMobileMenuOpen(false)}>
+                    <div style={{
+                      color: colors.text,
+                      fontSize: isMobile ? '1.2rem' : '1.5rem',
+                      fontWeight: 500,
+                      padding: '0.75rem 0',
+                      borderBottom: `1px solid ${colors.border}`,
+                      cursor: 'pointer'
+                    }}>
+                      {link}
+                    </div>
+                  </a>
+                ) : isChars ? (
+                  <a href="#/characters" onClick={() => setMobileMenuOpen(false)}>
                     <div style={{
                       color: colors.text,
                       fontSize: isMobile ? '1.2rem' : '1.5rem',
