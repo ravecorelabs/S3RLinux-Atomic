@@ -359,7 +359,7 @@ export default function Characters() {
             letterSpacing: '0.1em'
           }}
         >
-          S3RLINUX ATOMIC • AURORA-BASED • 2026 💀
+          © RaveCore-Labs • 2026
         </motion.p>
       </motion.div>
       
