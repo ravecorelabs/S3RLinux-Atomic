@@ -303,7 +303,7 @@ export default function Characters() {
             letterSpacing: '-0.02em'
           }}
         >
-          MEET THE SQUAD ✨
+          MEET THE DEGENERATES 💀
         </motion.h1>
         
         <motion.p
@@ -316,7 +316,7 @@ export default function Characters() {
             fontWeight: 500
           }}
         >
-          S3RLinux Atomic • Main Cast
+          S3RLinux Atomic • The Degenerates
         </motion.p>
       </motion.div>
 
