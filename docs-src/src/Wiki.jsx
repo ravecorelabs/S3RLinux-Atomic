@@ -371,7 +371,7 @@ function GettingStarted() {
       </p>
       
       <div style={wikiStyles.warning}>
-        <strong>🚀 Aurora F44 Update:</strong> SDDM has been replaced with Plasma Login Manager (PLM) on Fedora 44. AppImages require FUSE2 workarounds. See our <a href="#blog" style={{ color: colors.pink }}>blog post</a> for details.
+        <strong>🚀 Aurora F44 Update:</strong> SDDM has been replaced with Plasma Login Manager (PLM) on Fedora 44. AppImages require FUSE2 workarounds. See our <a href="/#blog" style={{ color: colors.pink }}>blog post</a> for details.
       </div>
       
       <h4 style={wikiStyles.subheading}>Overview</h4>
