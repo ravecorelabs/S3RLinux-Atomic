@@ -34,22 +34,12 @@ const characters = [
   },
   {
     id: 'nightcore-neko',
-    name: 'Nightcore Neko',
+    name: 'Nightcore Neko + Manjaro',
     icon: '🐱',
-    role: 'Roast Cannon',
-    description: 'Famous for grabbing Manjaro by the hoodie. "I‑I do not have delayed updates~!!!" 😭💚',
+    role: 'Roast Duo',
+    description: 'Neko holding Manjaro by the hoodie! "I‑I do not have delayed updates~!!!" 😭💚 "wahhhhhh~!!!"',
     color: '#aa00ff',
     accent: '#ff00ff',
-    image: 'https://i.imgur.com/RJlEU2w_d.webp'
-  },
-  {
-    id: 'manjaro',
-    name: 'Manjaro',
-    icon: '🐰',
-    role: 'Roast Victim',
-    description: 'Gets grabbed by the hoodie and dangled. Legs kicking mid-air. "wahhhhhh~!!!" 💚',
-    color: '#00aa44',
-    accent: '#44ff88',
     image: 'https://i.imgur.com/RJlEU2w_d.webp'
   }
 ]
