@@ -231,7 +231,7 @@ This project was created during a long session where we built S3RLinux Atomic fr
 - User was on Arch/EndeavourOS, wanted to switch to bootc-based distro
 - Audio: S3RL playlist on Spotify: https://open.spotify.com/artist/11aa081aKYUzmeFm0yHdT2
 - Email: ash8820@proton.me
-- GitHub: RaveCore-Labs
+- GitHub: ravecorelabs
 
 ### Backups Created
 - `backup/packages-arch.txt` - 1125 Arch packages list
@@ -250,13 +250,13 @@ sudo dnf install steam lutris wine discord
 
 ## 📞 Getting Help
 
-- GitHub Issues: https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues
+- GitHub Issues: https://github.com/ravecorelabs/S3RLinux-Atomic/issues
 - Auroras Docs: https://docs.getaurora.dev
 - Universal Blue: https://universal-blue.org
 - bootc Docs: https://github.com/bootc-dev/bootc
 
 ---
 
-*Built with 💜 and UNTZ UNTZ by RaveCore-Labs*
+*Built with 💜 and UNTZ UNTZ by ravecorelabs*
 
 *RAVE ALL NIGHT 💀*

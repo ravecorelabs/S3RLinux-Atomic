@@ -1,7 +1,7 @@
 # .all-contributorsrc configuration
 {
   "projectName": "S3RLinux-Atomic",
-  "projectOwner": "RaveCore-Labs",
+  "projectOwner": "ravecorelabs",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -17,9 +17,9 @@
   "allowFailedContribution": true,
   "contributors": [
     {
-      "login": "RaveCore-Labs",
+      "login": "ravecorelabs",
       "name": "Maintainer",
-      "profile": "https://github.com/RaveCore-Labs",
+      "profile": "https://github.com/ravecorelabs",
       "contributions": [
         "code",
         "doc",

@@ -1,14 +1,14 @@
 # CODEOWNERS
 
 # Default owner
-* @RaveCore-Labs
+* @ravecorelabs
 
 # Container stuff
-Containerfile @RaveCore-Labs
-.github/workflows/ @RaveCore-Labs
+Containerfile @ravecorelabs
+.github/workflows/ @ravecorelabs
 
 # Build files
-build_files/ @RaveCore-Labs
+build_files/ @ravecorelabs
 
 # Website
-docs-src/ @RaveCore-Labs
+docs-src/ @ravecorelabs

@@ -3,5 +3,5 @@ removeStates: CHANGES_REQUESTED
 
 # Star history settings
 specs:
-  - repository: RaveCore-Labs/S3RLinux-Atomic
+  - repository: ravecorelabs/S3RLinux-Atomic
     branch: main

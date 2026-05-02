@@ -37,9 +37,9 @@ VERSION_ID="44"
 BUILD_ID=latest
 ANSI_COLOR="38;2;23;147;209"
 HOME_URL="https://s3rlinux.github.io"
-DOCUMENTATION_URL="https://github.com/RaveCore-Labs/S3RLinux-Atomic"
-SUPPORT_URL="https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues"
-BUG_REPORT_URL="https://github.com/RaveCore-Labs/S3RLinux-Atomic/issues"
+DOCUMENTATION_URL="https://github.com/ravecorelabs/S3RLinux-Atomic"
+SUPPORT_URL="https://github.com/ravecorelabs/S3RLinux-Atomic/issues"
+BUG_REPORT_URL="https://github.com/ravecorelabs/S3RLinux-Atomic/issues"
 LOGO="s3rlinux-a-logo"
 EOF
 

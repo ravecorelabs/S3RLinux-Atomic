@@ -102,7 +102,7 @@ export default function Characters() {
       </div>
       
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', marginTop: '2.5rem', padding: '0 1rem' }}>
-        <p style={{ color: '#4a4a5a', fontSize: '0.75rem', letterSpacing: '0.1em' }}>© RaveCore-Labs • 2026</p>
+        <p style={{ color: '#4a4a5a', fontSize: '0.75rem', letterSpacing: '0.1em' }}>© ravecorelabs • 2026</p>
       </motion.div>
     </div>
   )
