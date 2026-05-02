@@ -1002,6 +1002,42 @@ function BlogSection() {
   
   const posts = [
     { 
+      id: 'real-org-announcement',
+      title: "WE'RE A REAL ORG NOW (Not Clickbait) 💀", 
+      date: "2026-05-02",
+      author: "ravecorelabs",
+      avatar: "🏢",
+      readTime: "2 min read",
+      excerpt: "Remember when we were a \"pseudo org\" (just a personal account with delusions of grandeur)? Welp, we actually created a REAL GitHub Organization. This is wild. We're officially legitimate now. Almost.",
+      tags: ["Org", "Real", "Milestone"],
+      content: `OK THIS IS ACTUALLY BIG 💀🏢
+
+We did the thing. We made an actual GitHub Organization. Not a renamed personal account pretending to be an org. A REAL one.
+
+THE DIFFERENCE
+- Old: Renamed personal account (pseudo org) — looks like an org, feels like one person crying in a dorm room
+- New: Actual GitHub Organization with verified domain and everything
+
+WHAT THIS MEANS
+Actually, nothing changes for you. The container still comes from ghcr.io/ravecore-labs. The website still deploys from the same repo. But now when you look at our GitHub page, it says "Organization" instead of "User". Very professional. We have member caps now!
+
+THE RENAME
+- Old: RaveCore-Labs (mixed case, taken obviously)
+- New: ravecorelabs (all lowercase, very real org, much cool)
+
+Wait, "ravecore-labs" vs "ravecorelabs" — they're different! One has an underscore, one doesn't. GitHub orgs are case-insensitive but the URL matters. Ours is ravecorelabs. Say it with us: RAY-VEH-CORE. Not ray-vee-core. NEVER ray-vee-core.
+
+THE URL
+https://github.com/ravecorelabs/S3RLinux-Atomic
+
+Yes it's lowercase. Yes it looks cleaner. Yes we spent way too long on this.
+
+WHAT'S NEXT
+Maybe actual team members? Who knows. The door is open. For now it's still just us, the bots, and S3RL at 3AM. But now we're an ORGANIZATION. With capital O. Legally distinct. Probably.
+
+RAVE ALL NIGHT 💀🏢`,
+    },
+    { 
       id: 'squad-reveal',
       title: "INTRODUCING THE SQUAD: Meet DJ S3R-L, Atom-chan, and the Roast Cannon 💀", 
       date: "2026-05-01",
