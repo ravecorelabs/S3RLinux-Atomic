@@ -38,7 +38,7 @@
 
 ```bash
 # Switch from existing Fedora/Bootc system
-sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
+sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 sudo reboot
 ```
 
@@ -129,7 +129,7 @@ S3RLinux Atomic is a **bootc** image themed around **S3RL** — the legendary Ha
 
 ```bash
 # Switch to our image
-sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
+sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 
 # Reboot
 sudo reboot

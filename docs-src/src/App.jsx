@@ -608,7 +608,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             Or use bootc to switch:
           </p>
           <CodeBlock>
-sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
+sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 sudo reboot
           </CodeBlock>
         </div>
@@ -623,7 +623,7 @@ sudo reboot
               "Enable RPMFusion (optional for gaming): sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm",
               "Install bootc: sudo dnf install bootc",
               "Reboot into bootc: sudo bootc install to-disk --replace",
-              "Or run: sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest && sudo reboot"
+              "Or run: sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest && sudo reboot"
             ]}
           />
           <InstallCard 

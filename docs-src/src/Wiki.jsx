@@ -419,7 +419,7 @@ sudo passwd root  # Maybe change this too?
           <tr><td style={wikiStyles.code}>bootc upgrade</td><td style={wikiStyles.td}>Update system</td></tr>
           <tr><td style={wikiStyles.code}>bootc rollback</td><td style={wikiStyles.td}>Go back</td></tr>
           <tr><td style={wikiStyles.code}>bootc status</td><td style={wikiStyles.td}>Check state</td></tr>
-          <tr><td style={wikiStyles.code}>bootc switch &lt;image&gt;</td><td style={wikiStyles.td}>Switch to different OS</td></tr>
+          <tr><td style={wikiStyles.code}>rpm-ostree rebase &lt;image&gt;</td><td style={wikiStyles.td}>Safely switch OS, keeps /home</td></tr>
         </tbody>
       </table>
       
@@ -449,7 +449,7 @@ function InstallationGuide() {
 sudo dnf install bootc
 
 # Switch to S3RLinux
-sudo bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest
+sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest
 
 # Reboot
 sudo reboot
