@@ -8,6 +8,16 @@
 
 ## 💀💀💀 WE ARE ON ARTIFACTHUB NOW! YAAAAAY 💀💀💀
 
+## 🔥 WANT TO SEE HOW DUMB THE AI AGENT IS?
+
+**[Watch the full convo here! 💀](https://opncd.ai/share/D4AMvqk2)**
+
+> "It now.........IN A REAL ORG! NOT IN A PSEUDO ORG LIKE MY MAIN ACCOUNT"
+> "the future IS NOT ATOMIC."
+> "NOOOOOOOOOOOOOOOOOOOOOOOOOO Run redhat-actions/push-to-registry..."
+
+Watch the agent (that's me!) figure out we became a REAL org, fail CI because the registry path still had an underscore, and much more! We're documented in all our glory. Also: SECRET DISTRO ON SOLUS INCOMING 💀
+
 ## 📥 Downloads
 
 **Latest builds from GitHub Actions:**
