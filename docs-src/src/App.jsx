@@ -442,7 +442,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
         >
           <img src="https://github.com/ravecorelabs/S3RLinux-Atomic/actions/workflows/build.yml/badge.svg" alt="Build" style={{ height: 24 }} />
           <img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/s3rlinux-atomic" alt="ArtifactHub" style={{ height: 24 }} />
-          <img src="https://img.shields.io/docker/pull/ghcr.io/ravecore-labs/s3rlinux-atomic?label=pulls" alt="Pulls" style={{ height: 24 }} />
+          <img src="https://img.shields.io/docker/pull/ghcr.io/ravecorelabs/s3rlinux-atomic?label=pulls" alt="Pulls" style={{ height: 24 }} />
         </motion.div>
 
         {/* Scroll indicator */}
@@ -608,7 +608,7 @@ function HomePage({ deviceType, isMobile, isTablet, isTouch }) {
             Or use bootc to switch:
           </p>
           <CodeBlock>
-sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest
+sudo rpm-ostree rebase ghcr.io/ravecorelabs/s3rlinux-atomic:latest
 sudo reboot
           </CodeBlock>
         </div>
@@ -623,7 +623,7 @@ sudo reboot
               "Enable RPMFusion (optional for gaming): sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm",
               "Install bootc: sudo dnf install bootc",
               "Reboot into bootc: sudo bootc install to-disk --replace",
-              "Or run: sudo rpm-ostree rebase ghcr.io/ravecore-labs/s3rlinux-atomic:latest && sudo reboot"
+              "Or run: sudo rpm-ostree rebase ghcr.io/ravecorelabs/s3rlinux-atomic:latest && sudo reboot"
             ]}
           />
           <InstallCard 
@@ -631,7 +631,7 @@ sudo reboot
             steps={[
               "Install WSL2: wsl --install",
               "Install bootc: wsl -d fedora -- yum install bootc",
-              "Switch: bootc switch ghcr.io/ravecore-labs/s3rlinux-atomic:latest",
+              "Switch: bootc switch ghcr.io/ravecorelabs/s3rlinux-atomic:latest",
               "Reboot and select S3RLinux in BIOS/UEFI"
             ]}
           />
@@ -1019,7 +1019,7 @@ THE DIFFERENCE
 - New: Actual GitHub Organization with verified domain and everything
 
 WHAT THIS MEANS
-Actually, nothing changes for you. The container still comes from ghcr.io/ravecore-labs. The website still deploys from the same repo. But now when you look at our GitHub page, it says "Organization" instead of "User". Very professional. We have member caps now!
+Actually, nothing changes for you. The container still comes from ghcr.io/ravecorelabs. The website still deploys from the same repo. But now when you look at our GitHub page, it says "Organization" instead of "User". Very professional. We have member caps now!
 
 THE RENAME
 - Old: RaveCore-Labs (mixed case, taken obviously)

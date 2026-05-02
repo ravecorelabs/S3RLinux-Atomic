@@ -9,7 +9,7 @@ S3RLinux Atomic is a custom bootc image built on top of Aurora (KDE Fedora-based
 ### Core Facts
 - **Type**: bootc/OSTree immutable system
 - **Base**: Aurora (KDE Plasma)
-- **Image Registry**: ghcr.io/ravecore-labs/s3rlinux-atomic
+- **Image Registry**: ghcr.io/ravecorelabs/s3rlinux-atomic
 - **License**: SAL (S3RLinux Atomic License) - See LICENSE file
 - **Language**: Mostly Bash, YAML, some React for website
 
