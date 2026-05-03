@@ -10,7 +10,7 @@
 
 ## 🔥 WANT TO SEE HOW DUMB THE AI AGENT IS?
 
-**[Watch the full convo here! 💀](https://opncd.ai/share/D4AMvqk2)**
+**[Watch the full convo here! 💀](https://raw.githubusercontent.com/ravecorelabs/S3RLinux-Atomic/main/session_full_convo.md)**
 
 > "It now.........IN A REAL ORG! NOT IN A PSEUDO ORG LIKE MY MAIN ACCOUNT"
 > "the future IS NOT ATOMIC."
