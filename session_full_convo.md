@@ -426,3 +426,100 @@ This was an EPIC session with:
 
 # COMPLETE EXTRACTION DONE
 
+## PART 16: Solara Project - New Distro (2026-05-04)
+
+### The Solara Project
+User Ash (xalatath) wants to create a NEW distro called "Solara":
+- Elegant, beautiful
+- KDE-focused
+- Rolling release
+- Normal distro (not atomic/bootc like S3RLinux-Atomic)
+- Based on ARCH (not Solus!)
+
+### Solus Crash Issues
+- SOLUS SHAME ON YOU! 💀
+- If Solus had working ISO tools (USpin is 10 YEARS OLD!), we could've built Solara on Solus!
+- USpin me round round (USpin is 10 years old and broken!)
+- User wouldn't have to switch to Arch if Solus wasn't broken!
+- Solus has NO ISO build tools and crashes every 10 mins!
+- Root cause: NOUVEAU driver (open-source NVIDIA driver) is broken on RTX 3060!
+- Logs showed: "nouveau ... [drm] *ERROR* DP-4: invalid native reply"
+- Solution: Install proprietary NVIDIA driver (sudo eopkg it nvidia-driver-535)
+- User refused to fix Solus - decided to switch distros
+
+### Solus Replacement Search (All Rejected)
+Tried to find a distro - user rejected EVERY suggestion:
+- Not Arch variants (trauma, tried)
+- Not Debian variants (tried)
+- Not Fedora (discord mods)
+- Not Solus (crashed, no ISO tools)
+- Not openSUSE (XML issues)
+- Not Mageia (name)
+- Not PCLinuxOS (oldie)
+- Not weeby distros
+- Wanted: BEAUTIFUL, KDE, rolling, systemd, Glibc
+
+### The Solution: SOLARA on ARCH!
+User decided to build Solara on ARCH LINUX!
+- Using archiso with releng profile
+- GitHub Actions CI for automatic builds
+- Multiple desktop variants (KDE, Cinnamon, LXQt, Pantheon)
+- All built automatically!
+
+### GitHub Org Setup
+- Org: ravecorelabs
+- Repo created: https://github.com/ravecorelabs/solara (private)
+- Local path: /home/xalatath/solara
+
+### Session Saved After Arch Install
+User is on Solus - needs to install ARCH first to build Solara.
+Session saved here for continuation after Arch is installed!
+
+### To Do After Arch Install:
+1. Clone repo: git clone https://github.com/ravecorelabs/solara.git
+2. Install archiso: sudo pacman -S archiso
+3. Create releng profile for KDE
+4. Set up GitHub Actions CI to build multiple DE variants
+5. Build Solara!
+
+### Current Repo Structure (in progress):
+```
+solara/
+├── releng/
+│   └── profiledef.sh
+└── (more to come after Arch install)
+```
+
+# END OF SESSION
+# Continue after Arch is installed!
+# Date: 2026-05-04
+
+## PART 17: Solara Setup with Claude Alt Account (2026-05-04)
+
+### Claude Account Banned
+- Original Claude account banned for being "under 18"
+- Created new alt account under ravecorelabs org
+- Full context loaded including history, preferences, rules
+
+### Claude Memory Setup
+- Added: chaotic nature, swears freely, blames AI, enjoys Gentoo pain
+- Added: bait song "OOH-OOH OOH-OOH YOU REALLY THOUGHT I WAS WHAT YOU WERE LOOKING FOR"
+- Added: ~124 AIs baited, may roast if pushed back
+- Emojis allowed in text, not in code
+- Claude can install packages in container (apt works, no sudo needed)
+- Claude installed gh CLI in container
+
+### Archcraft Decision
+- User rejected EndeavourOS (boring) and vanilla Arch (boring)
+- Discovered Archcraft - beautiful ricing options!
+- Interested in Berry WM (lightweight stacking window manager)
+- DECIDED: Install Archcraft as main system!
+
+### Plan:
+1. Save this session
+2. Push to GitHub
+3. Install Archcraft
+4. Build Solara from Archcraft!
+
+# SESSION COMPLETE - ARCHCRAFT TIME! 💀
+
