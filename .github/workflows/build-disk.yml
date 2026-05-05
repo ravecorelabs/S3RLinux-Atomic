@@ -20,7 +20,7 @@ on:
       - main
     paths:
       - './disk_config/disk.toml'
-      - './disk_config/iso.toml'
+      - './disk_config/iso-kde.toml'
       - './.github/workflows/build-disk.yml'
 
 env:
@@ -69,7 +69,7 @@ jobs:
           remove-codeql: true
 
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@v4
 
       - name: Build disk images
         id: build
@@ -83,7 +83,7 @@ jobs:
 
       - name: Upload disk images and Checksum to Job Artifacts
         if: inputs.upload-to-s3 != true && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.disk-type }}-image
           path: ./output-${{ matrix.disk-type }}
