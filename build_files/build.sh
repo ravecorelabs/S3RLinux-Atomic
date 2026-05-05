@@ -36,7 +36,7 @@ ID_LIKE="fedora"
 VERSION_ID="44"
 BUILD_ID=latest
 ANSI_COLOR="38;2;23;147;209"
-HOME_URL="https://s3rlinux.github.io"
+HOME_URL="https://github.com/ravecorelabs/S3RLinux-Atomic"
 DOCUMENTATION_URL="https://github.com/ravecorelabs/S3RLinux-Atomic"
 SUPPORT_URL="https://github.com/ravecorelabs/S3RLinux-Atomic/issues"
 BUG_REPORT_URL="https://github.com/ravecorelabs/S3RLinux-Atomic/issues"
@@ -113,7 +113,7 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 EOF
 
-(ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/Alternatives/plymouth-theme) 2>/dev/null || true
+(ln -sf /usr/share/plymouth/themes/S3RL-Atomic /etc/alternatives/plymouth-theme) 2>/dev/null || true
 
 ### Install packages
 
